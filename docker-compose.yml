@@ -8,10 +8,30 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./wordpress:/var/www/html:delegated
+      - wordpress:/var/www/html
+
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress:5.9-fpm-alpine
+    container_name: wordpress
+    restart: unless-stopped
+    environment:
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_USER=user
+      - WORDPRESS_DB_PASSWORD=secret
+      - WORDPRESS_DB_NAME=wp
+    volumes:
+      - ./plugins:/var/www/html/wp-content/plugins
+
+    networks:
+      - app-network
+
   mysql:
     image: mysql
     restart: always
+    ports:
+      - 3306:3306
     environment:
       MYSQL_DATABASE: wp
       MYSQL_USER: user
@@ -22,7 +42,7 @@ services:
       context: .
       dockerfile: php.dockerfile
     volumes:
-      - ./wordpress:/var/www/html
+      - wordpress:/var/www/html
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -37,4 +57,9 @@ services:
     ports:
       - 8081:80
 
+volumes:
+  wordpress:
 
+networks:
+  app-network:
+    driver: bridge
