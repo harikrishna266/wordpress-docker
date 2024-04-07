@@ -1,14 +1,39 @@
 version: '3.9'
+
 services:
-  ngnix:
+  nginx:
     build:
       context: .
       dockerfile: nginx.dockerfile
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./wordpress:/var/www/html:delegated
+      - wordpress:/var/www/html
+      - ./custom-plugins:/var/www/html/wp-content/plugins
+
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    volumes:
+      - wordpress:/var/www/html
+      - ./custom-plugins:/var/www/html/wp-content/plugins
+
+  wordpress:
+    depends_on:
+      - mysql
+    image: wordpress:latest
+    container_name: wordpress
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: secret
+      WORDPRESS_DB_NAME: wp
+    volumes:
+      - wordpress:/var/www/html
+
   mysql:
     image: mysql
     restart: always
@@ -17,24 +42,6 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
-  php:
-    build:
-      context: .
-      dockerfile: php.dockerfile
-    volumes:
-      - ./wordpress:/var/www/html
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: pma
-    links:
-      - mysql
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: always
-    ports:
-      - 8081:80
-
-
+volumes:
+  wordpress:
