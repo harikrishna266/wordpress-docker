@@ -1,36 +1,36 @@
 <?php
 
 /**
- * Fired during plugin activation
+ * Fired during plugin deactivation
  *
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Builder
- * @subpackage Builder/includes
+ * @package    Plugin_Name
+ * @subpackage Plugin_Name/includes
  */
 
 /**
- * Fired during plugin activation.
+ * Fired during plugin deactivation.
  *
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
  * @package    Plugin_Name
- * @subpackage Builder/includes
+ * @subpackage Plugin_Name/includes
  * @author     Your Name <email@example.com>
  */
 class Builder_Activator {
 
-    /**
-     * Short Description. (use period)
-     *
-     * Long Description.
-     *
-     * @since    1.0.0
-     */
-    public static function activate() {
+	/**
+	 * Short Description. (use period)
+	 *
+	 * Long Description.
+	 *
+	 * @since    1.0.0
+	 */
+	public static function activate() {
 
-    }
+	}
 
 }
