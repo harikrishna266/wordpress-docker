@@ -76,20 +76,29 @@ class Builder_Admin {
 	}
 
 
-    public function my_submenu_page_callback() {
-        return 'ho';
+    public function builder_dashboard() {
+        echo "hi";
     }
 
 
     public function add_admin_menu() {
-        add_menu_page(
-            __( 'Builder', 'builder_title' ), // page title
-            __( 'Builder', '3d-builder_title' ), // menu label
-            'manage_options', // permission
-            'builder_main_menu', // slug
-            'my_submenu_page_callback', // callback
-            'dashicons-admin-generic', //icon
-            6
+        $menus = array(
+            'page_title' => __( 'Builder', 'builder_dashboard' ),
+            'menu_title' => __( 'Builder', 'builder_dashboard' ),
+            'capability' => 'manage_options',
+            'menu_slug' => 'builder_main_menu',
+            'callback'   => array($this, 'builder_dashboard'),
+            'icon_url' =>  'dashicons-admin-generic',
+            'position' => 6
+        );
+         add_menu_page(
+            $menus['page_title'],
+            $menus['menu_title'],
+            $menus['capability'],
+            $menus['menu_slug'],
+            $menus['callback'],
+            $menus['icon_url'],
+            $menus['position']
         );
     }
 
@@ -99,30 +108,30 @@ class Builder_Admin {
                 'page_title' => __( 'Dashboard', 'builder_dashboard' ),
                 'menu_title' => __( 'Dashboard', 'builder_dashboard' ),
                 'capability' => 'manage_options',
-                'menu_slug' => 'builder_main_menu',
-                'callback' => 'submenu_page_1',
+                'menu_slug' => 'builder_dashboard',
+                'callback'   => array($this, 'builder_dashboard'),
              ),
             array(
                 'page_title' => __( 'Models', 'builder_models' ),
                 'menu_title' => __( 'Models', 'builder_models' ),
                 'capability' => 'manage_options',
-                'menu_slug' => 'builder_models',
-                'callback' => 'submenu_page_1',
+                'menu_slug' => 'builder_dashboard',
+                'callback'   => array($this, 'builder_dashboard'),
              ),
             array(
                 'page_title' => __( 'Print Area Designs', 'builder_print_area_designs' ),
                 'menu_title' => __( 'Print Area Designs', 'builder_print_area_designs' ),
-                'capability' => 'manage_options',
-                'menu_slug' => 'builder_saved_designs',
-                'callback' => 'submenu_page_1',
+                'capability' => 'builder_print_area_designs',
+                'menu_slug' => 'builder_print_area_designs',
+                'callback'   => array($this, 'builder_dashboard'),
              ),
             array(
                 'page_title' => __( 'Designs', 'builder_saved_designs' ),
                 'menu_title' =>__( 'Designs', 'builder_saved_designs' ),
                 'capability' => 'manage_options',
                 'menu_slug' => 'builder_saved_designs',
-                'callback' => 'submenu_page_1',
-             ),
+                'callback'   => array($this, 'builder_dashboard'),
+    ),
          );
 
         foreach ($submenus as $submenu) {
