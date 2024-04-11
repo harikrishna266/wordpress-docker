@@ -3,8 +3,13 @@ protected_branch="main"
 
 while read local_ref local_sha remote_ref remote_sha; do
     if [ "$remote_ref" = "refs/heads/$protected_branch" ]; then
-        echo "Error: Pushing directly to the '$protected_branch' branch is not allowed."
-        exit 1
+        # Check if the pushed commit is tagged as a release
+        is_release_commit=$(git tag --contains "$local_sha" | grep -E "^v[0-9]+\.[0-9]+\.[0-9]+$")
+
+        if [ -z "$is_release_commit" ]; then
+            echo "Error: Pushing directly to the '$protected_branch' branch is not allowed."
+            exit 1
+        fi
     fi
 done
 
