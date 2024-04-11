@@ -1,6 +1,5 @@
 #!/bin/sh
-# Prevent pushing directly to the main branch
-protected_branch="main"
+protected_branch="feature/git_commit_rules"
 
 while read local_ref local_sha remote_ref remote_sha; do
     if [ "$remote_ref" = "refs/heads/$protected_branch" ]; then
@@ -9,5 +8,4 @@ while read local_ref local_sha remote_ref remote_sha; do
     fi
 done
 
-# If not pushing to the main branch, allow the push to proceed
 exit 0

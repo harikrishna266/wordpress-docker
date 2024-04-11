@@ -20,7 +20,7 @@ KEY_FILE="${CERTS_DIR}/localhost-key.pem"
 
     echo "Certificates generated successfully."
 fi
-chmod +x .husky/pre-commit
+chmod +x .husky/pre-push
 
 docker-compose down
 docker-compose up --build -d
