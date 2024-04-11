@@ -1,4 +1,3 @@
 wordpress/wp-config.php
 nginx/certs/*
-wordpress/
-wordpress/wp-content/plugins/*
+node_modules/*
