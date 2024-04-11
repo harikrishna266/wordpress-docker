@@ -24,8 +24,6 @@ services:
     volumes:
       - wordpress:/var/www/html:deligated
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
-
-
   wordpress:
     depends_on:
       - mysql
