@@ -9,8 +9,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - wordpress:/var/www/html
-      - ./custom-plugins:/var/www/html/wp-content/plugins
+      - wordpress:/var/www/html:deligated
+      - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
 
   php:
     build:
@@ -22,8 +22,9 @@ services:
       WORDPRESS_DB_PASSWORD: "${WORDPRESS_DB_PASSWORD}"
       WORDPRESS_DB_NAME: "${WORDPRESS_DB_NAME}"
     volumes:
-      - wordpress:/var/www/html
-      - ./custom-plugins:/var/www/html/wp-content/plugins
+      - wordpress:/var/www/html:deligated
+      - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
+
 
   wordpress:
     depends_on:
@@ -42,7 +43,10 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - mysql_data:/var/lib/mysql
 
 volumes:
   wordpress:
+  mysql_data:
 
