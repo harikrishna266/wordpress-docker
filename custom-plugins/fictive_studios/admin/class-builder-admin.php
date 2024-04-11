@@ -50,10 +50,8 @@ class Builder_Admin {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $builder, $version ) {
-
 		$this->builder = $builder;
 		$this->version = $version;
-
 	}
 
 	/**
@@ -63,7 +61,6 @@ class Builder_Admin {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->builder, plugin_dir_url( __FILE__ ) . 'css/builder-admin.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -72,7 +69,7 @@ class Builder_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-        wp_enqueue_script( $this->builder, plugin_dir_url( __FILE__ ) . 'js/builder-admin.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script( $this->builder, plugin_dir_url( __FILE__ ) . 'js/builder-admin-n234234234.js', array( 'jquery' ), $this->version, false );
 	}
 
 
@@ -131,7 +128,7 @@ class Builder_Admin {
                 'capability' => 'manage_options',
                 'menu_slug' => 'builder_saved_designs',
                 'callback'   => array($this, 'builder_dashboard'),
-    ),
+            ),
          );
 
         foreach ($submenus as $submenu) {
