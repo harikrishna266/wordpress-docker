@@ -3,7 +3,7 @@
 class Builder2d {
 
 
-    public function Templates()
+    public function templates()
     {
         $link_url = esc_url(admin_url('admin.php?page=' . TEMPLATE_BUILDER_SLUG));
         include plugin_dir_path(__FILE__) . 'partials/builder-2d.php';
@@ -32,7 +32,7 @@ class Builder2d {
             'menu_title' =>__( 'Create Templates', 'Templates' ),
             'capability' => 'manage_options',
             'menu_slug' => 'create_template',
-            'callback'   => array($this, 'Templates'),
+            'callback'   => array($this, 'templates'),
         );
         add_submenu_page(
             'builder_main_menu',

@@ -41,9 +41,6 @@ class Dashboard {
             $submenu['position']
         );
         unset($GLOBALS['submenu']['builder_main_menu'][0]);
-
-
-
     }
 }
 

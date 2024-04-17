@@ -1,12 +1,11 @@
 <?php
-require_once 'partials/template-list-helper.php';
 class TemplatesListingAdmin {
 
      public function template_listing_admin() {
         $link_url = esc_url(admin_url('admin.php?page=' . TEMPLATE_BUILDER_SLUG));
-        require_once (plugin_dir_path(__FILE__) . 'partials/template-list-helper.php');
+        include plugin_dir_path(__FILE__) . 'template-list-helper.php';
         $template_table = new Template_List_Table();
-        include plugin_dir_path(__FILE__) . 'partials/template-listing.php';
+        require_once (plugin_dir_path(__FILE__) . 'partials/template-listing.php');
      }
 
     public function add_submenu()

@@ -22,14 +22,14 @@ class Template_List_Table extends \WP_List_Table
     protected function get_brocha_templates($search_term = null)
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'brocha_templates';
+        $table_name = $wpdb->prefix . 'builder_templates';
         $query = "SELECT * FROM $table_name";
         if ($search_term) {
             $query = $wpdb->prepare("SELECT * FROM $table_name WHERE name LIKE %s", '%' . $wpdb->esc_like($search_term) . '%');
         } else {
             $query = "SELECT * FROM $table_name";
         }
-        $results = $wpdb->get_results($query, ARRAY_A);
+        $results = $wpdb->get_results($query);
         return $results;
     }
 
@@ -70,21 +70,21 @@ class Template_List_Table extends \WP_List_Table
 
     public function column_cb($item)
     {
-        return sprintf(
-            '<input type="checkbox" name="%1$s_ID[]" value="%2$s" />',
-            esc_attr($this->_args['singular']),
-            esc_attr($item['ID'])
-        );
+//        return sprintf(
+//            '<input type="checkbox" name="%1$s_ID[]" value="%2$s" />',
+//            esc_attr($this->_args['singular']),
+//            esc_attr($item['ID'])
+//        );
     }
 
     public function prepare_items()
     {
         $columns = $this->get_columns();
         $sortable = $this->get_sortable_columns();
-        $hIdden = array();
+        $hidden = array();
         $primary = 'name';
-        $this->_column_headers = array($columns, $hIdden, $sortable, $primary);
-        $search_term = filter_input(INPUT_GET, 's', FILTER_UNSAFE_RAW);
+        $this->_column_headers = array($columns, $hidden, $sortable, $primary);
+        $search_term = filter_input(INPUT_GET, '', FILTER_UNSAFE_RAW);
         $data = $this->get_brocha_templates($search_term);
         $this->process_bulk_action();
         $this->items = $data;
@@ -148,9 +148,7 @@ class Template_List_Table extends \WP_List_Table
                     'selected' => filter_input(INPUT_GET, 'type', 513),
                 ),
             );
-
             $this->html_dropdown($drafts_dropdown_arg);
-
             submit_button(__('Filter', 'admin-table-tut'), 'secondary', 'action', false);
         }
     }

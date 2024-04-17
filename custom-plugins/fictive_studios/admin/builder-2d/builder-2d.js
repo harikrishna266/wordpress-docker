@@ -1,5 +1,4 @@
 import {Stage2D} from 'https://unpkg.com/@brocha-libs/builder-2d@10.0.0/index.mjs';
-alert('in');
 let rect;
 async function loadStage() {
     const stage = new Stage2D();
