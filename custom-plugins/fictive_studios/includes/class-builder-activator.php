@@ -1,36 +1,16 @@
 <?php
 
-/**
- * Fired during plugin deactivation
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- */
-
-/**
- * Fired during plugin deactivation.
- *
- * This class defines all code necessary to run during the plugin's activation.
- *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- * @author     Your Name <email@example.com>
- */
 class Builder_Activator {
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function activate() {
 
-	}
+	public function activate() {
+        $this->runMigrations();
+    }
+
+    private function runMigrations() {
+        require_once  PLUGIN_ROOT . '/admin/migrations/create-tables.php';
+        $activator = new BuilderMigrations();
+        $activator->createTables();
+    }
 
 }

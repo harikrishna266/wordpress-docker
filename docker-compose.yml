@@ -9,7 +9,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - wordpress:/var/www/html:deligated
+      - wordpress:/var/www/html:delegated
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
 
   php:
@@ -22,7 +22,7 @@ services:
       WORDPRESS_DB_PASSWORD: "${WORDPRESS_DB_PASSWORD}"
       WORDPRESS_DB_NAME: "${WORDPRESS_DB_NAME}"
     volumes:
-      - wordpress:/var/www/html:deligated
+      - wordpress:/var/www/html:delegated
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
   wordpress:
     depends_on:
