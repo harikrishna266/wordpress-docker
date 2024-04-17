@@ -32,7 +32,7 @@ class Builder {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/templates/listing/templates-listing.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/templates/create/templates-create.php';
 
-        $templates_admin = new TemplatesListingAdmin();
+        $templates_admin = new FictiveCodes\TemplatesListingAdmin();
         $this->loader->add_action( 'admin_menu', $templates_admin, 'add_submenu' );
 
         $templates_admin = new TemplatesCreateAdmin();

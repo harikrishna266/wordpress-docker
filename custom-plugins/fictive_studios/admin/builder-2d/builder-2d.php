@@ -16,10 +16,10 @@ class Builder2d {
 
     public function process_2d_builder_script($tag, $handle, $src)
     {
-         if($_GET['page'] != 'create_template' && $handle != '2b-builder-script') {
+         if(isset($_GET['page']) && $_GET['page'] != 'create_template' && $handle != '2b-builder-script') {
             return $tag;
         }
-        if($_GET['page'] == 'create_template' && $handle == '2b-builder-script') {
+        if(isset($_GET['page']) && $_GET['page'] == 'create_template' && $handle == '2b-builder-script') {
             return '<script type="module" src="' . esc_url($src) . '"></script>';
         }
         return $tag;

@@ -3,7 +3,7 @@
 function create_templates_tables()
 {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'builder_templates';
+    $table_name = $wpdb->prefix . 'templates';
     $charset_collate = $wpdb->get_charset_collate();
     $sql = "CREATE TABLE $table_name (
         ID mediumint(9) NOT NULL AUTO_INCREMENT,
