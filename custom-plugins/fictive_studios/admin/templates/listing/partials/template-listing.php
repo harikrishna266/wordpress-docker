@@ -7,7 +7,6 @@
         <input type="hidden" name="page" value="brocha-template" />
         <?php
             $template_table->prepare_items();
-//            $template_table->search_box('Search Templates', 'search');
             $template_table->display();
         ?>
     </form>

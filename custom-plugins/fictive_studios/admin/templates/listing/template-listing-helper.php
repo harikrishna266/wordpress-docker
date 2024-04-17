@@ -26,7 +26,7 @@ class TemplateListingHelper extends \WP_List_Table
     public function get_sortable_columns()
     {
         return array(
-            'col_name' => array('col_name', false),
+            'name' => array('name', false),
         );
     }
 
