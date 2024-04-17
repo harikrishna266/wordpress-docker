@@ -32,7 +32,7 @@ class Builder {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/templates/listing/templates-listing.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/templates/create/templates-create.php';
 
-        $templates_admin = new TemplatesListingAdmin();
+        $templates_admin = new FictiveCodes\TemplatesListingAdmin();
         $this->loader->add_action( 'admin_menu', $templates_admin, 'add_submenu' );
 
         $templates_admin = new TemplatesCreateAdmin();
@@ -53,7 +53,10 @@ class Builder {
         $builder2d = new Builder2d();
         $this->loader->add_action( 'admin_menu', $builder2d, 'add_submenu' );
         $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_2d_builder_script' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_alphine_js' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_tailwind' );
         $this->loader->add_filter( 'script_loader_tag', $builder2d, 'process_2d_builder_script', 9, 3 );
+        $this->loader->add_filter( 'style_loader_tag', $builder2d, 'process_2d_builder_styles', 9, 3 );
     }
 
 

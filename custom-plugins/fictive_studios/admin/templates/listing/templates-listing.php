@@ -1,10 +1,11 @@
 <?php
-class TemplatesListingAdmin {
+namespace FictiveCodes;
 
+class TemplatesListingAdmin {
      public function template_listing_admin() {
         $link_url = esc_url(admin_url('admin.php?page=' . TEMPLATE_BUILDER_SLUG));
-        include plugin_dir_path(__FILE__) . 'template-list-helper.php';
-        $template_table = new Template_List_Table();
+        include plugin_dir_path(__FILE__) . 'template-listing-helper.php';
+        $template_table = new TemplateListingHelper();
         require_once (plugin_dir_path(__FILE__) . 'partials/template-listing.php');
      }
 
