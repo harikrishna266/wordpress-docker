@@ -12,8 +12,8 @@ class BuilderMigrations
 
     public function loadMigrations()
     {
-         require_once PLUGIN_ROOT. 'admin/migrations/templates.php';
-         require_once PLUGIN_ROOT. 'admin/migrations/printing-areas.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/templates.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/printing-areas.php';
     }
 
 }

@@ -42,7 +42,7 @@ class Builder {
     private function printing_areas_CRUD(){
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/printing-area/listing/printing-area-listing.php';
 
-        $printing_area_admin = new PrintingAreaListingAdmin();
+        $printing_area_admin = new FictiveCodes\PrintingAreaListingAdmin();
         $this->loader->add_action( 'admin_menu', $printing_area_admin, 'add_submenu' );
     }
 
