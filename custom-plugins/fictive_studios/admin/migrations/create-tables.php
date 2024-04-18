@@ -7,11 +7,13 @@ class BuilderMigrations
     {
         $this->loadMigrations();
         create_templates_tables();
+        create_printing_areas_tables();
     }
 
     public function loadMigrations()
     {
-         require_once PLUGIN_ROOT. 'admin/migrations/templates.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/templates.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/printing-areas.php';
     }
 
 }

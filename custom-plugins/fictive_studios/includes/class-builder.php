@@ -20,7 +20,7 @@ class Builder {
         $this->dashboard();
         $this->TemplateCRUD();
         $this->builder2d();
-
+        $this->printing_areas_CRUD();
     }
 
     private function createLoader() {
@@ -37,6 +37,13 @@ class Builder {
 
         $templates_admin = new TemplatesCreateAdmin();
         $this->loader->add_action( 'wp_ajax_save_template_action', $templates_admin, 'save_template_hook' );
+    }
+
+    private function printing_areas_CRUD(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/printing-area/listing/printing-area-listing.php';
+
+        $printing_area_admin = new FictiveCodes\PrintingAreaListingAdmin();
+        $this->loader->add_action( 'admin_menu', $printing_area_admin, 'add_submenu' );
     }
 
     private function dashboard()
