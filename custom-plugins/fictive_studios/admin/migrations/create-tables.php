@@ -10,6 +10,7 @@ class BuilderMigrations
         create_printing_areas_tables();
         create_print_types_table();
         create_fashion_designs_tables();
+        create_models_tables();
     }
 
     public function loadMigrations()
@@ -18,6 +19,7 @@ class BuilderMigrations
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/printing-areas.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/print-types.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/fashion-designs.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/models.php';
     }
 
 }

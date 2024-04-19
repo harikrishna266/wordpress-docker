@@ -23,6 +23,7 @@ class Builder {
         $this->printing_areas_CRUD();
         $this->print_types_CRUD();
         $this->fashion_designs_CRUD();
+        $this->models_CRUD();
     }
 
     private function createLoader() {
@@ -59,6 +60,13 @@ class Builder {
 
         $fashion_designs_admin = new FictiveCodes\FashionDesignsListingAdmin();
         $this->loader->add_action( 'admin_menu', $fashion_designs_admin, 'add_submenu' );
+    }
+
+    private function models_CRUD(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/models/listing/models-listing.php';
+
+        $models_admin = new FictiveCodes\ModelsListingAdmin();
+        $this->loader->add_action( 'admin_menu', $models_admin, 'add_submenu' );
     }
 
     private function dashboard()
