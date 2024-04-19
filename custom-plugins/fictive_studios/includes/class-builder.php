@@ -22,6 +22,7 @@ class Builder {
         $this->builder2d();
         $this->printing_areas_CRUD();
         $this->print_types_CRUD();
+        $this->fashion_designs_CRUD();
     }
 
     private function createLoader() {
@@ -52,6 +53,12 @@ class Builder {
 
         $print_types_admin = new FictiveCodes\PrintingTypesListingAdmin();
         $this->loader->add_action( 'admin_menu', $print_types_admin, 'add_submenu' );
+    }
+    private function fashion_designs_CRUD(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/fashion-designs/listing/fashion-designs-listing.php';
+
+        $fashion_designs_admin = new FictiveCodes\FashionDesignsListingAdmin();
+        $this->loader->add_action( 'admin_menu', $fashion_designs_admin, 'add_submenu' );
     }
 
     private function dashboard()
