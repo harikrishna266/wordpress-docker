@@ -21,6 +21,7 @@ class Builder {
         $this->TemplateCRUD();
         $this->builder2d();
         $this->printing_areas_CRUD();
+        $this->print_types_CRUD();
     }
 
     private function createLoader() {
@@ -44,6 +45,13 @@ class Builder {
 
         $printing_area_admin = new FictiveCodes\PrintingAreaListingAdmin();
         $this->loader->add_action( 'admin_menu', $printing_area_admin, 'add_submenu' );
+    }
+
+    private function print_types_CRUD(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/print-types/listing/print-types-listing.php';
+
+        $print_types_admin = new FictiveCodes\PrintingTypesListingAdmin();
+        $this->loader->add_action( 'admin_menu', $print_types_admin, 'add_submenu' );
     }
 
     private function dashboard()

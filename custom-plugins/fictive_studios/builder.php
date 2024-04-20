@@ -26,6 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'BUILDER_VERSION', '1.0.0' );
 define('TEMPLATE_BUILDER_SLUG', 'template_builder');
 define('PRINTING_AREAS_BUILDER_SLUG', 'printing_areas_builder');
+define('PRINT_TYPES_BUILDER_SLUG', 'print_types_builder');
 define( 'PLUGIN_ROOT', plugin_dir_path( __FILE__));
 
 function activate_builder() {
