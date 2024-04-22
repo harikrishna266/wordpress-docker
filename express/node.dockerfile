@@ -10,10 +10,10 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the rest of the application code
-COPY ./express/ ./
-
+COPY ./express/ ./express
+WORKDIR  /usr/src/app/express
 # Expose port 3000 to the outside world
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "index.js"]
+CMD ["npm", "run","start"]

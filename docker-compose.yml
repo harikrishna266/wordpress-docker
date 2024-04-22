@@ -63,6 +63,8 @@ services:
       dockerfile: express/node.dockerfile
     ports:
       - 3000:3000
+    volumes:
+      - ./express:/usr/src/app/express
 
 volumes:
   wordpress:
