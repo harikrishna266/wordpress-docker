@@ -16,7 +16,8 @@ KEY_FILE="${CERTS_DIR}/localhost-key.pem"
     mkdir -p "$CERTS_DIR"
     cd "$CERTS_DIR"
 
-    mkcert -key-file localhost-key.pem -cert-file localhost.pem localhost
+    mkcert -key-file localhost-key.pem -cert-file localhost.pem woocommerce.com
+    mkcert -key-file fictivecodes-key.pem -cert-file fictivecodes.pem fictivecodes.com
 
     echo "Certificates generated successfully."
 fi
