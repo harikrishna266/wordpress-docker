@@ -11,7 +11,9 @@ services:
     volumes:
       - wordpress:/var/www/html:delegated
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
-
+    depends_on:
+      - php
+      - express
   php:
     build:
       context: .
@@ -54,6 +56,13 @@ services:
       PMA_HOST: mysql
       MYSQL_USERNAME: user
       MYSQL_ROOT_PASSWORD: secret
+
+  express:
+    build:
+      context: .
+      dockerfile: express/node.dockerfile
+    ports:
+      - 3000:3000
 
 volumes:
   wordpress:
