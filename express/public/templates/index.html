@@ -1,0 +1,58 @@
+<div class="bg-gray-900 rounded-lg  w-full h-full flex">
+    <div class='bg-gray w-28 h-full flex flex-col box-border space-y-10' >
+        <ul class='w-full flex-col space-y-10 mt-20'  >
+            <li  @click='$store.mainMenu.setMenu("templates")'
+                 x-bind:class="{ 'bg-gray-600': selectedMenu === 'templates' }"
+                 class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
+                 hx-get='https://fictivecodes.com/svg/templates.svg'
+                 hx-trigger='load' hx-swap='afterbegin'>
+                <span class='mt-2'>Templates</span>
+            </li>
+            <li  @click='$store.mainMenu.setMenu("elements")'
+                 x-bind:class="{ 'bg-gray-600': selectedMenu === 'elements' }"
+                 class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
+                 hx-get='https://fictivecodes.com/svg/elements.svg'
+                 hx-trigger='load' hx-swap='afterbegin'>
+                <span class='mt-2'>Elements</span>
+            </li>
+            <li @click='$store.mainMenu.setMenu("text")'
+                x-bind:class="{ 'bg-gray-600': selectedMenu === 'text' }"
+                class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
+                hx-get='https://fictivecodes.com/svg/text.svg'
+                hx-trigger='load' hx-swap='afterbegin'>
+                <span class='mt-2'>Text</span>
+            </li>
+            <li @click='$store.mainMenu.setMenu("images")'
+                x-bind:class="{ 'bg-gray-600': selectedMenu === 'images' }"
+                class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
+                hx-get='https://fictivecodes.com/svg/image.svg'
+                hx-trigger='load' hx-swap='afterbegin'>
+                <span class='mt-2'>Image</span>
+            </li>
+            <li  @click='$store.mainMenu.setMenu("my-designs")'
+                 x-bind:class="{ 'bg-gray-600': selectedMenu === 'my-designs' }"
+                 class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
+                 hx-get='https://fictivecodes.com/svg/my-design.svg'
+                 hx-trigger='load' hx-swap='afterbegin'>
+                <span class='mt-2'>My Designs</span>
+            </li>
+            <div x-></div>
+        </ul>
+
+    </div>
+    <div class='w-2/12 h-full bg-blue-300'></div>
+    <div class='flex-1 bg-white flex-col'>
+        <div class="w-full h-[50px]">
+
+        </div>
+        <div class='flex-1 flex flex-col h-full'>
+            <div class='flex-1 relative'>
+                <div
+                        id='konva-container'
+                        #rendererCanvas
+                        style='width: 100%; height: 100%'
+                ></div>
+            </div>
+        </div>
+    </div>
+</div>

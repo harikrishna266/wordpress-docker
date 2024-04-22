@@ -1,0 +1,18 @@
+<svg class='w-12 h-12 ' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 124 124' >
+  <g id='Layer_2' class="text-white" data-name='Layer 2' style="fill:#999393">
+    <g id='General_-_Shape' data-name='General - Shape'>
+      <g id='General_-_Shape-2' data-name='General - Shape'>
+        <g id='Frame'>
+          <rect class='cls-1' x='1' y='1' width='20' height='20' rx='1.9' />
+          <rect class='cls-1' x='103' y='1' width='20' height='20' rx='1.9' />
+          <rect class='cls-1' x='1' y='103' width='20' height='20' rx='1.9' />
+          <rect class='cls-1' x='103' y='103' width='20' height='20' rx='1.9' />
+          <path class='cls-1' d='M11 21v82M21 11h82M113 21v82M103 113H21' />
+        </g>
+        <path d='M106.72 44.53a48 48 0 1 1-13.88-19.31' />
+        <circle cx='100' cy='32' r='2' />
+        <path class='cls-1' d='M90 61c0-13.27-10.29-24-23-24' />
+      </g>
+    </g>
+  </g>
+</svg>
