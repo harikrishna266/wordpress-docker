@@ -18,6 +18,12 @@ class Builder2d {
         wp_enqueue_style('tailwind-css', 'https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css');
     }
 
+
+    public function add_htmlx()
+    {
+        wp_enqueue_script('add_htmlx', 'https://unpkg.com/htmx.org@1.9.12', array(), null, true);
+    }
+
     public function add_alphine_js()
     {
         wp_enqueue_script('alphine-js', 'https://cdn.jsdelivr.net/npm/alpinejs@3', array(), null, true);
