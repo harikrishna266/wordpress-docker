@@ -44,9 +44,14 @@ class Builder {
 
     private function printing_areas_CRUD(){
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/printing-area/listing/printing-area-listing.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/printing-area/api/print-area-api.php';
 
         $printing_area_admin = new FictiveCodes\PrintingAreaListingAdmin();
         $this->loader->add_action( 'admin_menu', $printing_area_admin, 'add_submenu' );
+        $this->loader->add_action('admin_enqueue_scripts', $printing_area_admin, 'get_print_area_function');
+
+        $printing_area_admin_api = new PrintAreaAPIAdmin;
+        $this->loader->add_action( 'wp_ajax_get_print_areas', $printing_area_admin_api, 'get_print_area_data' );
     }
 
     private function print_types_CRUD(){

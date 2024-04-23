@@ -10,6 +10,7 @@ class PrintingAreaListingAdmin
         include plugin_dir_path(__FILE__) . 'printing-area-listing-helper.php';
         $print_area_table = new PrintAreasListingHelper();
         require_once (plugin_dir_path(__FILE__) . 'partials/printing-area-header.php');
+        echo '<a id="getPrintArea" class="button-secondary">Get All Print Areas</a>';
     }
     public function add_submenu()
     {
@@ -29,4 +30,10 @@ class PrintingAreaListingAdmin
             $submenu['callback']
         );
     }
+
+    public function get_print_area_function()
+    {
+        wp_enqueue_script('get_print_area_script', plugin_dir_url(__FILE__) . '../api/print-area-api.js', array(), null, true);
+    }
+
 }
