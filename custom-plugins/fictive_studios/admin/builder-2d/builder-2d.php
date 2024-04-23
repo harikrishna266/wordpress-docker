@@ -32,7 +32,7 @@ class Builder2d {
 
     public function process_2d_builder_script($tag, $handle, $src)
     {
-        if($handle == '2b-builder-script') {
+        if($handle == '2b-builder-script'  && $_GET['page'] == 'create_template' ) {
             $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
         }
         if(isset($_GET['page']) && $_GET['page'] !== 'create_template') {
