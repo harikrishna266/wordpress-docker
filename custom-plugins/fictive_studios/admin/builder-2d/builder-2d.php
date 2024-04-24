@@ -26,7 +26,7 @@ class Builder2d {
 
     public function add_alphine_js()
     {
-        wp_enqueue_script('alphine-js', 'https://cdn.jsdelivr.net/npm/alpinejs@3', array(), null, true);
+        wp_enqueue_script('alphine-js', 'https://fictivecodes.com/scripts/alphine.esm.js', array(), null, true);
     }
 
 
