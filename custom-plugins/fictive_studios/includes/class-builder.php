@@ -52,6 +52,8 @@ class Builder {
 
         $printing_area_admin_api = new PrintAreaAPIAdmin;
         $this->loader->add_action( 'wp_ajax_get_print_areas', $printing_area_admin_api, 'get_print_area_data' );
+        $this->loader->add_action( 'wp_ajax_save_print_areas', $printing_area_admin_api, 'save_print_area_data' );
+        $this->loader->add_action( 'wp_ajax_edit_print_areas', $printing_area_admin_api, 'edit_print_area_data' );
     }
 
     private function print_types_CRUD(){
