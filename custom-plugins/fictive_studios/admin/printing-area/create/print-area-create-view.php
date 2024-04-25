@@ -1,4 +1,35 @@
 <?php
+$id = isset($print_area_data) && isset($print_area_data->ID) ? $print_area_data->ID : null;
+$heightValue = isset($print_area_data) && isset($print_area_data->height) ? $print_area_data->height : '';
+$widthValue = isset($print_area_data) && isset($print_area_data->width) ? $print_area_data->width : '';
+?>
+
+<form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
+  <?php if (isset($id)): ?>
+    <input type="hidden" name="id" value="<?php echo esc_attr($id); ?>">
+    <input type="hidden" name="action" value="edit_print_area">
+  <?php else: ?>
+    <input type="hidden" name="action" value="save_print_area">
+  <?php endif; ?>
+  <div id="print-area-form">
+    <div class="print-area-form-content">
+      <h2>Save Print Area</h2>
+      <div>
+        <label for="height">Height:</label>
+        <input type="number" id="height-field" name="height" value="<?php echo esc_attr($heightValue); ?>" required>
+      </div>
+      <div>
+        <label for="width">Width:</label>
+        <input type="number" id="width-field" name="width" value="<?php echo esc_attr($widthValue); ?>" required>
+      </div>
+      <div>
+        <button id="savePrintAreaBtn" type="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<?php
 echo <<<HTML
 <style>
   #print-area-form {
@@ -50,26 +81,7 @@ echo <<<HTML
 </style>
 HTML;
 
-$heightValue = isset($print_area_data) && isset($print_area_data->height) ? $print_area_data->height : '';
-$widthValue = isset($print_area_data) && isset($print_area_data->width) ? $print_area_data->width : '';
-
 echo <<<HTML
-<div id="print-area-form">
-  <div class="print-area-form-content">
-    <h2>Save Print Area</h2>
-    <div>
-      <label for="height">Height:</label>
-      <input type="number" id="height-field" name="height" value='$heightValue' required>
-    </div>
-    <div>
-      <label for="width">Width:</label>
-      <input type="number" id="width-field" name="width" value='$widthValue' required>
-    </div>
-    <div>
-      <button id="savePrintAreaBtn" type="submit">Submit</button>
-    </div>
-  </div>
-</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {

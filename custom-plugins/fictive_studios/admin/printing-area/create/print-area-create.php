@@ -5,7 +5,7 @@ class PrintAreaCreate
 {
     public function get_create_print_area_template()
     {
-        $action = ($_GET['action']);
+        $action = ($_GET['action']);    
         $print_area_id;
         $print_area_data;
         if ($action == 'edit') {
