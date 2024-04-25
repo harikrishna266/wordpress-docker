@@ -12,8 +12,8 @@ class PrintAreaAPIAdmin
 
     public function save_print_area_data()
     {
-        $height = isset($_POST['height']) ? $_POST['height'] : '';
-        $width = isset($_POST['width']) ? $_POST['width'] : '';
+        $height = isset($_POST['height']) ? sanitize_text_field($_POST['height']) : '';
+        $width = isset($_POST['width']) ? sanitize_text_field($_POST['width']) : '';
         global $wpdb;
         $table_name = $wpdb->prefix . 'print_areas';
         $wpdb->insert(
@@ -22,17 +22,32 @@ class PrintAreaAPIAdmin
                 'height' => $height,
                 'width' => $width,
                 'user' => get_current_user_id()
-            )
+            ),
+            array('%s', '%s', '%d')
         );
-        wp_die();
+        $edit_params = array(
+            'page' => 'printing_areas_builder',
+        );
+        $url = add_query_arg($edit_params, admin_url('admin.php'));
+        wp_redirect($url);
+        exit;
     }
+    
 
     public function edit_print_area_data()
     {
-        $height = isset($_POST['height']) ? $_POST['height'] : '';
-        $width = isset($_POST['width']) ? $_POST['width'] : '';
+        $height = isset($_POST['height']) ? sanitize_text_field($_POST['height']) : '';
+        $width = isset($_POST['width']) ? sanitize_text_field($_POST['width']) : '';
+
         global $wpdb;
         $table_name = $wpdb->prefix . 'print_areas';
+
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+
+        if ($id <= 0) {
+            wp_redirect(admin_url('admin.php?page=printing_areas_builder&error=invalid_id'));
+            exit;
+        }
         $wpdb->update(
             $table_name,
             array(
@@ -40,11 +55,19 @@ class PrintAreaAPIAdmin
                 'width' => $width,
                 'user' => get_current_user_id()
             ),
-            array('id' => $_POST['id']),
-            array('%s', '%s'),
+            array('id' => $id),
+            array('%s', '%s', '%d'),
             array('%d')
         );
-        wp_die();
+
+        $redirect_params = array(
+            'page' => 'printing_areas_builder',
+        );
+
+        $url = add_query_arg($redirect_params, admin_url('admin.php'));
+        wp_redirect($url);
+        exit;
     }
+
 
 }
