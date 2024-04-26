@@ -1,90 +1,39 @@
-<?php
-$id = isset($print_area_data) && isset($print_area_data->ID) ? $print_area_data->ID : null;
-$heightValue = isset($print_area_data) && isset($print_area_data->height) ? $print_area_data->height : '';
-$widthValue = isset($print_area_data) && isset($print_area_data->width) ? $print_area_data->width : '';
-?>
-
 <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-  <?php if (isset($id)): ?>
-    <input type="hidden" name="id" value="<?php echo esc_attr($id); ?>">
+  <?php if (isset($print_area_id)): ?>
+    <input type="hidden" name="id" value="<?php echo esc_attr($print_area_id); ?>">
     <input type="hidden" name="action" value="edit_print_area">
   <?php else: ?>
     <input type="hidden" name="action" value="save_print_area">
   <?php endif; ?>
-  <div id="print-area-form">
-    <div class="print-area-form-content">
-      <h2>Save Print Area</h2>
-      <div>
-        <label for="height">Height:</label>
-        <input type="number" id="height-field" name="height" value="<?php echo esc_attr($heightValue); ?>" required>
-      </div>
-      <div>
-        <label for="width">Width:</label>
-        <input type="number" id="width-field" name="width" value="<?php echo esc_attr($widthValue); ?>" required>
-      </div>
-      <div>
-        <button id="savePrintAreaBtn" type="submit">Submit</button>
-      </div>
-    </div>
-  </div>
+  <table class="form-table">
+    <tbody>
+      <tr>
+        <th scope="row">
+          <h2>Save Print Area</h2>
+        </th>
+      </tr>
+      <tr class="form-field">
+        <th scope="row"><label for="height">Height:</label></th>
+        <td><input type="number" id="height-field" name="height" value="<?php echo esc_attr($heightValue); ?>" required>
+        </td>
+      </tr>
+      <tr class="form-field">
+        <th scope="row"><label for="width">Width:</label></th>
+        <td><input type="number" id="width-field" name="width" value="<?php echo esc_attr($widthValue); ?>" required>
+        </td>
+      </tr>
+      <tr class="form-field">
+        <th scope="row"></th>
+        <td>
+          <button id="savePrintAreaBtn" type="submit" class="button button-primary">Submit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </form>
 
-<?php
-echo <<<HTML
-<style>
-  #print-area-form {
-    /* background-color: #f9f9f9; */
-    padding: 20px;
-    /* border-radius: 8px; */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-    max-width: 400px;
-    /* margin: 20px auto; */
-  }
-
-  #print-area-form h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-
-  #print-area-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
-
-  #print-area-form input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 15px;
-  }
-
-  #print-area-form button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  #print-area-form button:hover {
-    background-color: #0056b3;
-  }
-
-  #print-area-form button:disabled {
-    background-color: grey;
-  }
-</style>
-HTML;
-
-echo <<<HTML
-
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const heightField = document.getElementById('height-field');
     const widthField = document.getElementById('width-field');
     const saveButton = document.getElementById('savePrintAreaBtn');
@@ -96,5 +45,3 @@ echo <<<HTML
     widthField.addEventListener('input', toggleButton);
   });
 </script>
-HTML;
-?>
