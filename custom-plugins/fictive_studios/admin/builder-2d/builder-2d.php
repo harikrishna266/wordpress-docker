@@ -26,13 +26,13 @@ class Builder2d {
 
     public function add_alphine_js()
     {
-        wp_enqueue_script('alphine-js', 'https://cdn.jsdelivr.net/npm/alpinejs@3', array(), null, true);
+        wp_enqueue_script('alphine-js', 'https://fictivecodes.com/scripts/alphine.esm.js', array(), null, true);
     }
 
 
     public function process_2d_builder_script($tag, $handle, $src)
     {
-        if($handle == '2b-builder-script') {
+        if($handle == '2b-builder-script'  && $_GET['page'] == 'create_template' ) {
             $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
         }
         if(isset($_GET['page']) && $_GET['page'] !== 'create_template') {
