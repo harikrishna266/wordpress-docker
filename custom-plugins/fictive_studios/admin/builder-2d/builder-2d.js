@@ -17,20 +17,24 @@ Alpine.data("editor", () => ({
             }
         }
     ],
-    currentMainMenu: 'hello',
+    currentMainMenu: 'templates',
     async openEditor() {
         await loadStage();
     },
+    async closeEditor() {
+        await closeEditor();
+    },
     setCurrentMainMenu(current) {
-        this.currentMainMenu =
+        this.currentMainMenu = current;
     }
 }));
 Alpine.start();
 let rect;
+let stage;
 const BOUNDARY = 'BOUNDARY';
 async function loadStage() {
     builderHolder.classList.remove("hidden");
-    const stage = new Stage2D();
+    stage = new Stage2D();
     await stage.initializeStage();
 
     const boundaryService = new BoundaryService(stage);
@@ -52,11 +56,14 @@ function createHolder() {
     builderHolder.style.zIndex = 100001;
     wpcontentElement.parentNode.insertBefore( builderHolder, wpcontentElement.nextSibling );
 }
-var wpcontentElement = document.getElementById( 'wpcontent' );
+const wpcontentElement = document.getElementById( 'wpcontent' );
 if ( wpcontentElement ) {
     createHolder()
 }
-//
-// await loadStage();
+
+function closeEditor() {
+    stage.stage.destroy();
+    builderHolder.classList.add("hidden");
+}
 
 

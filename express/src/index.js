@@ -6,10 +6,10 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname,'..' ,'public')));
 
-app.get('/', async (req: any, res: any) => {
-    const HTML_FILE_PATH = path.join(__dirname, 'templates/index.html');
+app.get('/', async (req, res) => {
+    const HTML_FILE_PATH = path.join(__dirname,'templates', 'index.html');
     const htmlTemplate = await fs.readFile(HTML_FILE_PATH, 'utf8');
     res.setHeader('Content-Type', 'text/html');
     res.send(htmlTemplate);

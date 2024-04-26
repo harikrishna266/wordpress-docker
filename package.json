@@ -2,13 +2,13 @@
   "name": "wordpress",
   "version": "0.1.3",
   "description": "",
-  "main": "express/src/index.ts",
+  "main": "express/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "release-it",
     "prepare": "husky install",
     "start": "node ./",
-    "start:dev": "nodemon express/src/index.ts"
+    "start:dev": "nodemon express/src/index.js"
   },
   "author": "",
   "license": "ISC",

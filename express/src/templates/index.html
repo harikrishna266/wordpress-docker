@@ -1,43 +1,52 @@
-<div class="bg-gray-900 rounded-lg  w-full h-full flex">
+<div class="bg-gray-900 rounded-lg  w-full h-full flex" x-data="editor">
     <div class='bg-gray w-28 h-full flex flex-col box-border space-y-10' >
-        <p x-text="currentMainMenu" class="text-white">sds</p>
-        <ul class='w-full flex-col space-y-10 mt-20'  >
+        <p x-text="currentMainMenu"></p>
+         <ul class='w-full flex-col space-y-10 mt-20'  >
             <li
+                 @click="setCurrentMainMenu('templates')"
+                 :class="{ 'bg-gray-600':  currentMainMenu === 'templates'}"
                  class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
                  hx-get='https://fictivecodes.com/icons/svg/templates.svg'
                  hx-trigger='load' hx-swap='afterbegin'>
                 <span class='mt-2'>Templates</span>
             </li>
             <li
+                    @click="setCurrentMainMenu('elements')"
+                    :class="{ 'bg-gray-600':  currentMainMenu === 'elements'}"
                  class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
                  hx-get='https://fictivecodes.com/icons/svg/elements.svg'
                  hx-trigger='load' hx-swap='afterbegin'>
                 <span class='mt-2'>Elements</span>
             </li>
             <li
+                    @click="setCurrentMainMenu('text')"
+                    :class="{ 'bg-gray-600':  currentMainMenu === 'text'}"
                 class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
                 hx-get='https://fictivecodes.com/icons/svg/text.svg'
                 hx-trigger='load' hx-swap='afterbegin'>
                 <span class='mt-2'>Text</span>
             </li>
             <li
+                    @click="setCurrentMainMenu('image')"
+                    :class="{ 'bg-gray-600':  currentMainMenu === 'image'}"
                 class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
                 hx-get='https://fictivecodes.com/icons/svg/image.svg'
                 hx-trigger='load' hx-swap='afterbegin'>
                 <span class='mt-2'>Image</span>
             </li>
-            <li  class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
+            <li
+                    @click="setCurrentMainMenu('my-designs')"
+                    :class="{ 'bg-gray-600':  currentMainMenu === 'my-designs'}"
+                 class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
                  hx-get='https://fictivecodes.com/icons/svg/my-design.svg'
                  hx-trigger='load' hx-swap='afterbegin'>
                 <span class='mt-2'>My Designs</span>
             </li>
-            <div x-></div>
-        </ul>
-
+         </ul>
     </div>
     <div class='w-2/12 h-full bg-blue-300'></div>
     <div class='flex-1 bg-white flex-col'>
-        <div class="w-full h-[50px]">
+        <div class="w-full h-[50px] bg-grey" >
 
         </div>
         <div class='flex-1 flex flex-col h-full'>
@@ -47,6 +56,9 @@
                         #rendererCanvas
                         style='width: 100%; height: 100%'
                 ></div>
+                <div class="bg-gray-600 absolute top-0 right-0 p-2 text-white" @click="closeEditor()">
+                        Close
+                </div>
             </div>
         </div>
     </div>
