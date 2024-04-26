@@ -1,7 +1,6 @@
 <div class="bg-gray-900 rounded-lg  w-full h-full flex" x-data="editor">
-    <div class='bg-gray w-28 h-full flex flex-col box-border space-y-10' >
-        <p x-text="currentMainMenu"></p>
-         <ul class='w-full flex-col space-y-10 mt-20'  >
+    <div class='bg-gray w-28 h-full flex flex-col box-border space-y-10' id="main-menu">
+          <ul class='w-full flex-col space-y-10 mt-20'  >
             <li
                  @click="setCurrentMainMenu('templates')"
                  :class="{ 'bg-gray-600':  currentMainMenu === 'templates'}"
@@ -44,7 +43,14 @@
             </li>
          </ul>
     </div>
-    <div class='w-2/12 h-full bg-blue-300'></div>
+    <div class='w-2/12 h-full bg-blue-300' id="menu-content">
+        <div x-show="currentMainMenu === 'templates'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/templates.html"></div>
+        <div x-show="currentMainMenu === 'elements'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/elements.html"></div>
+        <div x-show="currentMainMenu === 'text'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/text.html"></div>
+        <div x-show="currentMainMenu === 'image'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/image.html"></div>
+        <div x-show="currentMainMenu === 'my-designs'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/my-designs.html"></div>
+     </div>
+
     <div class='flex-1 bg-white flex-col'>
         <div class="w-full h-[50px] bg-grey" >
 
@@ -56,10 +62,11 @@
                         #rendererCanvas
                         style='width: 100%; height: 100%'
                 ></div>
-                <div class="bg-gray-600 absolute top-0 right-0 p-2 text-white" @click="closeEditor()">
+                <div class="bg-gray-600 absolute top-0 right-0 p-2 text-white cursor-pointer" @click="closeEditor()">
                         Close
                 </div>
             </div>
         </div>
     </div>
+
 </div>
