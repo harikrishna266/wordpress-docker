@@ -6,7 +6,7 @@
      <div x-data="$store.editor">
         <ul class="bg-white shadow rounded-lg divide-y divide-gray-200">
             <template x-for="res in availablePrintAreas">
-                <li class="px-6 py-4   cursor-pointer" @click="openEditor()"  >
+                <li class="px-6 py-4   cursor-pointer" @click="openEditor(res.resolution.width, res.resolution.height)"  >
                     <p class="text-lg font-semibold" x-text="res.name">name</p>
                     <p class="text-sm text-gray-500" x-text="`${res.resolution.width} x ${res.resolution.height}`">Resolution</p>
                 </li>
