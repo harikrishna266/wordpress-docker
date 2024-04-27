@@ -1,4 +1,5 @@
-<div class="bg-gray-900 rounded-lg  w-full h-full flex" x-data="editor">
+
+<div class="bg-gray-900 rounded-lg  w-full h-full flex" x-data="$store.editor">
     <div class='bg-gray w-28 h-full flex flex-col box-border space-y-10' id="main-menu">
           <ul class='w-full flex-col space-y-10 mt-20'  >
             <li
@@ -50,7 +51,6 @@
         <div x-show="currentMainMenu === 'image'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/image.html"></div>
         <div x-show="currentMainMenu === 'my-designs'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/my-designs.html"></div>
      </div>
-
     <div class='flex-1 bg-white flex-col'>
         <div class="w-full h-[50px] bg-grey" >
 
