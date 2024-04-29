@@ -33,7 +33,6 @@ class BuilderMigrations
     public function load_seeding_files()
     {
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/print-areas-sample.php';
-
     }
 
 }
