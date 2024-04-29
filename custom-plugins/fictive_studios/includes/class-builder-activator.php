@@ -10,7 +10,7 @@ class Builder_Activator {
     private function run_migrations() {
         require_once  PLUGIN_ROOT . '/admin/migrations/create-tables.php';
         $activator = new BuilderMigrations();
-        $activator->createTables();
+        $activator->create_tables();
     }
 
 }
