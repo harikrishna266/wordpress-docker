@@ -54,10 +54,15 @@ class ModelsListingHelper extends \WP_List_Table
         global $wpdb;
         $models_table = $wpdb->prefix . 'models';
         $coordinates_table = $wpdb->prefix . 'print_area_model_coordinates';
-        $query = "SELECT m.*, c.ID AS coordinate_id, c.x_coordinate, c.y_coordinate, c.camera_coordinates
-                  FROM $models_table m
-                  LEFT JOIN $coordinates_table c ON m.ID = c.models_id";
+        $print_areas_table = $wpdb->prefix . 'print_areas';
+
+        $query = "SELECT m.*, c.ID AS print_area_model_coordinate_id, c.x_coordinate, c.y_coordinate, c.camera_coordinates, pa.ID AS print_area_id, pa.height, pa.width
+                FROM $models_table m
+                LEFT JOIN $coordinates_table c ON m.ID = c.models_id
+                LEFT JOIN $print_areas_table pa ON c.print_area_id = pa.ID";
+
         $results = $wpdb->get_results($query, ARRAY_A);
+        
         $models_with_coordinates = array();
         foreach ($results as $row) {
             $model_id = $row['ID'];
@@ -66,12 +71,14 @@ class ModelsListingHelper extends \WP_List_Table
                     'ID' => $row['ID'],
                     'name' => $row['name'],
                     'user' => $row['user'],
-                    'coordinates' => array(),
+                    'print_areas' => array(),
                 );
             }
-            if (!empty($row['coordinate_id'])) {
-                $models_with_coordinates[$model_id]['coordinates'][] = array(
-                    'ID' => $row['coordinate_id'],
+            if (!empty($row['print_area_model_coordinate_id'])) {
+                $models_with_coordinates[$model_id]['print_areas'][] = array(
+                    'ID' => $row['print_area_model_coordinate_id'],
+                    'print_area_height' => $row['height'],
+                    'print_area_width' => $row['width'],
                     'x_coordinate' => $row['x_coordinate'],
                     'y_coordinate' => $row['y_coordinate'],
                     'camera_coordinates' => $row['camera_coordinates'],

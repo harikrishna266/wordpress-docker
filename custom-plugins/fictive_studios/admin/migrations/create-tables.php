@@ -38,7 +38,7 @@ class BuilderMigrations
     {
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/print-areas-sample.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/models-sample.php';
-        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/print-area-model-coordiantes-sample.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/print-area-model-coordinates-sample.php';
     }
 
 }

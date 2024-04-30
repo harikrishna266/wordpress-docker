@@ -5,6 +5,7 @@ function add_print_area_model_coordinates_sample()
     global $wpdb;
 
     $models_ids = $wpdb->get_col("SELECT ID FROM {$wpdb->prefix}models");
+    $print_area_ids = $wpdb->get_col("SELECT ID FROM {$wpdb->prefix}print_areas");
 
     if (empty($models_ids)) {
         return;
@@ -41,8 +42,10 @@ function add_print_area_model_coordinates_sample()
 
     foreach ($sample_data as $data) {
         $random_models_id = $models_ids[array_rand($models_ids)];
+        $random_print_areas_id = $print_area_ids[array_rand($print_area_ids)];
 
         $data['models_id'] = $random_models_id;
+        $data['print_area_id'] = $random_print_areas_id;
 
         $wpdb->insert(
             $print_area_model_coordinates_table,
