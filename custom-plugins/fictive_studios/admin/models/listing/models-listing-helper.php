@@ -52,19 +52,34 @@ class ModelsListingHelper extends \WP_List_Table
     private function get_models_data($search_term = '')
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'models';
-        $print_area_table = $wpdb->prefix . 'print_areas';
-        $query = "SELECT pa.*, fd.* 
-        FROM $print_area_table AS pa
-        LEFT JOIN $table_name AS fd 
-        ON pa.ID = fd.print_area_id";
-        if ($search_term) {
-            $search_term_like = '%' . $wpdb->esc_like($search_term) . '%';
-            $query = $wpdb->prepare("SELECT * FROM $table_name WHERE name LIKE %s", $search_term_like);
-        }
+        $models_table = $wpdb->prefix . 'models';
+        $coordinates_table = $wpdb->prefix . 'print_area_model_coordinates';
+        $query = "SELECT m.*, c.ID AS coordinate_id, c.x_coordinate, c.y_coordinate, c.camera_coordinates
+                  FROM $models_table m
+                  LEFT JOIN $coordinates_table c ON m.ID = c.models_id";
         $results = $wpdb->get_results($query, ARRAY_A);
-        do_action('qm/debug', $results);
-        return $results;
+        $models_with_coordinates = array();
+        foreach ($results as $row) {
+            $model_id = $row['ID'];
+            if (!isset($models_with_coordinates[$model_id])) {
+                $models_with_coordinates[$model_id] = array(
+                    'ID' => $row['ID'],
+                    'name' => $row['name'],
+                    'user' => $row['user'],
+                    'coordinates' => array(),
+                );
+            }
+            if (!empty($row['coordinate_id'])) {
+                $models_with_coordinates[$model_id]['coordinates'][] = array(
+                    'ID' => $row['coordinate_id'],
+                    'x_coordinate' => $row['x_coordinate'],
+                    'y_coordinate' => $row['y_coordinate'],
+                    'camera_coordinates' => $row['camera_coordinates'],
+                );
+            }
+        }
+        $models_list = array_values($models_with_coordinates);
+        return $models_list;
     }
 
 

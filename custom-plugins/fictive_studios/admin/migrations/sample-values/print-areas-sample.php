@@ -1,27 +1,31 @@
 <?php
 
-function create_printing_areas_table()
+function create_printing_areas_sample()
 {
     global $wpdb;
     $table_name = $wpdb->prefix . 'print_areas';
 
-    $print_areas_sample_data = array(
-        array(
-            'width' => 100,
-            'height' => 200,
-            'user' => 1
-        ),
-        array(
-            'width' => 150,
-            'height' => 250,
-            'user' => 1
-        ),
-    );
+    $row_count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name");
 
-    foreach ($print_areas_sample_data as $data) {
-        $wpdb->insert(
-            $table_name,
-            $data
+    if ($row_count == 0) {
+        $print_areas_sample_data = array(
+            array(
+                'width' => 100,
+                'height' => 200,
+                'user' => 1
+            ),
+            array(
+                'width' => 150,
+                'height' => 250,
+                'user' => 1
+            ),
         );
+
+        foreach ($print_areas_sample_data as $data) {
+            $wpdb->insert(
+                $table_name,
+                $data
+            );
+        }
     }
 }
