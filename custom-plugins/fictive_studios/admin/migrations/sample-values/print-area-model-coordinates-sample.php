@@ -15,27 +15,31 @@ function add_print_area_model_coordinates_sample()
 
     $sample_data = array(
         array(
-            'x_coordinate' => '10',
-            'y_coordinate' => '20',
-            'camera_coordinates' => '30',
+            'x_coordinate' => 10,
+            'y_coordinate' => 20,
+            'camera_x_coordinates' => 30,
+            'camera_y_coordinates' => 30,
             'user' => 1,
         ),
         array(
-            'x_coordinate' => '15',
-            'y_coordinate' => '25',
-            'camera_coordinates' => '35',
+            'x_coordinate' => 15,
+            'y_coordinate' => 25,
+            'camera_x_coordinates' => 35,
+            'camera_y_coordinates' => 35,
             'user' => 1,
         ),
         array(
-            'x_coordinate' => '20',
-            'y_coordinate' => '30',
-            'camera_coordinates' => '22',
+            'x_coordinate' => 20,
+            'y_coordinate' => 30,
+            'camera_x_coordinates' => 22,
+            'camera_y_coordinates' => 35,
             'user' => 1,
         ),
         array(
-            'x_coordinate' => '13',
-            'y_coordinate' => '22',
-            'camera_coordinates' => '3',
+            'x_coordinate' => 13,
+            'y_coordinate' => 22,
+            'camera_x_coordinates' => 3,
+            'camera_y_coordinates' => 35,
             'user' => 1,
         ),
     );

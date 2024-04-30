@@ -8,6 +8,7 @@ function create_models_tables()
     $sql = "CREATE TABLE $table_name (
         ID mediumint(9) NOT NULL AUTO_INCREMENT,
         name text NOT NULL,
+        model_url text NOT NULL,
         user int NOT NULL,
         PRIMARY KEY  (ID)
     ) $charset_collate;";

@@ -11,10 +11,12 @@ function add_models_sample()
         $models_sample_data = array(
             array(
                 'name' => 'model_1',
+                'model_url' => 'dummy_url',
                 'user' => 1
             ),
             array(
                 'name' => 'model_2',
+                'model_url' => 'dummy_url',
                 'user' => 1
             ),
         );
