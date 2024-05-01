@@ -1,24 +1,23 @@
-import {Stage2D, BoundaryService} from 'https://unpkg.com/@brocha-libs/builder-2d@33.2.0-1/index.mjs';
+import {Stage2D, BoundaryService} from 'https://unpkg.com/@brocha-libs/builder-2d@34/index.mjs';
 import { Alpine } from "https://fictivecodes.com/scripts/alphine.esm.js";
 let boundaryService;
 let stage;
+
+
 Alpine.store("editor", () => ({
-    availablePrintAreas: [
-        {
-            name: 'name 1',
-            resolution: {
-                width: 400,
-                height: 400,
-            }
-        },
-        {
-            name: 'name 2',
-            resolution: {
-                width: 200,
-                height: 400,
-            }
-        }
-    ],
+    availablePrintAreas: [],
+    fetchPrintAreas() {
+        fetch('https://woocommerce.com/wp-admin/admin-ajax.php?action=get_print_areas')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse response as JSON
+            })
+             .then(data => {
+                  this.availablePrintAreas = data;
+            })
+    },
      boundaryService: null,
     currentMainMenu: 'templates',
     async openEditor(width, height) {
@@ -44,8 +43,9 @@ async function loadStage(width, height) {
     builderHolder.classList.remove("hidden");
     stage = new Stage2D();
     await stage.initializeStage();
+    stage.isEditor = true;
     boundaryService = new BoundaryService(stage);
-    await boundaryService.createBoundary('BOUNDARY', width, height);
+    await boundaryService.createBoundary('BOUNDARY', +width, +height);
     boundaryService.focusABoundary('BOUNDARY');
 }
 let builderHolder;
