@@ -6,14 +6,33 @@ class ModelsAPIAdmin
     public function get_models_data()
     {
         global $wpdb;
+        $sql_query = "SELECT * FROM " . $wpdb->prefix . "models";
+        $results = $wpdb->get_results($sql_query);
+        echo json_encode($results);
+        wp_die();
+    }
+
+    public function get_model_data_by_id()
+    {
+        global $wpdb;
         $models_table = $wpdb->prefix . 'models';
         $coordinates_table = $wpdb->prefix . 'print_area_model_coordinates';
         $print_areas_table = $wpdb->prefix . 'print_areas';
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-        $query = "SELECT m.*, c.ID AS print_area_model_coordinate_id, c.x_coordinate, c.y_coordinate, c.camera_x_coordinates,c.camera_y_coordinates, pa.ID AS print_area_id, pa.height, pa.width
-                FROM $models_table m
+        if ($id <= 0) {
+            wp_redirect(admin_url('admin.php?page=models_builder&error=invalid_id'));
+            exit;
+        }
+
+        $query = $wpdb->prepare(
+            "SELECT m.*, c.ID AS print_area_model_coordinate_id, c.x_coordinate, c.y_coordinate, c.camera_x_coordinates,c.camera_y_coordinates, pa.ID AS print_area_id, pa.height, pa.width
+                FROM $models_table m 
                 LEFT JOIN $coordinates_table c ON m.ID = c.models_id
-                LEFT JOIN $print_areas_table pa ON c.print_area_id = pa.ID";
+                LEFT JOIN $print_areas_table pa ON c.print_area_id = pa.ID
+                WHERE m.ID = %d",
+            $id
+        );
 
         $results = $wpdb->get_results($query, ARRAY_A);
 
