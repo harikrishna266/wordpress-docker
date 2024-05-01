@@ -71,14 +71,9 @@ class Builder {
 
     private function models_CRUD(){
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/models/listing/models-listing.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/models/api/models-api.php';
 
         $models_admin = new FictiveCodes\ModelsListingAdmin();
         $this->loader->add_action( 'admin_menu', $models_admin, 'add_submenu' );
-
-        $models_admin_api = new FictiveCodes\ModelsAPIAdmin();
-        $this->loader->add_action( 'wp_ajax_get_models', $models_admin_api, 'get_models_data' );
-        $this->loader->add_action( 'wp_ajax_get_model_by_id', $models_admin_api, 'get_model_data_by_id' );
     }
 
     private function dashboard()
