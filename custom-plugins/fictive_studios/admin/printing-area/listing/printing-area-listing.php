@@ -48,9 +48,5 @@ class PrintingAreaListingAdmin
         $print_area_edit->get_create_print_area_template();
     }
 
-    public function get_print_area_function()
-    {
-        wp_enqueue_script('get_print_area_script', plugin_dir_url(__FILE__) . '../api/print-area-api.js', array(), null, true);
-    }
 
 }
