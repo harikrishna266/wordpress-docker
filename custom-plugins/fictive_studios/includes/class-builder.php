@@ -24,6 +24,7 @@ class Builder {
         $this->print_types_CRUD();
         $this->fashion_designs_CRUD();
         $this->models_CRUD();
+        $this->threeDModelCrud();
     }
 
     private function createLoader() {
@@ -38,7 +39,7 @@ class Builder {
         $templates_admin = new FictiveCodes\TemplatesListingAdmin();
         $this->loader->add_action( 'admin_menu', $templates_admin, 'add_submenu' );
 
-        $templates_admin = new TemplatesCreateAdmin();
+        $templates_admin = new FictiveCodes\TemplatesCreateAdmin();
         $this->loader->add_action( 'wp_ajax_save_template_action', $templates_admin, 'save_template_hook' );
     }
 
@@ -80,6 +81,14 @@ class Builder {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/dashboard/dashboard.php';
         $dashboard = new Dashboard();
         $this->loader->add_action( 'admin_menu', $dashboard, 'add_admin_menu' );
+    }
+
+    private function threeDModelCrud()
+    {
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/three-d-products/listing/three-d-products-listing.php';
+        $threeDProductListing = new FictiveCodes\ThreeDProductListing();
+        $this->loader->add_action( 'admin_menu', $threeDProductListing, 'add_submenu' );
+
     }
 
 

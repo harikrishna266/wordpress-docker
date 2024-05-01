@@ -1,25 +1,25 @@
 <?php
 namespace FictiveCodes;
 
-class PrintingTypesListingAdmin
+class ThreeDProductListing
 {
 
     public function listing()
     {
         $link_url = esc_url(admin_url('admin.php?page=' . PRINT_TYPES_BUILDER_SLUG));
-        include plugin_dir_path(__FILE__) . 'print-types-listing-helper.php';
-        $print_types_table = new PrintTypesHelper();
-        require_once (plugin_dir_path(__FILE__) . 'partials/print-types-header.php');
+        include plugin_dir_path(__FILE__) . 'three-d-product-listing-helper.php';
+        $template_table = new ThreeDProductListingHelper();
+        require_once (plugin_dir_path(__FILE__) . 'partials/template-listing.php');
     }
 
     public function add_submenu()
     {
         $submenu = array(
-            'page_title' => __('Print Types', 'print_types'),
-            'menu_title' => __('Print Types', 'print_types'),
+            'page_title' => __('3d Products', '3d_products'),
+            'menu_title' => __('3d Products', '3d_products'),
             'capability' => 'manage_options',
-            'menu_slug' => PRINT_TYPES_BUILDER_SLUG,
-            'callback' => array($this, 'printing_types_admin'),
+            'menu_slug' => THREE_D_PRODUCTS_LISTING,
+            'callback' => array($this, 'listing'),
         );
         add_submenu_page(
             'builder_main_menu',
