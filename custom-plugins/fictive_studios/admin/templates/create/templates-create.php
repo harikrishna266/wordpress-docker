@@ -1,4 +1,6 @@
 <?php
+namespace FictiveCodes;
+
 class TemplatesCreateAdmin {
     public function save_template_data()
     {
