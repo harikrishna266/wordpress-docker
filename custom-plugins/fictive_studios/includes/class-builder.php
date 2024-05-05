@@ -93,7 +93,11 @@ class Builder {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/three-d-products/listing/three-d-products-listing.php';
         $threeDProductListing = new FictiveCodes\ThreeDProductListing();
         $this->loader->add_action( 'admin_menu', $threeDProductListing, 'add_submenu' );
-
+        $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_htmlx' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_3d_builder_script' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_tailwind' );
+        $this->loader->add_filter( 'script_loader_tag', $threeDProductListing, 'process_3d_builder_script', 9, 3 );
+        $this->loader->add_filter( 'style_loader_tag', $threeDProductListing, 'process_3d_builder_styles', 9, 3 );
     }
 
 
@@ -105,8 +109,7 @@ class Builder {
         $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_2d_builder_script' );
         $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_alphine_js' );
         $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_tailwind' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_htmlx' );
-        $this->loader->add_filter( 'script_loader_tag', $builder2d, 'process_2d_builder_script', 9, 3 );
+         $this->loader->add_filter( 'script_loader_tag', $builder2d, 'process_2d_builder_script', 9, 3 );
         $this->loader->add_filter( 'style_loader_tag', $builder2d, 'process_2d_builder_styles', 9, 3 );
     }
 
