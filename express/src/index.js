@@ -8,14 +8,15 @@ const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname,'..' ,'public')));
 
-app.get('/templates/:filename', async (req, res) => {
+app.get('/templates/:app/:filename', async (req, res) => {
     try {
-        const { filename } = req.params;
-         if (filename.includes('..')) {
+         const { filename, app } = req.params;
+
+        if (filename.includes('..')) {
             throw new Error('Invalid filename');
         }
-        const HTML_FILE_PATH = path.join(__dirname, 'templates', filename);
-        try {
+        const HTML_FILE_PATH = path.join(__dirname, 'templates', app ,filename);
+         try {
             await fs.access(HTML_FILE_PATH, fs.constants.F_OK);
         } catch (error) {
             throw new Error('File not found');

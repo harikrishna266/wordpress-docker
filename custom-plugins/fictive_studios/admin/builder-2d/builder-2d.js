@@ -18,7 +18,7 @@ Alpine.store("editor", () => ({
                   this.availablePrintAreas = data;
             })
     },
-     boundaryService: null,
+    boundaryService: null,
     currentMainMenu: 'templates',
     async openEditor(width, height) {
         await loadStage(width, height);
@@ -53,10 +53,11 @@ let mainMenuContent;
 function createHolder() {
     builderHolder = document.createElement( 'div' );
     builderHolder.setAttribute('hx-trigger', "load");
-    builderHolder.setAttribute('hx-get', "https://fictivecodes.com/templates/index.html");
+    builderHolder.setAttribute('hx-get', "https://fictivecodes.com/templates/2d-builder/index.html");
     builderHolder.setAttribute('class', "bg-black hidden absolute inset-0 flex w-100 h-100 top-0 right-0 bottom-0 left-0");
     builderHolder.style.zIndex = 100001;
-    wpcontentElement.parentNode.insertBefore( builderHolder, wpcontentElement.nextSibling );
+    document.body.appendChild( builderHolder);
+    // wpcontentElement.parentNode.insertBefore( builderHolder, wpcontentElement.nextSibling );
 }
 const wpcontentElement = document.getElementById( 'wpcontent' );
 if ( wpcontentElement ) {
