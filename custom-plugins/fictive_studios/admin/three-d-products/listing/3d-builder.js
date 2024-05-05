@@ -1,6 +1,7 @@
-import {Stage2D, BoundaryService} from 'https://unpkg.com/@brocha-libs/builder-2d@41/index.mjs';
 import { Alpine } from "https://fictivecodes.com/scripts/alphine.esm.js";
-import {SceneHelper, ArcRotationCameraHelper, LightHelper, loadModel, centerScene} from 'https://unpkg.com/@brocha-libs/builder-3d@44/index.mjs'
+import {SceneHelper, ArcRotationCameraHelper, LightHelper, loadModel, centerScene, createDynamicTexture} from 'https://unpkg.com/@brocha-libs/builder-3d@45/index.mjs'
+import {Stage2D, BoundaryService} from 'https://unpkg.com/@brocha-libs/builder-2d@45/index.mjs';
+
 let builderHolder;
 let boundaryService;
 let stage;
@@ -11,6 +12,7 @@ Alpine.store("threeDEditor", () => ({
     currentMainMenu: 'templates',
     async openEditor() {
         builderHolder.classList.remove('hidden');
+        await loadStage();
         await create3dBuilder();
     },
     closeEditor() {
@@ -39,11 +41,18 @@ function createHolder() {
     document.body.appendChild( builderHolder);
 }
 
-async function loadStage(width, height) {
-     stage = new Stage2D();
+async function loadStage() {
+    stage = new Stage2D();
     await stage.initializeStage();
     stage.isEditor = false;
+    boundaryService = new BoundaryService(stage);
+    await boundaryService.createBoundary('BOUNDARY', 2048, 2048);
+    const rect = stage.createShape('rect');
+    await rect.setAttrs({ width: 2048, height: 2048, fill: 'red' });
+    await boundaryService.addTShapeToBoundary('BOUNDARY', rect);
 }
+
+
 
 async function create3dBuilder(width, height) {
     await sceneHelper.createScene(document.getElementById('render-canvas'));
@@ -53,6 +62,17 @@ async function create3dBuilder(width, height) {
     new LightHelper().addEnvSettings(sceneHelper.scene);
     const meshes = await loadModel(sceneHelper.scene, 'model', '', 'https://fictivecodes.com/glb/', 'compressed.glb')
     centerScene(sceneHelper.scene);
+    const dynamicTexture = await createDynamicTexture('main-texture',
+        stage.layer.getCanvas()._canvas,
+        sceneHelper.scene
+    );
+     meshes.forEach((mesh) => {
+        if (mesh.material) {
+            const material = mesh.material;
+            material.albedoTexture = dynamicTexture;
+        }
+    });
+    dynamicTexture.update()
 }
 
 createHolder();
