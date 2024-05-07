@@ -30,6 +30,7 @@ define('PRINT_TYPES_BUILDER_SLUG', 'print_types_builder');
 define('THREE_D_PRODUCTS_LISTING', 'three_d_products_listing');
 define('FASHION_DESIGNS_BUILDER_SLUG', 'fashion_designs_builder');
 define('MODELS_BUILDER_SLUG', 'models_builder');
+define('MODEL_PRINT_AREA_SLUG', 'model_print_areas');
 define( 'PLUGIN_ROOT', plugin_dir_path( __FILE__));
 
 function activate_builder() {
