@@ -17,7 +17,7 @@ $url = createUrl();
 
 <div class="wrap">
     <h2>
-        <?php esc_html_e('Models'); ?>
+        <?php esc_html_e('Models' . '/' . $model_data['name'] . '/' . 'Print Areas'); ?>
         <?php
         echo '  <a id="create-print-area" class="button-secondary" href=' . esc_url($url) . '>Add Print Area</a>'
             ?>
