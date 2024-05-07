@@ -3,7 +3,7 @@ namespace FictiveCodes;
 
 require_once (ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 
-class ModelsListingHelper extends \WP_List_Table
+class ModelPrintAreasListingHelper extends \WP_List_Table
 {
 
     public function __construct()
@@ -22,23 +22,13 @@ class ModelsListingHelper extends \WP_List_Table
         return array(
             'cb' => '<input type="checkbox"/>',
             'name' => __('Name', 'name'),
-            'print_areas' => __('Print Areas', 'print_areas'),
+            'x_coordinate' => __('x coordinate', 'x_coordinate'),
+            'y_coordinate' => __('y coordinate', 'y_coordinate'),
+            'camera_x_coordinates' => __('Camera x coordinate', 'camera_x_coordinate'),
+            'camera_y_coordinates' => __('Camera y coordinate', 'camera_y_coordinate'),
         );
     }
 
-    public function column_print_areas($item)
-    {
-        $view_page = esc_url(add_query_arg(array('model' => $item['ID']), admin_url('admin.php?page=' . MODEL_PRINT_AREA_SLUG)));
-        $actions = '<a href="' . $view_page . '"class="dashicons dashicons-visibility"></a>';
-        return $actions;
-    }
-
-    public function get_sortable_columns()
-    {
-        return array(
-            'name' => array('name', false),
-        );
-    }
 
     protected function column_default($item, $column_name)
     {
@@ -49,18 +39,18 @@ class ModelsListingHelper extends \WP_List_Table
     public function prepare_items()
     {
         $columns = $this->get_columns();
-        $sortable = $this->get_sortable_columns();
         $hidden = array();
         $primary = 'name';
-        $this->_column_headers = array($columns, $hidden, $sortable, $primary);
+        $this->_column_headers = array($columns, $hidden, $primary);
         $this->items = $this->get_models_data();
     }
 
     private function get_models_data()
     {
         global $wpdb;
-        $models_table = $wpdb->prefix . 'models';
-        $query = "SELECT * from $models_table";
+        $models_table = $wpdb->prefix . 'print_area_model_coordinates';
+        $model_id = $_GET['model'];
+        $query = "SELECT * from $models_table WHERE `models_id` = $model_id";
         $results = $wpdb->get_results($query, ARRAY_A);
         return $results;
     }
