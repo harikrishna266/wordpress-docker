@@ -7,6 +7,7 @@ function create_print_area_model_cordinates_tables()
     $charset_collate = $wpdb->get_charset_collate();
     $sql = "CREATE TABLE $table_name (
         ID mediumint(9) NOT NULL AUTO_INCREMENT,
+        name text NOT NULL,
         models_id mediumint(9) NOT NULL,
         print_area_id mediumint(9) NOT NULL,
         x_coordinate DECIMAL(10, 3) NOT NULL,

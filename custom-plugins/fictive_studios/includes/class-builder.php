@@ -25,6 +25,7 @@ class Builder {
         $this->fashion_designs_CRUD();
         $this->models_CRUD();
         $this->threeDModelCrud();
+        $this->model_print_area_CRUD();
     }
 
     private function createLoader() {
@@ -80,6 +81,17 @@ class Builder {
         $this->loader->add_action( 'wp_ajax_get_models', $models_admin_api, 'get_models_data' );
         $this->loader->add_action( 'wp_ajax_get_model_by_id', $models_admin_api, 'get_model_data_by_id' );
         $this->loader->add_action( 'admin_post_save_model_data', $models_admin_api, 'save_model_data' );
+    }
+
+    private function model_print_area_CRUD(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/model-print-areas/listing/model-print-areas-listing.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/model-print-areas/api/model-print-areas-api.php';
+
+        $model_print_area_list = new FictiveCodes\ModelPrintAreaListingAdmin();
+        $this->loader->add_action( 'admin_menu', $model_print_area_list, 'add_submenu' );
+
+        $model_print_areas_api = new FictiveCodes\ModelPrintAreasAPIAdmin();
+        $this->loader->add_action( 'admin_post_save_model_print_area_data', $model_print_areas_api, 'save_model_print_area_data' );
     }
 
     private function dashboard()

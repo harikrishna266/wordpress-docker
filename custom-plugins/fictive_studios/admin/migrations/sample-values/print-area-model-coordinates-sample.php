@@ -15,6 +15,7 @@ function add_print_area_model_coordinates_sample()
 
     $sample_data = array(
         array(
+            'name' => 'chest_logos',
             'x_coordinate' => 10,
             'y_coordinate' => 20,
             'camera_x_coordinates' => 30,
@@ -22,6 +23,7 @@ function add_print_area_model_coordinates_sample()
             'user' => 1,
         ),
         array(
+            'name' => 'arm_logos',
             'x_coordinate' => 15,
             'y_coordinate' => 25,
             'camera_x_coordinates' => 35,
@@ -29,6 +31,7 @@ function add_print_area_model_coordinates_sample()
             'user' => 1,
         ),
         array(
+            'name' => 'back_logos',
             'x_coordinate' => 20,
             'y_coordinate' => 30,
             'camera_x_coordinates' => 22,
@@ -36,6 +39,7 @@ function add_print_area_model_coordinates_sample()
             'user' => 1,
         ),
         array(
+            'name' => 'front_logos',
             'x_coordinate' => 13,
             'y_coordinate' => 22,
             'camera_x_coordinates' => 3,
