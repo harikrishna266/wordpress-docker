@@ -41,8 +41,30 @@ class ModelsAPIAdmin
         $print_area_coordinates = $wpdb->get_results($print_area_coordinate_query, ARRAY_A);
 
         $model->print_areas = $print_area_coordinates;
-        
+
         echo json_encode($model);
         wp_die();
+    }
+
+    public function save_model_data()
+    {
+        $model_name = isset($_POST['model_name']) ? sanitize_text_field($_POST['model_name']) : '';
+        global $wpdb;
+        $model_table = $wpdb->prefix . 'models';
+        $wpdb->insert(
+            $model_table,
+            array(
+                'name' => $model_name,
+                'model_url' => 'model-url',
+                'user' => get_current_user_id()
+            )
+        );
+
+        $redirect_page_params = array(
+            'page' => 'models_builder',
+        );
+        $url = add_query_arg($redirect_page_params, admin_url('admin.php'));
+        wp_redirect($url);
+        exit;
     }
 }
