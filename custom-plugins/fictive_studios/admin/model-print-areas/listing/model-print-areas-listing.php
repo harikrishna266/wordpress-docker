@@ -37,7 +37,17 @@ class ModelPrintAreaListingAdmin
         $link_url = esc_url(admin_url('admin.php?page=' . MODEL_PRINT_AREA_SLUG));
         include plugin_dir_path(__FILE__) . 'model-print-areas-helper.php';
         $model_print_area_table = new ModelPrintAreasListingHelper();
+        $model_data = $this->get_model_data();
         require_once (plugin_dir_path(__FILE__) . 'partials/model-print-areas-header.php');
+    }
+
+    public function get_model_data()
+    {
+        global $wpdb;
+        $model_id = $_GET['model'];
+        $table_name = $wpdb->prefix . 'models';
+        $query = $wpdb->prepare("SELECT * FROM $table_name WHERE ID = %d", $model_id);
+        return $model_data = $wpdb->get_row($query, ARRAY_A);
     }
 
     public function create_edit_page()
