@@ -15,6 +15,7 @@
             <tr class="form-field">
                 <th scope="row"><label for="model_url">Select Model:</label></th>
                 <td><select id="model_url" name="model_url" required>
+                        <option value="">--</option>
                         <?php
                         if (isset($models_dummy_data) && is_array($models_dummy_data)) {
                             foreach ($models_dummy_data as $option) {
