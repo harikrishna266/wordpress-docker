@@ -1,18 +1,20 @@
 <?php
 namespace FictiveCodes;
 
-require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
+require_once (ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 
 class FashionDesignListingHelper extends \WP_List_Table
 {
 
     public function __construct()
     {
-        parent::__construct(array(
-            'singular' => 'fashion_design',
-            'plural' => 'fashion_designs',
-            'ajax' => false
-        ));
+        parent::__construct(
+            array(
+                'singular' => 'fashion_design',
+                'plural' => 'fashion_designs',
+                'ajax' => false
+            )
+        );
     }
 
     public function get_columns()
@@ -20,7 +22,14 @@ class FashionDesignListingHelper extends \WP_List_Table
         return array(
             'cb' => '<input type="checkbox"/>',
             'name' => __('Name', 'name'),
+            'design_file' => __('File', 'design_file'),
         );
+    }
+
+    function column_design_file($item)
+    {
+        $actions = '<a href="' . esc_url($item['design_file']) . '" class="dashicons dashicons-visibility" target="_blank"></a>';
+        return $actions;
     }
 
     public function get_sortable_columns()
@@ -30,8 +39,9 @@ class FashionDesignListingHelper extends \WP_List_Table
         );
     }
 
-    protected function column_default( $item, $column_name ) {
-        return isset( $item[ $column_name ] ) ? $item[ $column_name ] : '';
+    protected function column_default($item, $column_name)
+    {
+        return isset($item[$column_name]) ? $item[$column_name] : '';
     }
 
 

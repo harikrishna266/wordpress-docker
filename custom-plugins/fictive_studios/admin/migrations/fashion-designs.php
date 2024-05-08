@@ -10,6 +10,7 @@ function create_fashion_designs_tables()
         name text NOT NULL,
         model_id mediumint(9) NOT NULL,
         user int NOT NULL,
+        design_file text NOT NULL,
         PRIMARY KEY  (ID),
         FOREIGN KEY (model_id) REFERENCES {$wpdb->prefix}models(ID)
     ) $charset_collate;";
