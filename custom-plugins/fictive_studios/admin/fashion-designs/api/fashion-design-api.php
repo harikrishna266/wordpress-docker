@@ -10,6 +10,33 @@ class FashionDesignAPIAdmin
         add_filter('upload_mimes', array($this, 'custom_upload_svg'));
     }
 
+    public function get_all_designs()
+    {
+        global $wpdb;
+        $query = "SELECT * FROM " . $wpdb->prefix . "fashion_designs";
+        $results = $wpdb->get_results($query);
+        echo json_encode($results);
+        wp_die();
+    }
+
+    public function get_design_by_id()
+    {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'fashion_designs';
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+        if ($id <= 0) {
+            wp_redirect(admin_url('admin.php?page=fashion_designs_builder&error=invalid_id'));
+            exit;
+        }
+
+        $query = "SELECT * from $table_name WHERE `ID` = $id";
+        $design = $wpdb->get_row($query, OBJECT);
+
+        echo json_encode($design);
+        wp_die();
+    }
+
     public function custom_upload_svg($mimes)
     {
         $mimes['svg'] = 'image/svg+xml';
