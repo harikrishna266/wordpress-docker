@@ -22,13 +22,41 @@ class FashionDesignListingHelper extends \WP_List_Table
         return array(
             'cb' => '<input type="checkbox"/>',
             'name' => __('Name', 'name'),
-            'design_file' => __('File', 'design_file'),
+            'design_layer_1' => __('Layer 1', 'design_layer_1'),
+            'design_layer_2' => __('Layer 2', 'design_layer_2'),
+            'design_layer_3' => __('Layer 3', 'design_layer_3'),
+            'design_layer_4' => __('Layer 4', 'design_layer_4'),
+            'design_layer_5' => __('Layer 5', 'design_layer_5'),
         );
     }
 
-    function column_design_file($item)
+    function column_design_layer_1($item)
     {
-        $actions = '<a href="' . esc_url($item['design_file']) . '" class="dashicons dashicons-visibility" target="_blank"></a>';
+        $actions = !empty($item['design_layer_1']) ? '<a href="' . esc_url($item['design_layer_1']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        return $actions;
+    }
+
+    function column_design_layer_2($item)
+    {
+        $actions = !empty($item['design_layer_2']) ? '<a href="' . esc_url($item['design_layer_2']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        return $actions;
+    }
+
+    function column_design_layer_3($item)
+    {
+        $actions = !empty($item['design_layer_3']) ? '<a href="' . esc_url($item['design_layer_3']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        return $actions;
+    }
+
+    function column_design_layer_4($item)
+    {
+        $actions = !empty($item['design_layer_4']) ? '<a href="' . esc_url($item['design_layer_4']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        return $actions;
+    }
+
+    function column_design_layer_5($item)
+    {
+        $actions = !empty($item['design_layer_5']) ? '<a href="' . esc_url($item['design_layer_5']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
         return $actions;
     }
 

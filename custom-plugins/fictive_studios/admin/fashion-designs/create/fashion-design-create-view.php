@@ -27,8 +27,28 @@
                 </td>
             </tr>
             <tr class="form-field">
-                <th scope="row"><label for="fashion_design_file">Upload File:</label></th>
-                <td><input type="file" id="fashion_design_file" name="fashion_design_file" required>
+                <th scope="row"><label for="fashion_design_layer_1">Upload Layer 1*:</label></th>
+                <td><input type="file" id="fashion_design_layer_1" name="fashion_design_layer_1" required>
+                </td>
+            </tr>
+            <tr class="form-field">
+                <th scope="row"><label for="fashion_design_layer_2">Upload Layer 2:</label></th>
+                <td><input type="file" id="fashion_design_layer_2" name="fashion_design_layer_2">
+                </td>
+            </tr>
+            <tr class="form-field">
+                <th scope="row"><label for="fashion_design_layer_3">Upload Layer 3:</label></th>
+                <td><input type="file" id="fashion_design_layer_3" name="fashion_design_layer_3">
+                </td>
+            </tr>
+            <tr class="form-field">
+                <th scope="row"><label for="fashion_design_layer_4">Upload Layer 4:</label></th>
+                <td><input type="file" id="fashion_design_layer_4" name="fashion_design_layer_4">
+                </td>
+            </tr>
+            <tr class="form-field">
+                <th scope="row"><label for="fashion_design_layer_5">Upload Layer 5:</label></th>
+                <td><input type="file" id="fashion_design_layer_5" name="fashion_design_layer_5">
                 </td>
             </tr>
             <tr class="form-field">
