@@ -65,9 +65,13 @@ class Builder {
     }
     private function fashion_designs_CRUD(){
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/fashion-designs/listing/fashion-designs-listing.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/fashion-designs/api/fashion-design-api.php';
 
         $fashion_designs_admin = new FictiveCodes\FashionDesignsListingAdmin();
         $this->loader->add_action( 'admin_menu', $fashion_designs_admin, 'add_submenu' );
+
+        $fashion_design_api = new FictiveCodes\FashionDesignAPIAdmin();
+        $this->loader->add_action( 'admin_post_save_design_data', $fashion_design_api, 'save_design' );
     }
 
     private function models_CRUD(){
