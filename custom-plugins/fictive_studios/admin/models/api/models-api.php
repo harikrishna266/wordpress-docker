@@ -49,13 +49,14 @@ class ModelsAPIAdmin
     public function save_model_data()
     {
         $model_name = isset($_POST['model_name']) ? sanitize_text_field($_POST['model_name']) : '';
+        $model_url = isset($_POST['model_url']) ? sanitize_text_field($_POST['model_url']) : '';
         global $wpdb;
         $model_table = $wpdb->prefix . 'models';
         $wpdb->insert(
             $model_table,
             array(
                 'name' => $model_name,
-                'model_url' => 'model-url',
+                'model_url' => $model_url,
                 'user' => get_current_user_id()
             )
         );

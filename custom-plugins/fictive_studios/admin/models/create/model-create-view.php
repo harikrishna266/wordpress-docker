@@ -8,12 +8,23 @@
                 </th>
             </tr>
             <tr class="form-field">
-                <th scope="row"><label for="height">Name:</label></th>
-                <td><input type="text" id="model-name" name="model_name" required>
+                <th scope="row"><label for="model_name">Name:</label></th>
+                <td><input type="text" id="model_name" name="model_name" required>
                 </td>
             </tr>
             <tr class="form-field">
-                <th scope="row"><label for="height">Select Model:</label></th>
+                <th scope="row"><label for="model_url">Select Model:</label></th>
+                <td><select id="model_url" name="model_url" required>
+                        <option value="">--</option>
+                        <?php
+                        if (isset($models_dummy_data) && is_array($models_dummy_data)) {
+                            foreach ($models_dummy_data as $option) {
+                                echo '<option value="' . esc_attr($option['model_url']) . '">' . esc_html($option['name']) . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </td>
             </tr>
             <tr class="form-field">
                 <th scope="row"></th>
