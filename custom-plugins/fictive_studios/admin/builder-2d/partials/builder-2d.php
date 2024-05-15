@@ -1,3 +1,6 @@
+<?php
+    $link_url = esc_url(admin_url('admin.php?page=' . TEMPLATE_BUILDER_SLUG));
+?>
 <div class="wrap">
     <h2>
         <?php esc_html_e('Create Template', 'admin-table-tut'); ?>

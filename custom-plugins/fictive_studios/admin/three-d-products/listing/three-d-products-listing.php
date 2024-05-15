@@ -37,8 +37,7 @@ class ThreeDProductListing
 
     public function process_3d_builder_script($tag, $handle, $src)
     {
-//        return $handle.$_GET['page']. '<br/>';
-         if($handle == '3d-builder-script'  && $_GET['page'] == 'three_d_products_listing' ) {
+          if(isset($_GET['page']) && $handle == '3d-builder-script'  && $_GET['page'] == 'three_d_products_listing' ) {
             $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
         }
         if(isset($_GET['page']) && $_GET['page'] !== 'three_d_products_listing') {

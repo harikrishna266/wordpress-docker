@@ -49,11 +49,12 @@ register_activation_hook( __FILE__, 'activate_builder' );
 register_deactivation_hook( __FILE__, 'deactivate_builder' );
 
 
-require plugin_dir_path( __FILE__ ) . 'includes/class-builder.php';
+require plugin_dir_path(__FILE__) . 'includes/class-admin-builder.php';
+require plugin_dir_path(__FILE__) . 'includes/manage-is-customizable-field.php';
 
-
-function run_builder() {
-	$plugin = new Builder();
+function run_admin_builder() {
+	$plugin = new AdminBuilder();
 	$plugin->run();
 }
-run_builder();
+
+run_admin_builder();

@@ -1,6 +1,6 @@
 <?php
 
-class Builder {
+class AdminBuilder {
 
     protected $loader;
 

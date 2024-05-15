@@ -5,7 +5,6 @@ class Builder2d {
 
     public function templates()
     {
-        $link_url = esc_url(admin_url('admin.php?page=' . TEMPLATE_BUILDER_SLUG));
         include plugin_dir_path(__FILE__) . 'partials/builder-2d.php';
     }
 
@@ -32,7 +31,7 @@ class Builder2d {
 
     public function process_2d_builder_script($tag, $handle, $src)
     {
-        if($handle == '2b-builder-script'  && $_GET['page'] == 'create_template' ) {
+        if(isset($_GET['page']) && $handle == '2b-builder-script'  && $_GET['page'] == 'create_template' ) {
             $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
         }
         if(isset($_GET['page']) && $_GET['page'] !== 'create_template') {
@@ -42,7 +41,6 @@ class Builder2d {
             return $tag;
         }
         return $tag;
-
     }
 
     public function process_2d_builder_styles($tag, $handle, $src)
