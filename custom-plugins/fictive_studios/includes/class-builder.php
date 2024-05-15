@@ -26,6 +26,7 @@ class Builder {
         $this->models_CRUD();
         $this->threeDModelCrud();
         $this->model_print_area_CRUD();
+        $this->patterns_CRUD();
     }
 
     private function createLoader() {
@@ -119,6 +120,16 @@ class Builder {
         $this->loader->add_filter( 'style_loader_tag', $threeDProductListing, 'process_3d_builder_styles', 9, 3 );
     }
 
+    private function patterns_CRUD(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/patterns/listing/patterns-listing.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/patterns/api/patterns-api.php';
+
+        $patternListing = new FictiveCodes\PatternsListingAdmin();
+        $this->loader->add_action( 'admin_menu', $patternListing, 'add_submenu' );
+
+        $patternAPI = new FictiveCodes\PatternsAPIAdmin();
+        $this->loader->add_action( 'admin_post_save_pattern_data', $patternAPI, 'save_pattern_data' );
+    }
 
     private function builder2d()
     {
