@@ -28,6 +28,9 @@ function display_is_customizable_field() {
 
 
 function exclude_customizable_products($q) {
+    if(isset($_GET['page']) && $_GET['page'] === 'User_custom_Products') {
+        return;
+    }
     if (isset($q->query['post_type']) && $q->query['post_type'] === 'product') {
         $meta_query = $q->get('meta_query');
         if (!is_array($meta_query)) {
@@ -50,7 +53,7 @@ function exclude_customizable_products($q) {
                 array(
                     'key' => '_is_customizable',
                     'value' => 'true',
-                    'compare' => '=' // Check if _is_customizable is true
+                    'compare' => '='
                 ),
                 array(
                     'taxonomy' => 'product_visibility',
@@ -64,7 +67,22 @@ function exclude_customizable_products($q) {
     }
 }
 
+function handle_custom_query_var( $query, $query_vars ) {
+    if ( ! empty( $query_vars['customvar'] ) ) {
+          $query['meta_query'][] = array(
+            'key' => '_is_customizable',
+            'value' => esc_attr( $query_vars['customvar'] ),
+            'compare' => '='
+        );
+    }
+    return $query;
+}
+
+add_filter( 'woocommerce_product_data_store_cpt_get_products_query', 'handle_custom_query_var', 10, 2 );
+
 add_action('pre_get_posts', 'exclude_customizable_products');
 add_action('woocommerce_product_options_general_product_data', 'register_is_customizable_field');
 add_action('woocommerce_process_product_meta', 'save_is_customizable_field');
 add_action('woocommerce_single_product_summary', 'display_is_customizable_field');
+
+

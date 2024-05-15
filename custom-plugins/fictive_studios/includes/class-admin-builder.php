@@ -110,8 +110,8 @@ class AdminBuilder {
 
     private function threeDModelCrud()
     {
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/three-d-products/listing/three-d-products-listing.php';
-        $threeDProductListing = new FictiveCodes\ThreeDProductListing();
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/user-custom-products/listing/user-custom-products-listing.php';
+        $threeDProductListing = new FictiveCodes\UserCustomProducts();
         $this->loader->add_action( 'admin_menu', $threeDProductListing, 'add_submenu' );
         $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_htmlx' );
         $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_3d_builder_script' );
@@ -143,13 +143,6 @@ class AdminBuilder {
         $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_tailwind' );
          $this->loader->add_filter( 'script_loader_tag', $builder2d, 'process_2d_builder_script', 9, 3 );
         $this->loader->add_filter( 'style_loader_tag', $builder2d, 'process_2d_builder_styles', 9, 3 );
-    }
-
-
-    private function define_public_hooks() {
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-builder-public.php';
-        $plugin_public = new Builder_Public( $this->get_builder(), $this->get_version() );
-        $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
     }
 
     public function run() {

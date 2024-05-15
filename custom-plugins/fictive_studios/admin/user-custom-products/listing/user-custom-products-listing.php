@@ -1,7 +1,7 @@
 <?php
 namespace FictiveCodes;
 
-class ThreeDProductListing
+class UserCustomProducts
 {
 
     public function listing()
@@ -61,8 +61,8 @@ class ThreeDProductListing
     public function add_submenu()
     {
         $submenu = array(
-            'page_title' => __('3d Products', '3d_products'),
-            'menu_title' => __('3d Products', '3d_products'),
+            'page_title' => __('Custom Products', 'User_custom_Products'),
+            'menu_title' => __('Custom Products', 'User_custom_Products'),
             'capability' => 'manage_options',
             'menu_slug' => THREE_D_PRODUCTS_LISTING,
             'callback' => array($this, 'listing'),
