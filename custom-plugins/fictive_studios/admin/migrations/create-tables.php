@@ -12,6 +12,7 @@ class BuilderMigrations
         create_models_tables();
         create_fashion_designs_tables();
         create_print_area_model_cordinates_tables();
+        create_patterns_tables();
 
         $this->load_seeding_files();
         $this->run_data_seeding();
@@ -32,6 +33,7 @@ class BuilderMigrations
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/models.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/fashion-designs.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/print-area-model-coordinates.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/patterns.php';
     }
 
     public function load_seeding_files()
