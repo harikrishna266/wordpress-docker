@@ -14,6 +14,11 @@ Alpine.store("threeDEditor", () => ({
         builderHolder.classList.remove('hidden');
         await loadStage();
         await create3dBuilder();
+        this.setCurrentMainMenu(this.currentMainMenu);
+    },
+    setCurrentMainMenu(current) {
+        this.currentMainMenu = current;
+        loadMainMenuOptions(current)
     },
     closeEditor() {
         builderHolder.classList.add('hidden');
@@ -73,6 +78,17 @@ async function create3dBuilder(width, height) {
         }
     });
     dynamicTexture.update()
+}
+
+function loadMainMenuOptions(current) {
+    const mainMenu = document.getElementById('main-menu');
+    const mainMenuContentsArray = Array.from(document.getElementsByClassName('main-menu-content'));
+    mainMenuContentsArray.forEach(element => element.remove());
+    const mainMenuContent = document.createElement('div');
+    mainMenuContent.classList.add('w-[50px]', 'h-full', 'bg-blue-300', 'main-menu-content');
+    mainMenuContent.setAttribute('hx-trigger', 'load');
+    mainMenuContent.setAttribute('hx-get', `https://fictivecodes.com/templates/${current}.html`);
+    mainMenu.insertAdjacentElement( 'afterend', mainMenuContent );
 }
 
 createHolder();

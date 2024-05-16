@@ -23,6 +23,8 @@ class BuilderMigrations
         create_printing_areas_sample();
         add_models_sample();
         add_print_area_model_coordinates_sample();
+        add_designs_sample();
+        add_patterns_sample();
     }
 
     public function load_migrations()
@@ -41,6 +43,8 @@ class BuilderMigrations
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/print-areas-sample.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/models-sample.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/print-area-model-coordinates-sample.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/designs-sample.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/sample-values/patterns-sample.php';
     }
 
 }

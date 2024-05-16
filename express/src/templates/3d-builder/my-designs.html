@@ -1,0 +1,17 @@
+<div id="designs-list" hx-get="admin-ajax.php?action=get_all_designs" hx-trigger="load" hx-swap="innerHTML"
+    hx-error="alert('Failed to load data')">
+    Loading...
+</div>
+
+<script>
+    document.getElementById('designs-list').addEventListener('htmx:afterRequest', function (event) {
+        var response = event.detail.xhr.response;
+        var data = JSON.parse(response);
+        var listHTML = '<ul>';
+        data.forEach(function (item) {
+            listHTML += '<li>' + item.name + '</li>';
+        });
+        listHTML += '</ul>';
+        event.target.outerHTML = listHTML;
+    });
+</script>

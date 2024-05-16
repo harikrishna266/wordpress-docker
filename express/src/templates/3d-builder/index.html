@@ -42,6 +42,14 @@
                  hx-trigger='load' hx-swap='afterbegin'>
                 <span class='mt-2'>My Designs</span>
             </li>
+            <li
+                    @click="setCurrentMainMenu('patterns')"
+                    :class="{ 'bg-gray-600':  currentMainMenu === 'patterns'}"
+                 class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
+                 hx-get='https://fictivecodes.com/icons/svg/my-design.svg'
+                 hx-trigger='load' hx-swap='afterbegin'>
+                <span class='mt-2'>Patterns</span>
+            </li>
          </ul>
     </div>
     <div class='w-2/12 h-full bg-blue-300' id="menu-content">
@@ -49,7 +57,8 @@
         <div x-show="currentMainMenu === 'elements'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/2d-builder/elements.html"></div>
         <div x-show="currentMainMenu === 'text'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/2d-builder/text.html"></div>
         <div x-show="currentMainMenu === 'image'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/2d-builder/image.html"></div>
-        <div x-show="currentMainMenu === 'my-designs'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/2d-builder/my-designs.html"></div>
+        <div x-show="currentMainMenu === 'my-designs'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/3d-builder/my-designs.html"></div>
+        <div x-show="currentMainMenu === 'patterns'" hx-trigger="load" hx-get="https://fictivecodes.com/templates/3d-builder/patterns.html"></div>
      </div>
     <div class='flex-1 bg-white flex-col'>
         <div class="w-full h-[50px] bg-grey" >
