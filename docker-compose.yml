@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   nginx:
+    container_name: nginx1
     build:
       context: .
       dockerfile: nginx.dockerfile
@@ -11,10 +12,12 @@ services:
     volumes:
       - wordpress:/var/www/html:delegated
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
+      - webcomponents:/var/www/html/wp-content/plugins/builder/public/js
     depends_on:
       - php
       - express
   php:
+    container_name: php1
     build:
       context: .
       dockerfile: php.dockerfile
@@ -25,7 +28,7 @@ services:
       WORDPRESS_DB_NAME: "${WORDPRESS_DB_NAME}"
     volumes:
       - wordpress:/var/www/html:delegated
-      - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
+      - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder/three-d-ui
   wordpress:
     depends_on:
       - mysql
@@ -66,7 +69,16 @@ services:
     volumes:
       - ./express:/usr/src/app/express
 
+  web-component:
+    build:
+      context: .
+      dockerfile: web-components/.dockerfile
+    volumes:
+      - webcomponents:/usr/share/nginx/html/dist/apps/three-d-ui/browser
 volumes:
   wordpress:
   mysql_data:
+  webcomponents:
+
+
 
