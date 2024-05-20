@@ -17,7 +17,7 @@ RUN npm install
 RUN npm add --global nx@latest
 
 # Build the Nx project
-RUN nx build three-d-ui
+RUN nx build three-d-ui --output-hashing=none
 
 # Create a new stage for serving the built application with Nginx
 FROM nginx:alpine

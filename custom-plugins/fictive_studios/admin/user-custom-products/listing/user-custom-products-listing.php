@@ -21,7 +21,8 @@ class UserCustomProducts
     }
 
     public function add_3d_builder_script() {
-        wp_enqueue_script('3d-builder-script', plugin_dir_url(__FILE__) . '3d-builder.js', array(), null, true);
+        wp_enqueue_script('3d-builder-script', PLUGIN_URL .'js/three-d-ui/polyfils.js', array(), null, true);
+        wp_enqueue_script('3d-builder-script', PLUGIN_URL .'js/three-d-ui/main.js', array(), null, true);
     }
 
     public function add_tailwind() {

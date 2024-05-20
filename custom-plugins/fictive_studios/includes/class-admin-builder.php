@@ -15,7 +15,6 @@ class AdminBuilder {
             $this->version = '1.0.0';
         }
         $this->builder = 'builder';
-
         $this->createLoader();
         $this->dashboard();
         $this->TemplateCRUD();
@@ -113,11 +112,7 @@ class AdminBuilder {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/user-custom-products/listing/user-custom-products-listing.php';
         $threeDProductListing = new FictiveCodes\UserCustomProducts();
         $this->loader->add_action( 'admin_menu', $threeDProductListing, 'add_submenu' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_htmlx' );
         $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_3d_builder_script' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_tailwind' );
-        $this->loader->add_filter( 'script_loader_tag', $threeDProductListing, 'process_3d_builder_script', 9, 3 );
-        $this->loader->add_filter( 'style_loader_tag', $threeDProductListing, 'process_3d_builder_styles', 9, 3 );
     }
 
     private function patterns_CRUD(){

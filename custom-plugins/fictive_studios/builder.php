@@ -32,9 +32,10 @@ define('FASHION_DESIGNS_BUILDER_SLUG', 'fashion_designs_builder');
 define('MODELS_BUILDER_SLUG', 'models_builder');
 define('MODEL_PRINT_AREA_SLUG', 'model_print_areas');
 define('PATTERNS_BUILDER_SLUG', 'patterns_builder');
-define( 'PLUGIN_ROOT', plugin_dir_path( __FILE__));
+define( 'PLUGIN_ROOT', plugins_url( __FILE__));
+define( 'PLUGIN_URL',   plugins_url('public', __FILE__)."/");
 
-function activate_builder() {
+ function activate_builder() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/class-builder-activator.php';
     $activator = new Builder_Activator();
     $activator->activate();;

@@ -12,10 +12,11 @@ services:
     volumes:
       - wordpress:/var/www/html:delegated
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
-      - webcomponents:/var/www/html/wp-content/plugins/builder/public/js
+      - webcomponents:/var/www/html/wp-content/plugins/builder/public/js/three-d-ui
     depends_on:
       - php
       - express
+      - web-component
   php:
     container_name: php1
     build:
@@ -28,10 +29,11 @@ services:
       WORDPRESS_DB_NAME: "${WORDPRESS_DB_NAME}"
     volumes:
       - wordpress:/var/www/html:delegated
-      - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder/three-d-ui
+      - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
   wordpress:
     depends_on:
       - mysql
+      - web-component
     image: wordpress:latest
     container_name: wordpress
     restart: unless-stopped
