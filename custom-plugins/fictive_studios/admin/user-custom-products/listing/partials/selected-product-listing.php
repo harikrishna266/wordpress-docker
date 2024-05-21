@@ -1,9 +1,9 @@
-<div class="wrap" x-data="$store.threeDEditor">
+<div class="wrap"  >
     <h2>
         <?php esc_html_e('Selected Products', 'admin-table-tut'); ?>
     </h2>
     <div>
-        <button @click="openEditor()">Open 3d Editor</button>
+        <button >Open 3d Editor</button>
     </div>
+     <app-root></app-root>
 </div>
-
