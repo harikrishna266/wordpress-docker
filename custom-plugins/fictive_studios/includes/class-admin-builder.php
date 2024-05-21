@@ -15,6 +15,8 @@ class AdminBuilder {
             $this->version = '1.0.0';
         }
         $this->builder = 'builder';
+
+        $this->initDependencies();
         $this->createLoader();
         $this->dashboard();
         $this->TemplateCRUD();
@@ -26,6 +28,16 @@ class AdminBuilder {
         $this->threeDModelCrud();
         $this->model_print_area_CRUD();
         $this->patterns_CRUD();
+    }
+
+    private function initDependencies(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/manage-is-customizable-field.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/private-products-handler.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/woo-products-filter.php';
+
+        new ManageIsCustomizableField();
+        new PrivateProductsHandler();
+        new WooProductFilter();
     }
 
     private function createLoader() {
