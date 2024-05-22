@@ -15,9 +15,6 @@ class WooProductAPI
 
         $product->set_short_description('<p>Here it is... A WIZARD HAT!</p><p>Only here and now.</p>');
 
-
-        $product->set_is_private_product(array(19));
-
         $product->save();
 
 
