@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="14a198a4-87b1-4e4d-ad0f-f6a221418347" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.prettierignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.prettierrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/.eslintrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/jest.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/ng-package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/project.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/src/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/src/lib/three-d-ui/three-d-ui.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/src/lib/three-d-ui/three-d-ui.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/src/lib/three-d-ui/three-d-ui.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/src/lib/three-d-ui/three-d-ui.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/src/test-setup.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/tailwind.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/tsconfig.lib.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/tsconfig.lib.prod.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/three-d-ui/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/.eslintrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/jest.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/ng-package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/project.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/src/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/src/lib/two-d-ui/two-d-ui.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/src/lib/two-d-ui/two-d-ui.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/src/lib/two-d-ui/two-d-ui.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/src/lib/two-d-ui/two-d-ui.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/src/test-setup.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/tailwind.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/tsconfig.lib.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/tsconfig.lib.prod.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/@fictivecode/webcomponents/two-d-ui/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/project.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/app/app.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/app/app.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/app/app.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/app/app.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/app/app.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/app/app.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/assets/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/src/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/wordpress/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.preset.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nx.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.base.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webcomponents/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../webcomponents/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2gr7fErROnBzZF3QE6TQob7tljK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/wordpress-client-side-implementation",
+    "last_opened_file_path": "/Users/hari/work/php/wordpress/web-components",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Users/hari/work/php/wordpress/web-components/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "dev.nx.console.project_details_files": [
+      "/Users/hari/work/php/wordpress/web-components/@fictivecode/webcomponents/three-d-ui/project.json",
+      "/Users/hari/work/php/wordpress/web-components/@fictivecode/webcomponents/three-d-ui/package.json",
+      "/Users/hari/work/php/wordpress/web-components/nx.json",
+      "/Users/hari/work/php/wordpress/web-components/@fictivecode/webcomponents/two-d-ui/project.json",
+      "/Users/hari/work/php/wordpress/web-components/@fictivecode/webcomponents/two-d-ui/package.json",
+      "/Users/hari/work/php/wordpress/web-components/apps/wordpress-angular/project.json",
+      "/Users/hari/work/php/wordpress/web-components/apps/wordpress-angular/package.json"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14a198a4-87b1-4e4d-ad0f-f6a221418347" name="Changes" comment="" />
+      <created>1716443943291</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716443943291</updated>
+      <workItem from="1716443944558" duration="1848000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
