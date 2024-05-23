@@ -35,35 +35,24 @@ export default async function runExecutor(
   const combineModules = async () => {
     const distDir = path.join(__dirname, '../../../../../dist/apps/wordpress-threed-builder/browser');
     const wordpressPath = path.join(__dirname, '../../../../../apps/fictivecode/src/public/wordpress-scripts');
-    const outputFile = path.join(wordpressPath, 'combined.js');
 
     const files = await fs.readdir(distDir);
-    const jsFiles = files.filter(file => file.endsWith('.js'));
 
-    let combinedContent = '';
-    for (const file of jsFiles) {
+    for (const file of files) {
+      const outputFile = path.join(wordpressPath, file);
       const filePath = path.join(distDir, file);
       const content = await fs.readFile(filePath, 'utf-8');
-      combinedContent += content + '\n';
+      await fs.writeFile(outputFile, content, 'utf-8');
     }
 
-    await fs.writeFile(outputFile, combinedContent, 'utf-8');
-    console.log(`Combined ${jsFiles.length} files into ${outputFile}`);
   };
 
   watcher
-    .on('add', async path => {
-      console.log(`File ${path} has been added`);
-      await buildProject();
-    })
     .on('change', async path => {
       console.log(`File ${path} has been changed`);
       await buildProject();
     })
-    .on('unlink', async path => {
-      console.log(`File ${path} has been removed`);
-      await buildProject();
-    });
+
 
   console.log('Watching for file changes...');
 

@@ -5,19 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa2d413a-8350-4445-8eef-b44bb76d1ef4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../nx/apps/fictivecode/src/public/wordpress-scripts/main-CZJH5N57.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nx/apps/fictivecode/src/public/wordpress-scripts/polyfills-A7MJM4D4.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/builder/builder.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/builder/builder.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/builder/builder.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/builder/builder.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../custom-plugins/fictive_studios/admin/user-custom-products/listing/user-custom-products-listing.php" beforeDir="false" afterPath="$PROJECT_DIR$/../custom-plugins/fictive_studios/admin/user-custom-products/listing/user-custom-products-listing.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nx/apps/fictivecode/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../nx/apps/fictivecode/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nx/apps/fictivecode/src/public/wordpress-scripts/combined.js" beforeDir="false" afterPath="$PROJECT_DIR$/../nx/apps/fictivecode/src/public/wordpress-scripts/combined.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nx/apps/fictivecode/src/public/wordpress-scripts/combined.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nx/apps/fictivecode/src/public/wordpress-scripts/main-CZJH5N57.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nx/apps/fictivecode/src/public/wordpress-scripts/polyfills-A7MJM4D4.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/app/nx-welcome.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../nx/apps/wordpress-threed-builder/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nx/express.dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../nx/express.dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nx/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../nx/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../nx/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../nx/package.json" afterDir="false" />
@@ -101,7 +94,7 @@
       <updated>1716390689109</updated>
       <workItem from="1716390690245" duration="8686000" />
       <workItem from="1716443916381" duration="1038000" />
-      <workItem from="1716466729098" duration="20207000" />
+      <workItem from="1716466729098" duration="24940000" />
     </task>
     <servers />
   </component>
