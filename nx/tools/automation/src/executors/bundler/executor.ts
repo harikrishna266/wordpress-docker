@@ -15,7 +15,7 @@ export default async function runExecutor(
 
   const buildProject = () => {
     return new Promise<{ success: boolean }>((resolve, reject) => {
-      exec('nx build wordpress-threed-builder', (error, stdout, stderr) => {
+      exec('nx build wordpress-threed-builder --output-hashing=none', (error, stdout, stderr) => {
         if (error) {
           console.error(`Build error: ${stderr}`);
           resolve({ success: false });
