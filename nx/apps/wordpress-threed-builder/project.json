@@ -74,6 +74,13 @@
       "options": {
         "jestConfig": "apps/wordpress-threed-builder/jest.config.ts"
       }
+    },
+    "bundler": {
+      "executor": "@webcomponents/automation:bundler",
+      "options": {
+        "paths": ["apps/wordpress-threed-builder/src/**/*"],
+        "ignored": [".angular", ".github", "dist", "tmp"]
+      }
     }
   }
 }

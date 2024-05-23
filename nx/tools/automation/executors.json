@@ -1,0 +1,14 @@
+{
+  "executors": {
+    "bundler": {
+      "implementation": "./src/executors/bundler/executor",
+      "schema": "./src/executors/bundler/schema.json",
+      "description": "wordpress-bundler executor"
+    },
+    "echo": {
+      "implementation": "./src/executors/echo/executor",
+      "schema": "./src/executors/echo/schema.json",
+      "description": "echo executor"
+    }
+  }
+}

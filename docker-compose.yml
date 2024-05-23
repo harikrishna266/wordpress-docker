@@ -14,8 +14,6 @@ services:
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
     depends_on:
       - php
-      - express
-      - web-component
   php:
     container_name: php1
     build:
@@ -32,7 +30,6 @@ services:
   wordpress:
     depends_on:
       - mysql
-      - web-component
     image: wordpress:latest
     container_name: wordpress
     restart: unless-stopped
@@ -60,20 +57,14 @@ services:
       PMA_HOST: mysql
       MYSQL_USERNAME: user
       MYSQL_ROOT_PASSWORD: secret
-
   express:
+    container_name: fictivecode
     build:
       context: .
-      dockerfile: express/node.dockerfile
+      dockerfile: nx/express.dockerfile
     ports:
-      - 3000:3000
-    volumes:
-      - ./express:/usr/src/app/express
+      - 3333:3333
 
-  web-component:
-    build:
-      context: .
-      dockerfile: web-components-1/.dockerfile
 volumes:
   wordpress:
   mysql_data:

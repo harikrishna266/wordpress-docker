@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@fictivecode/three-d-ui": ["@fictivecode/three-d-ui/src/index.ts"]
+      "@fictivecode/three-d-ui": ["@fictivecode/three-d-ui/src/index.ts"],
+      "@webcomponents/automation": ["tools/automation/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
