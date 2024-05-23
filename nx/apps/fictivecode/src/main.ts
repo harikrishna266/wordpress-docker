@@ -1,13 +1,10 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import express from 'express';
 import * as path from 'path';
 
 const app = express();
-app.use(express.static(path.join(__dirname,'..' ,'public')));
+
+const publicPath = path.join(__dirname, 'public');
+app.use(express.static(publicPath));
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to fictivecode!' });

@@ -34,7 +34,7 @@ export default async function runExecutor(
 
   const combineModules = async () => {
     const distDir = path.join(__dirname, '../../../../../dist/apps/wordpress-threed-builder/browser');
-    const wordpressPath = path.join(__dirname, '../../../../../apps/fictivecode/public/wordpress-scripts');
+    const wordpressPath = path.join(__dirname, '../../../../../apps/fictivecode/src/public/wordpress-scripts');
     const outputFile = path.join(wordpressPath, 'combined.js');
 
     const files = await fs.readdir(distDir);

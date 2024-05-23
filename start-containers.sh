@@ -24,4 +24,6 @@ fi
 chmod +x .husky/pre-push
 
 docker-compose down
- docker-compose -f docker-compose.yml  up --build -d
+docker-compose -f docker-compose.yml  up --build -d
+
+cd nx && nx bundler wordpress-threed-builder

@@ -13,7 +13,7 @@ class UserCustomProducts
         $link_url = esc_url(admin_url('admin.php?page=' . PRINT_TYPES_BUILDER_SLUG.'&selected_product=1'));
         include plugin_dir_path(__FILE__) . 'three-d-product-listing-helper.php';
 //        $template_table = new ThreeDProductListingHelper();
-        require_once (plugin_dir_path(__FILE__) . 'partials/template-listing.php');
+//        require_once (plugin_dir_path(__FILE__) . 'partials/template-listing.php');
     }
 
     public function showSelectedProductBuilder() {
@@ -21,8 +21,7 @@ class UserCustomProducts
     }
 
     public function add_3d_builder_script() {
-        wp_enqueue_script('3d-builder-script-polyfills', 'https://fictivecodes.com/script/wordpress/latest/polyfills.js', array(), null, true);
-        wp_enqueue_script('3d-builder-script-main', 'https://fictivecodes.com/script/wordpress/latest/main.js', array(), null, true);
+        wp_enqueue_script('3d-builder-script-polyfills', 'https://fictivecodes.com/wordpress-scripts/combined.js', array(), null, true);
     }
 
 
