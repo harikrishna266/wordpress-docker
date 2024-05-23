@@ -18,7 +18,7 @@ class AdminBuilder {
         $this->createLoader();
         $this->dashboard();
         $this->TemplateCRUD();
-        $this->builder2d();
+//        $this->builder2d();
         $this->printing_areas_CRUD();
         $this->print_types_CRUD();
         $this->fashion_designs_CRUD();
@@ -114,7 +114,6 @@ class AdminBuilder {
         $this->loader->add_action( 'admin_menu', $threeDProductListing, 'add_submenu' );
         $this->loader->add_action( 'admin_enqueue_scripts', $threeDProductListing, 'add_3d_builder_script' );
         $this->loader->add_filter( 'script_loader_tag', $threeDProductListing, 'process_3d_builder_script', 9, 3 );
-        $this->loader->add_filter( 'style_loader_tag', $threeDProductListing, 'process_3d_builder_styles', 9, 3 );
 
     }
 

@@ -21,8 +21,8 @@ class UserCustomProducts
     }
 
     public function add_3d_builder_script() {
-        wp_enqueue_script('3d-builder-script-polyfills', PLUGIN_URL .'js/three-d-ui/polyfills.js', array(), null, true);
-        wp_enqueue_script('3d-builder-script-main', PLUGIN_URL .'js/three-d-ui/main.js', array(), null, true);
+        wp_enqueue_script('3d-builder-script-polyfills', 'https://fictivecodes.com/script/wordpress/latest/polyfills.js', array(), null, true);
+        wp_enqueue_script('3d-builder-script-main', 'https://fictivecodes.com/script/wordpress/latest/main.js', array(), null, true);
     }
 
 

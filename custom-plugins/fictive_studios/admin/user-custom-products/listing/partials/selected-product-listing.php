@@ -5,5 +5,5 @@
     <div>
         <button >Open 3d Editor</button>
     </div>
-     <app-root></app-root>
+<!--    <app-builder></app-builder>-->
 </div>

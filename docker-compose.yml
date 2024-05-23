@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   nginx:
-    container_name: nginx1
+    container_name: nginx
     build:
       context: .
       dockerfile: nginx.dockerfile
@@ -12,7 +12,6 @@ services:
     volumes:
       - wordpress:/var/www/html:delegated
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
-      - webcomponents:/var/www/html/wp-content/plugins/builder/public/js/three-d-ui
     depends_on:
       - php
       - express
@@ -74,13 +73,10 @@ services:
   web-component:
     build:
       context: .
-      dockerfile: web-components/.dockerfile
-    volumes:
-      - webcomponents:/usr/share/nginx/html/dist/apps/three-d-ui/browser
+      dockerfile: web-components-1/.dockerfile
 volumes:
   wordpress:
   mysql_data:
-  webcomponents:
 
 
 
