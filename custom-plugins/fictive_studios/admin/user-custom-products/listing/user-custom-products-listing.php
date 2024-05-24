@@ -21,14 +21,16 @@ class UserCustomProducts
     }
 
     public function add_3d_builder_script() {
-        wp_enqueue_script('3d-builder-script-polyfills', 'https://fictivecodes.com/wordpress-scripts/polyfills.js', array(), null, true);
-        wp_enqueue_script('3d-builder-script-polyfills-11', 'https://fictivecodes.com/wordpress-scripts/main.js', array(), null, true);
+//        wp_enqueue_script('3d-builder-polyfills-module', 'https://fictivecodes.com/wordpress-scripts/polyfills.js', array(), null, true);
+//        wp_enqueue_script('3d-builder-main-module', 'https://fictivecodes.com/wordpress-scripts/main.js', array(), null, true);
     }
 
 
     public function process_3d_builder_script($tag, $handle, $src)
     {
-        $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
+        if (str_contains($handle, 'module')) {
+            return'<script type="module" src="' . esc_url($src) . '"></script>';
+        }
         return $tag;
     }
 

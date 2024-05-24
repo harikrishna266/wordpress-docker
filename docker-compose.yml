@@ -57,13 +57,12 @@ services:
       PMA_HOST: mysql
       MYSQL_USERNAME: user
       MYSQL_ROOT_PASSWORD: secret
-  express:
-    container_name: fictivecode
+  fictivecode:
+    container_name: fictivecode.com
     build:
       context: .
       dockerfile: nx/express.dockerfile
     image: fictivecode_image
-
     ports:
       - 3333:3333
     volumes:
