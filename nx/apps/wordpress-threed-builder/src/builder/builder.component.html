@@ -40,15 +40,25 @@
     </div>
   </div>
   <div class='w-2/12 h-full'>
+    <ul>
+      <li *ngFor="let design of designs" (click)="loadDesign(design)" >
+        {{design.name}}
+      </li>
+    </ul>
   </div>
   <div class='flex-1 bg-white'>
     <div class='flex-1 flex flex-col h-full'>
       <div class='flex-1 relative'>
         <div
           id='konva-container'
-          #rendererCanvas
-          style='width: 100%; height: 100%'
+          #konvacontainer
+          style='width: 2048px; height: 2048px; display: none'
         ></div>
+        <canvas
+          #rendererCanvas
+          id='renderer-canvas'
+          style='height: 100%; width: 100%; padding: 0px'
+        ></canvas>
       </div>
     </div>
   </div>

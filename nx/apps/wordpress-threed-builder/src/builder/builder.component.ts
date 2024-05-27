@@ -1,4 +1,12 @@
-import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  ViewChild
+} from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { BoundaryService, Stage2D } from '@brocha-libs/builder-2d';
 import {
@@ -9,46 +17,60 @@ import {
   SceneHelper
 } from '@brocha-libs/builder-3d';
 import { DynamicTexture, PBRMaterial } from '@babylonjs/core';
-import { getRandomColors } from '@brocha-libs/builder-2d/lib/shapes/utils';
+import { HttpClientModule } from '@angular/common/http';
+import { WordpressService } from '../services/wordpress.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-builder',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './builder.component.html',
   styleUrl: './builder.component.scss',
+  providers: [WordpressService]
 })
-export class BuilderComponent {
+export class BuilderComponent implements AfterViewInit{
   public stage!: Stage2D;
   public readonly sceneHelper: SceneHelper = new SceneHelper();
   public readonly arcRotationCameraHelper: ArcRotationCameraHelper = new ArcRotationCameraHelper();
   public boundaryService!: BoundaryService;
   dynamicTexture!: DynamicTexture;
+  public designs: any[] = [];
   @ViewChild('rendererCanvas', { static: true }) rendererCanvas!: ElementRef;
+  @ViewChild('konvacontainer', { static: true }) konvacontainer!: ElementRef;
 
   constructor(
-    @Inject(DOCUMENT) private document: Document
-  ) {
-  }
+    @Inject(DOCUMENT) private document: Document,
+    private readonly wordpressService: WordpressService
+  ) {}
 
   async ngAfterViewInit() {
     this.stage = new Stage2D();
-    this.stage.initializeStage('konva-container', 2048, 2048);
+    this.stage.initializeStage(this.konvacontainer.nativeElement, 2048, 2048);
     this.stage.isEditor = true;
     this.boundaryService = new BoundaryService(this.stage);
-    await this.threeDBuilder();
-    await this.renderDynamicTexture();
+    this.wordpressService.getAllDesigns()
+      .pipe(
+        tap((res: any) => this.designs = res)
+      )
+      .subscribe();
+    setTimeout(async () => {
+      await this.threeDBuilder();
+      await this.renderDynamicTexture();
+    }, 100)
+
+
   }
 
   async threeDBuilder() {
-    await this.sceneHelper.createScene(document.getElementById('renderer-canvas') as HTMLCanvasElement);
+    await this.sceneHelper.createScene(this.rendererCanvas.nativeElement);
     await this.loadModel();
   }
 
   async loadModel() {
     const modelMeshes = await loadModel(this.sceneHelper.scene, 'model', '', 'https://fictivecodes.com/glb/', 'compressed.glb');
     centerScene(this.sceneHelper.scene);
-    // await this.renderDynamicTexture();
+    await this.renderDynamicTexture();
   }
 
   downloadURI(name: string = 'test') {
@@ -69,9 +91,10 @@ export class BuilderComponent {
     this.sceneHelper.scene.meshes.forEach((mesh) => {
       if (mesh.material) {
         const material = mesh.material as PBRMaterial;
-        // material.albedoTexture = this.dynamicTexture;
+        material.albedoTexture = this.dynamicTexture;
       }
     });
+    this.changeColor();
   }
   async changeColor() {
     const pattern = this.stage.createShape('path');
@@ -135,6 +158,40 @@ export class BuilderComponent {
       scaleY: 1
     });
     await this.stage.addShape(this.stage.layer, patten);
+    this.dynamicTexture.update(false);
+  }
+
+  async loadDesign(design: any) {
+    const layer1 = await fetch(design.design_layer_1).then((response) => response.text());
+    const layer2 = await fetch(design.design_layer_2).then((response) => response.text());
+    const layer1Instance = this.stage.createShape('path');
+    const layer2Instance = this.stage.createShape('path');
+
+
+    await layer1Instance.setAttrs({
+      x: 0,
+      y: 0,
+      fill: 'red',
+      data: layer1,
+      fillPatternScaleX: 1,
+      fillPatternScaleY: 1,
+      fillPatternRepeat: 'repeat',
+      scaleX: 1,
+      scaleY: 1
+    });
+    await layer2Instance.setAttrs({
+      x: 0,
+      y: 0,
+      fill: 'yellow',
+      data: layer2,
+      fillPatternScaleX: 1,
+      fillPatternScaleY: 1,
+      fillPatternRepeat: 'repeat',
+      scaleX: 1,
+      scaleY: 1
+    });
+    await this.stage.addShape(this.stage.layer, layer1Instance);
+    await this.stage.addShape(this.stage.layer, layer2Instance);
     this.dynamicTexture.update(false);
 
   }
