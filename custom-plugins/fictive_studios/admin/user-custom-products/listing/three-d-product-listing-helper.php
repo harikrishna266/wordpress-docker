@@ -123,6 +123,7 @@ class ThreeDProductListingHelper extends \WP_List_Table
     public function get_custom_product_data_data()
     {
         $products = wc_get_products(array('customvar' => 'yes', 'limit' => 100, ));
+        $data = [];
         foreach ($products as $product) {
             $thumbnail_id = $product->get_image_id();
             $thumbnail_url = wp_get_attachment_image_url($thumbnail_id, 'thumbnail');
