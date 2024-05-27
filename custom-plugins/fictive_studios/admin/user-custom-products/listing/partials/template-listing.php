@@ -6,6 +6,13 @@
     </h2>
     <button onclick="loadBuilder()">Open Editor</button>
  </div>
+    <form id="all-drafts" method="get">
+        <input type="hidden" name="page" value="brocha-template" />
+        <?php
+            $template_table->prepare_items();
+            $template_table->display();
+        ?>
+    </form>
 <style>
     #modal-3d {
         background: black;

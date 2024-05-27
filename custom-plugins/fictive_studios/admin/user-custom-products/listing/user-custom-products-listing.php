@@ -12,7 +12,7 @@ class UserCustomProducts
         }
         $link_url = esc_url(admin_url('admin.php?page=' . PRINT_TYPES_BUILDER_SLUG.'&selected_product=1'));
         include plugin_dir_path(__FILE__) . 'three-d-product-listing-helper.php';
-//        $template_table = new ThreeDProductListingHelper();
+        $template_table = new ThreeDProductListingHelper();
         require_once (plugin_dir_path(__FILE__) . 'partials/template-listing.php');
     }
 
