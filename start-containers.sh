@@ -16,7 +16,7 @@ KEY_FILE="${CERTS_DIR}/localhost-key.pem"
     mkdir -p "$CERTS_DIR"
     cd "$CERTS_DIR"
 
-    mkcert -key-file localhost-key.pem -cert-file localhost.pem woocommerce.com
+    mkcert -key-file localhost-key.pem -cert-file localhost.pem tshirtstore.com
     mkcert -key-file fictivecodes-key.pem -cert-file fictivecodes.pem fictivecodes.com
 
     echo "Certificates generated successfully."
@@ -24,4 +24,6 @@ fi
 chmod +x .husky/pre-push
 
 docker-compose down
-docker-compose up --build -d
+docker-compose -f docker-compose.yml  up --build -d
+
+cd nx && nx bundler wordpress-threed-builder

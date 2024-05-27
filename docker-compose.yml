@@ -2,6 +2,7 @@ version: '3.9'
 
 services:
   nginx:
+    container_name: nginx
     build:
       context: .
       dockerfile: nginx.dockerfile
@@ -13,8 +14,8 @@ services:
       - ./custom-plugins/fictive_studios:/var/www/html/wp-content/plugins/builder
     depends_on:
       - php
-      - express
   php:
+    container_name: php1
     build:
       context: .
       dockerfile: php.dockerfile
@@ -56,17 +57,20 @@ services:
       PMA_HOST: mysql
       MYSQL_USERNAME: user
       MYSQL_ROOT_PASSWORD: secret
-
-  express:
+  fictivecode:
+    container_name: fictivecode.com
     build:
       context: .
-      dockerfile: express/node.dockerfile
+      dockerfile: nx/express.dockerfile
+    image: fictivecode_image
     ports:
-      - 3000:3000
+      - 3333:3333
     volumes:
-      - ./express:/usr/src/app/express
+      - ./nx/apps/fictivecode/src/public:/usr/src/app/apps/fictivecode/src/public
 
 volumes:
   wordpress:
   mysql_data:
+
+
 

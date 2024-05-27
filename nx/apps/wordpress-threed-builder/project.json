@@ -1,0 +1,86 @@
+{
+  "name": "wordpress-threed-builder",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/wordpress-threed-builder/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/wordpress-threed-builder",
+        "index": "apps/wordpress-threed-builder/src/index.html",
+        "browser": "apps/wordpress-threed-builder/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/wordpress-threed-builder/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/wordpress-threed-builder/src/favicon.ico",
+          "apps/wordpress-threed-builder/src/assets"
+        ],
+        "styles": ["apps/wordpress-threed-builder/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "5mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "wordpress-threed-builder:build:production"
+        },
+        "development": {
+          "buildTarget": "wordpress-threed-builder:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "wordpress-threed-builder:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/wordpress-threed-builder/jest.config.ts"
+      }
+    },
+    "bundler": {
+      "executor": "@webcomponents/automation:bundler",
+      "options": {
+        "paths": ["apps/wordpress-threed-builder/src/**/*"],
+        "ignored": [".angular", ".github", "dist", "tmp"]
+      }
+    }
+  }
+}
