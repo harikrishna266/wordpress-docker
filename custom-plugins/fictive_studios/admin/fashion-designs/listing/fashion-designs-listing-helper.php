@@ -30,6 +30,34 @@ class FashionDesignListingHelper extends \WP_List_Table
         );
     }
 
+    public function column_name($item)
+    {
+        $output = '<strong>';
+        $output .= '<a>' . esc_html($item['name']) . '</a>';
+        $output .= '</strong>';
+
+        $actions = array(
+            'id' => '<a id="' . esc_attr('id-' . $item['ID']) . '>' . 'ID:' . __($item['ID']) . '</a>',
+            'edit' => '<a id="' . esc_attr('edit-' . $item['ID']) . '" href="' . esc_url($this->getEditQueryArguments($item)) . '">' . __('Edit') . '</a>',
+        );
+        $row_actions = array();
+        foreach ($actions as $action => $link) {
+            $row_actions[] = '<span class="' . esc_attr($action) . '">' . $link . '</span>';
+        }
+        $output .= '<div class="row-actions">' . implode(' | ', $row_actions) . '</div>';
+        return $output;
+    }
+
+    private function getEditQueryArguments($item): string
+    {
+        $edit_params = array(
+            'page' => FASHION_DESIGNS_BUILDER_SLUG,
+            'action' => 'edit',
+            'design' => $item['ID']
+        );
+        return add_query_arg($edit_params, admin_url('admin.php'));
+    }
+
     function column_design_layer_1($item)
     {
         $actions = !empty($item['design_layer_1']) ? '<a href="' . esc_url($item['design_layer_1']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
