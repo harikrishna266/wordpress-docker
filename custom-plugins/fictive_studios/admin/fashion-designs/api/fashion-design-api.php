@@ -46,7 +46,7 @@ class FashionDesignAPIAdmin
         );
 
         for ($i = 1; $i <= 5; $i++) {
-                $insert_data['design_layer_' . $i] = isset($_POST['fashion_design_layer_' . $i]) ? sanitize_text_field($_POST['fashion_design_layer_' . $i]) : '';
+            $insert_data['design_layer_' . $i] = isset($_POST['fashion_design_layer_' . $i]) ? sanitize_text_field($_POST['fashion_design_layer_' . $i]) : '';
         }
 
         $wpdb->insert($model_table, $insert_data);
@@ -56,6 +56,59 @@ class FashionDesignAPIAdmin
         );
         $url = add_query_arg($redirect_page_params, admin_url('admin.php'));
         wp_redirect($url);
+        exit;
+    }
+
+    public function edit_design()
+    {
+        $design_name = isset($_POST['fashion_design_name']) ? sanitize_text_field($_POST['fashion_design_name']) : '';
+        $model_id = isset($_POST['fashion_design_model']) ? intval($_POST['fashion_design_model']) : 0;
+
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'fashion_designs';
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+
+        if ($id <= 0) {
+            wp_redirect(admin_url('admin.php?page=' . FASHION_DESIGNS_BUILDER_SLUG . '&error=invalid_id'));
+            exit;
+        }
+
+        if (empty($design_name)) {
+            wp_redirect(admin_url('admin.php?page=' . FASHION_DESIGNS_BUILDER_SLUG . '&error=missing_design_name'));
+            exit;
+        }
+
+        $insert_data = array(
+            'name' => $design_name,
+            'model_id' => $model_id,
+        );
+
+        for ($i = 1; $i <= 5; $i++) {
+            $insert_data['design_layer_' . $i] = isset($_POST['fashion_design_layer_' . $i]) ? sanitize_text_field($_POST['fashion_design_layer_' . $i]) : '';
+        }
+
+        $wpdb->update(
+            $table_name,
+            $insert_data,
+            array('id' => $id),
+            array(
+                '%s',
+                '%d',
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s'
+            ),
+            array('%d')
+        );
+
+        $redirect_params = array(
+            'page' => FASHION_DESIGNS_BUILDER_SLUG,
+        );
+        $url = add_query_arg($redirect_params, admin_url('admin.php'));
+        wp_redirect($url);
+        exit;
     }
 
 }

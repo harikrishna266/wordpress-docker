@@ -85,6 +85,7 @@ class AdminBuilder {
 
         $fashion_design_api = new FictiveCodes\FashionDesignAPIAdmin();
         $this->loader->add_action( 'admin_post_save_design_data', $fashion_design_api, 'save_design' );
+        $this->loader->add_action( 'admin_post_edit_design_data', $fashion_design_api, 'edit_design' );
         $this->loader->add_action( 'wp_ajax_get_design_by_id', $fashion_design_api, 'get_design_by_id' );
         $this->loader->add_action( 'wp_ajax_get_all_designs', $fashion_design_api, 'get_all_designs' );
     }

@@ -17,14 +17,11 @@ $url = createUrl();
     <h2>
         <?php esc_html_e('Design', 'admin-table-tut'); ?>
         <?php
-        echo '  <a id="create-print-area" class="button-secondary" href=' . esc_url($url) . '>Add Design</a>'
+        echo '  <a id="create-design" class="button-secondary" href=' . esc_url($url) . '>Add Design</a>'
             ?>
     </h2>
-    <form id="all-drafts" method="get">
-        <input type="hidden" name="page" value="print-areas" />
-        <?php
-        $fashion_design_table->prepare_items();
-        $fashion_design_table->display();
-        ?>
-    </form>
+    <?php
+    $fashion_design_table->prepare_items();
+    $fashion_design_table->display();
+    ?>
 </div>
