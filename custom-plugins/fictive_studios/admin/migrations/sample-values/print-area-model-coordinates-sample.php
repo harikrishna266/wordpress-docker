@@ -3,9 +3,10 @@
 function add_print_area_model_coordinates_sample()
 {
     global $wpdb;
-
-    $models_ids = $wpdb->get_col("SELECT ID FROM {FICTIVE_TABLE}models");
-    $print_area_ids = $wpdb->get_col("SELECT ID FROM {FICTIVE_TABLE}print_areas");
+    $models_table = FICTIVE_TABLE . 'models';
+    $print_areas_table = FICTIVE_TABLE . 'print_areas';
+    $models_ids = $wpdb->get_col("SELECT ID FROM $models_table");
+    $print_area_ids = $wpdb->get_col("SELECT ID FROM $print_areas_table");
 
     if (empty($models_ids)) {
         return;
