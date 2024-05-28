@@ -21,7 +21,7 @@
             <tr class="form-field">
                 <th scope="row"><label for="fashion_design_model">Select Model:</label></th>
                 <td>
-                    <select name="fashion_design_model">
+                    <select id="fashion_design_model" name="fashion_design_model" required>
                         <?php if ($action !== 'edit'): ?>
                             <option value="">--</option>
                         <?php endif; ?>
