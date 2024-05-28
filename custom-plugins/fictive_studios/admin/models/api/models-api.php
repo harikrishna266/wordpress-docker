@@ -6,7 +6,7 @@ class ModelsAPIAdmin
     public function get_models_data()
     {
         global $wpdb;
-        $sql_query = "SELECT * FROM " . $wpdb->prefix . "models";
+        $sql_query = "SELECT * FROM " . FICTIVE_TABLE . "models";
         $results = $wpdb->get_results($sql_query);
         echo json_encode($results);
         wp_die();
@@ -15,9 +15,9 @@ class ModelsAPIAdmin
     public function get_model_data_by_id()
     {
         global $wpdb;
-        $models_table = $wpdb->prefix . 'models';
-        $coordinates_table = $wpdb->prefix . 'print_area_model_coordinates';
-        $print_areas_table = $wpdb->prefix . 'print_areas';
+        $models_table = FICTIVE_TABLE . 'models';
+        $coordinates_table = FICTIVE_TABLE . 'print_area_model_coordinates';
+        $print_areas_table = FICTIVE_TABLE . 'print_areas';
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
         if ($id <= 0) {
@@ -51,7 +51,7 @@ class ModelsAPIAdmin
         $model_name = isset($_POST['model_name']) ? sanitize_text_field($_POST['model_name']) : '';
         $model_url = isset($_POST['model_url']) ? sanitize_text_field($_POST['model_url']) : '';
         global $wpdb;
-        $model_table = $wpdb->prefix . 'models';
+        $model_table = FICTIVE_TABLE . 'models';
         $wpdb->insert(
             $model_table,
             array(

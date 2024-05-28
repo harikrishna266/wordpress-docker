@@ -13,7 +13,7 @@ class ModelPrintAreasCreate
     public function get_print_area_data()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'print_areas';
+        $table_name = FICTIVE_TABLE . 'print_areas';
         $query = "SELECT * FROM $table_name";
         $results = $wpdb->get_results($query, ARRAY_A);
         return $results;

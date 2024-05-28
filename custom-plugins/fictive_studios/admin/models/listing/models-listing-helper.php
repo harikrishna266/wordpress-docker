@@ -59,7 +59,7 @@ class ModelsListingHelper extends \WP_List_Table
     private function get_models_data()
     {
         global $wpdb;
-        $models_table = $wpdb->prefix . 'models';
+        $models_table = FICTIVE_TABLE . 'models';
         $query = "SELECT * from $models_table";
         $results = $wpdb->get_results($query, ARRAY_A);
         return $results;

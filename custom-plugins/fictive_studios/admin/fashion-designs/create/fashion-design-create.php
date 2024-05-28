@@ -19,7 +19,7 @@ class FashionDesignCreate
     {
         $design_id = ($_GET['design']);
         global $wpdb;
-        $table_name = $wpdb->prefix . 'fashion_designs';
+        $table_name = FICTIVE_TABLE . 'fashion_designs';
         $query = $wpdb->prepare("SELECT * FROM $table_name WHERE ID = %d", $design_id);
         return $wpdb->get_row($query);
     }
@@ -28,7 +28,7 @@ class FashionDesignCreate
     public function get_models_data()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'models';
+        $table_name = FICTIVE_TABLE . 'models';
         $query = "SELECT * FROM $table_name";
         $results = $wpdb->get_results($query, ARRAY_A);
         return $results;

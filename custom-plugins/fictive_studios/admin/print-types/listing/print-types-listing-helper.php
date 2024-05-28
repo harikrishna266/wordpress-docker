@@ -48,7 +48,7 @@ class PrintTypesHelper extends \WP_List_Table
     private function get_print_types_data($search_term = '')
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'print_types';
+        $table_name = FICTIVE_TABLE . 'print_types';
         $query = "SELECT * FROM $table_name";
         if ($search_term) {
             $search_term_like = '%' . $wpdb->esc_like($search_term) . '%';

@@ -3,7 +3,7 @@
 function add_models_sample()
 {
     global $wpdb;
-    $models_table = $wpdb->prefix . 'models';
+    $models_table = FICTIVE_TABLE . 'models';
 
     $row_count = $wpdb->get_var("SELECT COUNT(*) FROM $models_table");
 

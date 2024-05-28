@@ -3,7 +3,7 @@
 function add_designs_sample()
 {
     global $wpdb;
-    $designs_table = $wpdb->prefix . 'fashion_designs';
+    $designs_table = FICTIVE_TABLE . 'fashion_designs';
 
     $row_count = $wpdb->get_var("SELECT COUNT(*) FROM $designs_table");
 

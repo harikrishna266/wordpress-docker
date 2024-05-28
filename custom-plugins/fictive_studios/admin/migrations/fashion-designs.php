@@ -3,7 +3,8 @@
 function create_fashion_designs_tables()
 {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'fashion_designs';
+    $table_name = FICTIVE_TABLE . 'fashion_designs';
+    $models_table = FICTIVE_TABLE. 'models';
     $charset_collate = $wpdb->get_charset_collate();
     $sql = "CREATE TABLE $table_name (
         ID mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -16,7 +17,7 @@ function create_fashion_designs_tables()
         design_layer_4 text NOT NULL,
         design_layer_5 text NOT NULL,
         PRIMARY KEY  (ID),
-        FOREIGN KEY (model_id) REFERENCES {$wpdb->prefix}models(ID)
+        FOREIGN KEY (model_id) REFERENCES $models_table(ID)
     ) $charset_collate;";
     require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);

@@ -3,7 +3,7 @@
 function create_print_types_table()
 {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'print_types';
+    $table_name = FICTIVE_TABLE . 'print_types';
     $charset_collate = $wpdb->get_charset_collate();
     $sql = "CREATE TABLE $table_name (
         ID mediumint(9) NOT NULL AUTO_INCREMENT,

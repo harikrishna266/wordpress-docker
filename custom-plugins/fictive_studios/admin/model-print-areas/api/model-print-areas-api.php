@@ -14,7 +14,7 @@ class ModelPrintAreasAPIAdmin
         $camera_y_coordinate = isset($_POST['camera_y_coordinate']) ? sanitize_text_field($_POST['camera_y_coordinate']) : '';
 
         global $wpdb;
-        $model_table = $wpdb->prefix . 'print_area_model_coordinates';
+        $model_table = FICTIVE_TABLE . 'print_area_model_coordinates';
         $wpdb->insert(
             $model_table,
             array(
