@@ -7,7 +7,7 @@ tmp
 
 # dependencies
 node_modules
-
+apps/fictivecode/src/public/wordpress-scripts
 # IDEs and editors
 /.idea
 .project

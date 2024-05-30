@@ -39,4 +39,4 @@
     }
 </script>
 <script src="<?php echo BUILDER_URL ?>wordpress-scripts/polyfills.js" defer type="module" ></script>
-<script  src="<?php echo  BUILDER_URL ?>wordpress-scripts/main.js" defer type="module"  ></script>
+<script src="<?php echo  BUILDER_URL ?>wordpress-scripts/main.js" defer type="module"  onload="" ></script>
