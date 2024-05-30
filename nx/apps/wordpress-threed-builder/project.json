@@ -8,19 +8,25 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/wordpress-threed-builder",
         "index": "apps/wordpress-threed-builder/src/index.html",
         "browser": "apps/wordpress-threed-builder/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/wordpress-threed-builder/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/wordpress-threed-builder/src/favicon.ico",
           "apps/wordpress-threed-builder/src/assets"
         ],
-        "styles": ["apps/wordpress-threed-builder/src/styles.scss"],
+        "styles": [
+          "apps/wordpress-threed-builder/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -42,7 +48,13 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/wordpress-threed-builder/src/environments/environment.ts",
+              "with": "apps/wordpress-threed-builder/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -70,7 +82,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/wordpress-threed-builder/jest.config.ts"
       }
@@ -78,8 +92,15 @@
     "bundler": {
       "executor": "@webcomponents/automation:bundler",
       "options": {
-        "paths": ["apps/wordpress-threed-builder/src/**/*"],
-        "ignored": [".angular", ".github", "dist", "tmp"]
+        "paths": [
+          "apps/wordpress-threed-builder/src/**/*"
+        ],
+        "ignored": [
+          ".angular",
+          ".github",
+          "dist",
+          "tmp"
+        ]
       }
     }
   }

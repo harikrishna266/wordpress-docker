@@ -20,6 +20,7 @@ import { DynamicTexture, PBRMaterial } from '@babylonjs/core';
 import { HttpClientModule } from '@angular/common/http';
 import { WordpressService } from '../services/wordpress.service';
 import { tap } from 'rxjs';
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-builder',
@@ -68,7 +69,7 @@ export class BuilderComponent implements AfterViewInit{
   }
 
   async loadModel() {
-    const modelMeshes = await loadModel(this.sceneHelper.scene, 'model', '', 'https://fictivecodes.com/glb/', 'compressed.glb');
+    const modelMeshes = await loadModel(this.sceneHelper.scene, 'model', '', `https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/glb/`, 'compressed.glb');
     centerScene(this.sceneHelper.scene);
     await this.renderDynamicTexture();
   }

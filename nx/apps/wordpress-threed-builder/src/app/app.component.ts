@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, Injector, Input, Renderer2, ViewEncapsulation } from '@angular/core';
-import { createCustomElement } from '@angular/elements';
+import { AfterViewInit, Component, Input, Renderer2, ViewEncapsulation } from '@angular/core';
 import { BuilderComponent } from '../builder/builder.component';
+import { environment } from '../environments/environment';
 
 @Component({
   standalone: true,
@@ -14,6 +14,7 @@ import { BuilderComponent } from '../builder/builder.component';
 })
 export class AppComponent implements AfterViewInit{
 
+
   @Input() model = '1';
 
   constructor(
@@ -21,12 +22,13 @@ export class AppComponent implements AfterViewInit{
   ) { }
 
 
+
   ngAfterViewInit() {
     this.loadExternalStyles();
   }
 
   loadExternalStyles() {
-    fetch('https://fictivecodes.com/wordpress-scripts/styles.css')
+    fetch(`https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/wordpress-scripts/styles.css`)
       .then(function(response) {
         return response.text();
       })

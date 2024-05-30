@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["apps/wordpress-threed-builder/src/app/app.component.scss"],
+  "sourcesContent": ["div {\n  background: 'red';\n}\n"],
+  "mappings": ";AAAA;AACE,cAAA;;",
+  "names": []
+}

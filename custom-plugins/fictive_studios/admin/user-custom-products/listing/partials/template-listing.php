@@ -38,5 +38,5 @@
         builderHolder.appendChild(appBuilder);
     }
 </script>
-<script src="https://fictivecodes.com/wordpress-scripts/polyfills.js" defer  type="module"></script>
-<script  src="https://fictivecodes.com/wordpress-scripts/main.js" defer type="module"></script>
+<script src="<?php echo BUILDER_URL ?>wordpress-scripts/polyfills.js" defer type="module" ></script>
+<script  src="<?php echo  BUILDER_URL ?>wordpress-scripts/main.js" defer type="module"  ></script>
