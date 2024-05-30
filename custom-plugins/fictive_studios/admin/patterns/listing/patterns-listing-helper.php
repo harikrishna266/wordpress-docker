@@ -43,6 +43,34 @@ class PatternsListingHelper extends \WP_List_Table
         }
     }
 
+    public function column_name($item)
+    {
+        $output = '<strong>';
+        $output .= '<a>' . esc_html($item['name']) . '</a>';
+        $output .= '</strong>';
+
+        $actions = array(
+            'id' => '<a id="' . esc_attr('id-' . $item['ID']) . '>' . 'ID:' . __($item['ID']) . '</a>',
+            'edit' => '<a id="' . esc_attr('edit-' . $item['ID']) . '" href="' . esc_url($this->getEditQueryArguments($item)) . '">' . __('Edit') . '</a>',
+        );
+        $row_actions = array();
+        foreach ($actions as $action => $link) {
+            $row_actions[] = '<span class="' . esc_attr($action) . '">' . $link . '</span>';
+        }
+        $output .= '<div class="row-actions">' . implode(' | ', $row_actions) . '</div>';
+        return $output;
+    }
+
+    private function getEditQueryArguments($item): string
+    {
+        $edit_params = array(
+            'page' => PATTERNS_BUILDER_SLUG,
+            'action' => 'edit',
+            'pattern' => $item['ID']
+        );
+        return add_query_arg($edit_params, admin_url('admin.php'));
+    }
+
     protected function column_default($item, $column_name)
     {
         return isset($item[$column_name]) ? $item[$column_name] : '';

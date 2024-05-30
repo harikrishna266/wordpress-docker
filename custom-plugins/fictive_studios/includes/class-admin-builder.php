@@ -140,6 +140,7 @@ class AdminBuilder {
 
         $patternAPI = new FictiveCodes\PatternsAPIAdmin();
         $this->loader->add_action( 'admin_post_save_pattern_data', $patternAPI, 'save_pattern_data' );
+        $this->loader->add_action( 'admin_post_edit_pattern_data', $patternAPI, 'edit_pattern_data' );
         $this->loader->add_action( 'wp_ajax_get_patterns', $patternAPI, 'get_all_patterns' );
         $this->loader->add_action( 'wp_ajax_get_pattern_by_id', $patternAPI, 'get_pattern_by_id' );
     }
