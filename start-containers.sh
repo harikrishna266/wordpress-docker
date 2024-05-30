@@ -17,7 +17,7 @@ KEY_FILE="${CERTS_DIR}/localhost-key.pem"
     cd "$CERTS_DIR"
 
     mkcert -key-file localhost-key.pem -cert-file localhost.pem tshirtstore.com
-    mkcert -key-file fictivecodes-key.pem -cert-file fictivecodes.pem fictivecodes.com
+    mkcert -key-file fictivecodes-key.pem -cert-file fictivecodes.pem fictivecodes.local.com
 
     echo "Certificates generated successfully."
 fi
