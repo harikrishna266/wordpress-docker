@@ -7,7 +7,7 @@ class TemplatesCreateAdmin {
         $templateData = isset ($_POST['data']) ? $_POST['data'] : '';
         $templateName = isset ($_POST['name']) ? $_POST['name'] : '';
         global $wpdb;
-        $table_name = $wpdb->prefix . 'templates';
+        $table_name = FICTIVE_TABLE . 'templates';
         $wpdb->insert(
             $table_name,
             array(

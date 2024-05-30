@@ -48,7 +48,7 @@ class ModelPrintAreasListingHelper extends \WP_List_Table
     private function get_models_data()
     {
         global $wpdb;
-        $models_table = $wpdb->prefix . 'print_area_model_coordinates';
+        $models_table = FICTIVE_TABLE . 'print_area_model_coordinates';
         $model_id = $_GET['model'];
         $query = "SELECT * from $models_table WHERE `models_id` = $model_id";
         $results = $wpdb->get_results($query, ARRAY_A);

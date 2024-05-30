@@ -48,7 +48,7 @@ class TemplateListingHelper extends \WP_List_Table
     private function get_templates_data($search_term = '')
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'templates';
+        $table_name = FICTIVE_TABLE . 'templates';
         $query = "SELECT * FROM $table_name";
         if ($search_term) {
             $search_term_like = '%' . $wpdb->esc_like($search_term) . '%';

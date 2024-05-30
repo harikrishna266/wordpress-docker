@@ -13,7 +13,7 @@ class PatternsAPIAdmin
     public function get_all_patterns()
     {
         global $wpdb;
-        $query = "SELECT * FROM " . $wpdb->prefix . "patterns";
+        $query = "SELECT * FROM " . FICTIVE_TABLE . "patterns";
         $results = $wpdb->get_results($query);
         echo json_encode($results);
         wp_die();
@@ -22,7 +22,7 @@ class PatternsAPIAdmin
     public function get_pattern_by_id()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'patterns';
+        $table_name = FICTIVE_TABLE . 'patterns';
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
         if ($id <= 0) {
@@ -52,7 +52,7 @@ class PatternsAPIAdmin
 
         if ($pattern_file_url !== false && $pattern_image_url !== false) {
             global $wpdb;
-            $patterns_table = $wpdb->prefix . 'patterns';
+            $patterns_table = FICTIVE_TABLE . 'patterns';
 
             $insert_data = array(
                 'name' => $pattern_name,

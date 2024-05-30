@@ -114,7 +114,7 @@ class FashionDesignListingHelper extends \WP_List_Table
     private function get_fashion_designs_data()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'fashion_designs';
+        $table_name = FICTIVE_TABLE . 'fashion_designs';
         $query = "SELECT * FROM $table_name";
         $results = $wpdb->get_results($query, ARRAY_A);
         return $results;

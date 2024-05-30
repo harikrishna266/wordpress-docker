@@ -3,7 +3,7 @@
 function create_printing_areas_tables()
 {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'print_areas';
+    $table_name = FICTIVE_TABLE . 'print_areas';
     $charset_collate = $wpdb->get_charset_collate();
     $sql = "CREATE TABLE $table_name (
         ID mediumint(9) NOT NULL AUTO_INCREMENT,

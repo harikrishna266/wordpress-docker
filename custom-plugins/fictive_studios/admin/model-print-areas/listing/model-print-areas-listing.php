@@ -45,7 +45,7 @@ class ModelPrintAreaListingAdmin
     {
         global $wpdb;
         $model_id = $_GET['model'];
-        $table_name = $wpdb->prefix . 'models';
+        $table_name = FICTIVE_TABLE . 'models';
         $query = $wpdb->prepare("SELECT * FROM $table_name WHERE ID = %d", $model_id);
         return $model_data = $wpdb->get_row($query, ARRAY_A);
     }

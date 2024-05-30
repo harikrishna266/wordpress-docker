@@ -8,7 +8,7 @@ class FashionDesignAPIAdmin
     public function get_all_designs()
     {
         global $wpdb;
-        $query = "SELECT * FROM " . $wpdb->prefix . "fashion_designs";
+        $query = "SELECT * FROM " . FICTIVE_TABLE . "fashion_designs";
         $results = $wpdb->get_results($query);
         echo json_encode($results);
         wp_die();
@@ -17,7 +17,7 @@ class FashionDesignAPIAdmin
     public function get_design_by_id()
     {
         global $wpdb;
-        $table_name = $wpdb->prefix . 'fashion_designs';
+        $table_name = FICTIVE_TABLE . 'fashion_designs';
         $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
         if ($id <= 0) {
@@ -37,7 +37,7 @@ class FashionDesignAPIAdmin
         $design_name = isset($_POST['fashion_design_name']) ? sanitize_text_field($_POST['fashion_design_name']) : '';
         $model_id = isset($_POST['fashion_design_model']) ? sanitize_text_field($_POST['fashion_design_model']) : '';
         global $wpdb;
-        $model_table = $wpdb->prefix . 'fashion_designs';
+        $model_table = FICTIVE_TABLE . 'fashion_designs';
 
         $insert_data = array(
             'name' => $design_name,
@@ -65,7 +65,7 @@ class FashionDesignAPIAdmin
         $model_id = isset($_POST['fashion_design_model']) ? intval($_POST['fashion_design_model']) : 0;
 
         global $wpdb;
-        $table_name = $wpdb->prefix . 'fashion_designs';
+        $table_name = FICTIVE_TABLE . 'fashion_designs';
         $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 
         if ($id <= 0) {

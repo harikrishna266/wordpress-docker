@@ -3,7 +3,7 @@
 function add_patterns_sample()
 {
     global $wpdb;
-    $patterns_table = $wpdb->prefix . 'patterns';
+    $patterns_table = FICTIVE_TABLE . 'patterns';
 
     $row_count = $wpdb->get_var("SELECT COUNT(*) FROM $patterns_table");
 

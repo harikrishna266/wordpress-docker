@@ -3,7 +3,7 @@
 function create_patterns_tables()
 {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'patterns';
+    $table_name = FICTIVE_TABLE . 'patterns';
     $charset_collate = $wpdb->get_charset_collate();
     $sql = "CREATE TABLE $table_name (
         ID mediumint(9) NOT NULL AUTO_INCREMENT,

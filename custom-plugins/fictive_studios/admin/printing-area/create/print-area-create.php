@@ -11,7 +11,7 @@ class PrintAreaCreate
         if ($action == 'edit') {
             $print_area_id = ($_GET['print-area']);
             global $wpdb;
-            $table_name = $wpdb->prefix . 'print_areas';
+            $table_name = FICTIVE_TABLE . 'print_areas';
             $query = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $print_area_id);
             $print_area_data = $wpdb->get_row($query);
         }

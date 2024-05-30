@@ -62,7 +62,7 @@ class PatternsListingHelper extends \WP_List_Table
     private function get_patterns_data()
     {
         global $wpdb;
-        $patterns_table = $wpdb->prefix . 'patterns';
+        $patterns_table = FICTIVE_TABLE . 'patterns';
         $query = "SELECT * from $patterns_table";
         $results = $wpdb->get_results($query, ARRAY_A);
         return $results;

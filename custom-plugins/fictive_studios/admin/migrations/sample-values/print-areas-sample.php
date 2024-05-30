@@ -3,7 +3,7 @@
 function create_printing_areas_sample()
 {
     global $wpdb;
-    $table_name = $wpdb->prefix . 'print_areas';
+    $table_name = FICTIVE_TABLE . 'print_areas';
 
     $row_count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name");
 
