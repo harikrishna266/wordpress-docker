@@ -52,6 +52,7 @@ export default async function runExecutor(
     .on('change', async path => {
       console.log(`File ${path} has been changed`);
       await buildProject();
+      console.log(`build complete!`);
     })
 
 

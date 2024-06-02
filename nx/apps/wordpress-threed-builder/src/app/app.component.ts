@@ -28,7 +28,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   loadExternalStyles() {
-    fetch(`https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/wordpress-scripts/styles.css`)
+    fetch(`${environment.URL}/wordpress-scripts/styles.css`)
       .then(function(response) {
         return response.text();
       })
