@@ -16,8 +16,8 @@
     "@angular/router": "~17.3.0",
     "@babylonjs/core": "^7.8.0",
     "@babylonjs/inspector": "^7.9.0",
-    "@brocha-libs/builder-2d": "^61.0.0",
-    "@brocha-libs/builder-3d": "^61.0.0",
+    "@brocha-libs/builder-2d": "^80.0.0",
+    "@brocha-libs/builder-3d": "^80.0.0",
     "@nx/angular": "19.0.6",
     "@nx/express": "^19.0.6",
     "@types/cors": "^2.8.17",
@@ -84,5 +84,9 @@
     "ts-node": "10.9.1",
     "typescript": "~5.4.2",
     "webpack-cli": "^5.1.4"
-  }
+  },
+  "description": "<a alt=\"Nx logo\" href=\"https://nx.dev\" target=\"_blank\" rel=\"noreferrer\"><img src=\"https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png\" width=\"45\"></a>",
+  "main": "jest.preset.js",
+  "keywords": [],
+  "author": ""
 }

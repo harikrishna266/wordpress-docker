@@ -62,11 +62,11 @@ services:
     build:
       context: .
       dockerfile: nx/express.dockerfile
-    image: fictivecode_image
+    image: fictivecode.com
     ports:
       - 3333:3333
     volumes:
-      - ./nx/apps/fictivecode/src/public:/usr/src/app/apps/fictivecode/src/public
+      - ./nx/dist/apps/wordpress-threed-builder/browser:/usr/src/app/dist/public/3d-builder
 
 volumes:
   wordpress:

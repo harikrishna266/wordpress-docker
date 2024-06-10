@@ -1,3 +1,3 @@
 export const environment = {
-  URL: 'https://fictivecodes.local.com/'
+  ASSET_URL: 'http://localhost:3200/assets/',
 };

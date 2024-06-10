@@ -5,6 +5,9 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as console from 'console';
 
+const copyFrom = path.join(__dirname, '../../../../../dist/apps/wordpress-threed-builder/browser');
+const copyToBase = path.join(__dirname, '../../../../../dist/apps/fictivecode/public/3d-builder');
+
 export default async function runExecutor(
   options: WordpressBundlerExecutorSchema
 ): Promise<{ success: boolean }> {
@@ -16,37 +19,18 @@ export default async function runExecutor(
   const buildProject = () => {
 
     return new Promise<{ success: boolean }>((resolve, reject) => {
-      exec('nx build wordpress-threed-builder --configuration=development --output-hashing=none', (error, stdout, stderr) => {
+      exec('nx build wordpress-threed-builder --configuration=wordpress --output-hashing=none', (error, stdout, stderr) => {
         if (error) {
-          console.error(`Build error: ${stderr}`);
+          console.error(stderr);
           resolve({ success: false });
         } else {
           console.log(`Build output: ${stdout}`);
-          combineModules()
-            .then(() => resolve({ success: true }))
-            .catch(err => {
-              console.error(`Error combining modules: ${err}`);
-              resolve({ success: false });
-            });
         }
       });
     });
   };
 
-  const combineModules = async () => {
-    const distDir = path.join(__dirname, '../../../../../dist/apps/wordpress-threed-builder/browser');
-    const wordpressPath = path.join(__dirname, '../../../../../apps/fictivecode/src/public/wordpress-scripts');
 
-    const files = await fs.readdir(distDir);
-
-    for (const file of files) {
-      const outputFile = path.join(wordpressPath, file);
-      const filePath = path.join(distDir, file);
-      const content = await fs.readFile(filePath, 'utf-8');
-      await fs.writeFile(outputFile, content, 'utf-8');
-    }
-
-  };
 
   watcher
     .on('change', async path => {
@@ -54,8 +38,6 @@ export default async function runExecutor(
       await buildProject();
       console.log(`build complete!`);
     })
-
-
   console.log('Watching for file changes...');
 
   return new Promise<{ success: boolean }>(resolve => {

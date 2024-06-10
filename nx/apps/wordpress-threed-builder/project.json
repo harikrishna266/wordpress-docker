@@ -34,13 +34,13 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "5mb"
+              "maximumWarning": "4.5MB",
+              "maximumError": "4.5MB"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumWarning": "8kb",
+              "maximumError": "8kb"
             }
           ],
           "outputHashing": "all"
@@ -55,12 +55,26 @@
               "with": "apps/wordpress-threed-builder/src/environments/environment.development.ts"
             }
           ]
+        },
+        "wordpress": {
+          "optimization": true,
+          "extractLicenses": false,
+          "sourceMap": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/wordpress-threed-builder/src/environments/environment.ts",
+              "with": "apps/wordpress-threed-builder/src/environments/environment.wordpress.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 3200
+      },
       "configurations": {
         "production": {
           "buildTarget": "wordpress-threed-builder:build:production"

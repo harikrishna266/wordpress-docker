@@ -33,10 +33,12 @@
         builderHolder.setAttribute('id', "modal-3d");
         builderHolder.style.zIndex = 100001;
         document.body.appendChild( builderHolder);
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        document.body.style.overflow = 'hidden';
         const appBuilder = document.createElement('app-root');
         appBuilder.setAttribute('model', 'model url goes here');
         builderHolder.appendChild(appBuilder);
     }
 </script>
-<script src="<?php echo BUILDER_URL ?>wordpress-scripts/polyfills.js" defer type="module" ></script>
-<script src="<?php echo  BUILDER_URL ?>wordpress-scripts/main.js" defer type="module"  onload="" ></script>
+<script src="<?php echo BUILDER_URL ?>polyfills.js" defer type="module" ></script>
+<script src="<?php echo  BUILDER_URL ?>main.js" defer type="module"  onload="" ></script>
