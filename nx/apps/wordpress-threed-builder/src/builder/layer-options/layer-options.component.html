@@ -1,0 +1,19 @@
+<div  class='fixed bottom-0 left-0 h-1/4 w-full bg-gray-800 text-white p-4 slide-in-left flex flex-col '>
+  <ul class="text-sm font-medium w-80 text-center text-gray-500 rounded-lg shadow flex flex-row m-auto	py-1">
+    <li class="w-full focus-within:z-10">
+      <button class="cursor-pointer inline-block max-w-20 p-2 text-gray-900 bg-gray-100 border-r border-gray-200 dark:border-gray-700 rounded-s-lg " aria-current="page" (click)="selectLayer('layer_1')" >Layer 1</button>
+    </li>
+    <li class="w-full focus-within:z-10">
+      <button class="cursor-pointer inline-block max-w-20 p-2 border-r border-gray-700 " (click)="selectLayer('layer_2')" >Layer 2</button>
+    </li>
+    <li class="w-full focus-within:z-10">
+      <button class="cursor-pointer inline-block max-w-20 p-2 border-r border-gray-700 " (click)="selectLayer('layer_3')" >Layer 3</button>
+    </li>
+    <li class="w-full focus-within:z-10">
+      <button class="cursor-pointer inline-block max-w-20 p-2 border-s-0 border-gray-200 rounded-e-lg " (click)="selectLayer('layer_4')" >Layer 4</button>
+    </li>
+  </ul>
+  <div class='flex-1 flex flex-wrap overflow-auto'>
+      <div class="w-8 h-8 rounded-full"  *ngFor="let colors of goodColors" [style.background]="colors" (click)="colourSelected(colors)" ></div>
+  </div>
+</div>
