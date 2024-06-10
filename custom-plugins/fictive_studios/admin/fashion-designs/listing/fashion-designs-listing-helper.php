@@ -60,31 +60,31 @@ class FashionDesignListingHelper extends \WP_List_Table
 
     function column_design_layer_1($item)
     {
-        $actions = !empty($item['design_layer_1']) ? '<a href="' . esc_url($item['design_layer_1']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        $actions = !empty($item['design_layer_1_name']) ? '<a href="' . esc_url($item['design_layer_1_link']) . '">'.$item['design_layer_1_name'].'</a>' : '--';
         return $actions;
     }
 
     function column_design_layer_2($item)
     {
-        $actions = !empty($item['design_layer_2']) ? '<a href="' . esc_url($item['design_layer_2']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        $actions = !empty($item['design_layer_2_name']) ? '<a href="' . esc_url($item['design_layer_2_link']) . '">'.$item['design_layer_2_name'].'</a>' : '--';
         return $actions;
     }
 
     function column_design_layer_3($item)
     {
-        $actions = !empty($item['design_layer_3']) ? '<a href="' . esc_url($item['design_layer_3']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        $actions = !empty($item['design_layer_3_name']) ? '<a href="' . esc_url($item['design_layer_3_link']) . '">'.$item['design_layer_3_name'].'</a>' : '--';
         return $actions;
     }
 
     function column_design_layer_4($item)
     {
-        $actions = !empty($item['design_layer_4']) ? '<a href="' . esc_url($item['design_layer_4']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        $actions = !empty($item['design_layer_4_name']) ? '<a href="' . esc_url($item['design_layer_4_link']) . '">'.$item['design_layer_4_name'].'</a>' : '--';
         return $actions;
     }
 
     function column_design_layer_5($item)
     {
-        $actions = !empty($item['design_layer_5']) ? '<a href="' . esc_url($item['design_layer_5']) . '" class="dashicons dashicons-visibility" target="_blank"></a>' : '--';
+        $actions = !empty($item['design_layer_5_name']) ? '<a href="' . esc_url($item['design_layer_5_link']) . '">'.$item['design_layer_5_name'].'</a>' : '--';
         return $actions;
     }
 

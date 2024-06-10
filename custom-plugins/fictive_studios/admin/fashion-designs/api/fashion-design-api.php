@@ -46,7 +46,9 @@ class FashionDesignAPIAdmin
         );
 
         for ($i = 1; $i <= 5; $i++) {
-            $insert_data['design_layer_' . $i] = isset($_POST['fashion_design_layer_' . $i]) ? sanitize_text_field($_POST['fashion_design_layer_' . $i]) : '';
+            $insert_data['design_layer_' . $i . '_name'] = isset($_POST['fashion_design_layer_' . $i . '_name']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_name']) : '';
+            $insert_data['design_layer_' . $i . '_link'] = isset($_POST['fashion_design_layer_' . $i . '_link']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_link']) : '';
+            $insert_data['design_layer_' . $i . '_color'] = isset($_POST['fashion_design_layer_' . $i . '_color']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_color']) : '';
         }
 
         $wpdb->insert($model_table, $insert_data);
@@ -84,7 +86,9 @@ class FashionDesignAPIAdmin
         );
 
         for ($i = 1; $i <= 5; $i++) {
-            $insert_data['design_layer_' . $i] = isset($_POST['fashion_design_layer_' . $i]) ? sanitize_text_field($_POST['fashion_design_layer_' . $i]) : '';
+            $insert_data['design_layer_' . $i . '_name'] = isset($_POST['fashion_design_layer_' . $i . '_name']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_name']) : '';
+            $insert_data['design_layer_' . $i . '_link'] = isset($_POST['fashion_design_layer_' . $i . '_link']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_link']) : '';
+            $insert_data['design_layer_' . $i . '_color'] = isset($_POST['fashion_design_layer_' . $i . '_color']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_color']) : '';
         }
 
         $wpdb->update(
@@ -110,5 +114,4 @@ class FashionDesignAPIAdmin
         wp_redirect($url);
         exit;
     }
-
 }
