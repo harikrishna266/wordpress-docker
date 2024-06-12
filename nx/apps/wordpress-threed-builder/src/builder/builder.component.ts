@@ -78,19 +78,19 @@ export class BuilderComponent implements AfterViewInit{
     this.stage.initializeStage(this.konvaContainer.nativeElement, 2048, 2048);
     this.stage.isEditor = true;
     this.boundaryService = new BoundaryService(this.stage);
-    // await this.threeDBuilder();
+    await this.threeDBuilder();
   }
 
   async threeDBuilder() {
     await this.sceneHelper.createScene(this.threedCanvas.nativeElement);
-    this.sceneHelper.addEnvironment();
+    this.sceneHelper.addDefaultEnvironment();
     this.sceneHelper.loadCamera();
     await this.loadModel();
   }
 
   async loadModel() {
     await loadModel(this.sceneHelper.scene, 'model', '', `${environment.ASSET_URL}glb/`, 'model-3.glb');
-    (this.sceneHelper.scene.activeCamera as ArcRotateCamera).setTarget((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh));
+    (this.sceneHelper.scene.activeCamera as ArcRotateCamera).setTarget((this.sceneHelper.scene.getMeshByName('bounding-box') as Mesh));
     ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture = new Texture(`${environment.ASSET_URL}assets/Cotton_Heavy_Canvas_NRM.jpg`, this.sceneHelper.scene);
     (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).level = 2;
     (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).uScale = 5;
