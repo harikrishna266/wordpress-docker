@@ -67,7 +67,6 @@ services:
       - 3333:3333
     volumes:
       - ./nx/dist/apps/wordpress-threed-builder/browser:/usr/src/app/dist/public/3d-builder
-
 volumes:
   wordpress:
   mysql_data:

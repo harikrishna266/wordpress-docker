@@ -23,7 +23,7 @@ import { DesignsSideBarComponent } from './designs-side-bar/designs-side-bar.com
 import { LayerOptionsComponent } from './layer-options/layer-options.component';
 import { LayerPatternsComponent } from './layer-patterns/layer-patterns.component';
 import { Designs, LayerNames } from './types/design.type';
-import { concatMap, filter, from,  toArray } from 'rxjs';
+import {concatMap, filter, forkJoin, from, map, mergeMap, of, switchMap, tap, toArray} from 'rxjs';
 
 @Component({
   selector: 'app-builder',
@@ -130,8 +130,9 @@ export class BuilderComponent implements AfterViewInit{
     from([this.selectedDesign?.design_layer_1, this.selectedDesign?.design_layer_2, this.selectedDesign?.design_layer_3, this.selectedDesign?.design_layer_4])
       .pipe(
         filter((url): url is string => !!url),
-        concatMap((url: string) => this.http.get(url, { headers, responseType: 'text' })),
+        map((url: string) => this.http.get(url, { headers, responseType: 'text' })),
         toArray(),
+        switchMap((e) =>forkJoin(e)),
       ).subscribe(async ([layer_1, layer_2, layer_3, layer_4]) => {
         this.layer_1 = await this.createLayer(layer_1, 'red');
         this.layer_2 = await this.createLayer(layer_2, 'yellow');
