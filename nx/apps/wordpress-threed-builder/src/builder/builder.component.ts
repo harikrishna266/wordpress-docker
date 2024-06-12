@@ -23,7 +23,7 @@ import { DesignsSideBarComponent } from './designs-side-bar/designs-side-bar.com
 import { LayerOptionsComponent } from './layer-options/layer-options.component';
 import { LayerPatternsComponent } from './layer-patterns/layer-patterns.component';
 import { Designs, LayerNames } from './types/design.type';
-import {concatMap, filter, forkJoin, from, map, mergeMap, of, switchMap, tap, toArray} from 'rxjs';
+import { filter, forkJoin, from, map, switchMap, toArray} from 'rxjs';
 
 @Component({
   selector: 'app-builder',
