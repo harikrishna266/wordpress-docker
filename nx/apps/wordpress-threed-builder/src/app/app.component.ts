@@ -4,8 +4,8 @@ import { BuilderComponent } from '../builder/builder.component';
 @Component({
   standalone: true,
   imports: [
-    BuilderComponent
-  ],
+    BuilderComponent,
+ ],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

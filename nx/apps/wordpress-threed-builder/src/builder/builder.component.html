@@ -36,7 +36,7 @@
       style='height: 100%; width: 100%; padding: 0px'
     ></canvas>
   </div>
-  <app-designs-side-bar *ngIf='currentAction === "designs"' [sceneHelper]="this.sceneHelper" (designSelected)="applyDesign($event)" ></app-designs-side-bar>
+  <app-designs-side-bar *ngIf='currentAction === "designs"'   (designSelected)="applyDesign($event)" ></app-designs-side-bar>
   <app-layer-options *ngIf='currentAction === "layers"' [sceneHelper]="this.sceneHelper" (colourPicked)="applyColor($event)" ></app-layer-options>
   <app-layer-patterns *ngIf='currentAction === "patterns"' [sceneHelper]="this.sceneHelper"></app-layer-patterns>
 </div>

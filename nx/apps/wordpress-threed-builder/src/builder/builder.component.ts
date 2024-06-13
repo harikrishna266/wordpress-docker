@@ -16,7 +16,6 @@ import {
   Texture
 } from '@brocha-libs/builder-3d';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { WordpressService } from '../services/wordpress.service';
 import { BoundaryService, ShapeInstance, Stage2D } from '@brocha-libs/builder-2d';
 import { environment } from '../environments/environment';
 import { DesignsSideBarComponent } from './designs-side-bar/designs-side-bar.component';
@@ -31,9 +30,9 @@ import { filter, forkJoin, from, map, switchMap, toArray} from 'rxjs';
   imports: [CommonModule, HttpClientModule, DesignsSideBarComponent, LayerOptionsComponent, LayerPatternsComponent],
   templateUrl: './builder.component.html',
   styleUrl: './builder.component.scss',
-  providers: [WordpressService],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
+
 export class BuilderComponent implements AfterViewInit{
   stage!: Stage2D;
   readonly sceneHelper: SceneHelper = new SceneHelper();
@@ -112,7 +111,6 @@ export class BuilderComponent implements AfterViewInit{
         material.albedoTexture = this.dynamicTexture;
       }
     });
-    this.changeColor();
   }
 
   async setColor(color: string) {
