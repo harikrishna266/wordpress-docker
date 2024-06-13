@@ -72,9 +72,14 @@ class AdminBuilder {
 
     private function print_types_CRUD(){
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/print-types/listing/print-types-listing.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/print-types/api/print-types-api.php';
 
         $print_types_admin = new FictiveCodes\PrintingTypesListingAdmin();
         $this->loader->add_action( 'admin_menu', $print_types_admin, 'add_submenu' );
+
+        $print_type_api = new FictiveCodes\PrintTypesAPIAdmin();
+        $this->loader->add_action( 'admin_post_save_print_type', $print_type_api, 'save_print_types_data' );
+        $this->loader->add_action( 'admin_post_edit_print_type', $print_type_api, 'edit_print_types_data' );
     }
     private function fashion_designs_CRUD(){
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/fashion-designs/listing/fashion-designs-listing.php';
