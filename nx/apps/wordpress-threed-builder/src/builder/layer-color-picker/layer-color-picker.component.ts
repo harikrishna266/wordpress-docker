@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SceneHelper } from '@brocha-libs/builder-3d';
 import { LayerNames } from '../types/design.type';
 import { Layer } from '../types/layer.type';
-
+type LayerWithSelection = Layer & { selected: boolean};
 @Component({
   selector: 'app-layer-color-picker',
   standalone: true,
@@ -11,18 +11,18 @@ import { Layer } from '../types/layer.type';
   templateUrl: './layer-color-picker.component.html',
   styleUrl: './layer-color-picker.component.css',
 })
+
 export class LayerColorPickerComponent {
   selectedLayer!: Layer;
   @Input() sceneHelper!: SceneHelper;
-  @Output() colourPicked: EventEmitter<{layer: LayerNames, color: string}> = new EventEmitter();
+  @Output() colourPicked: EventEmitter<{layer: Layer, color: string}> = new EventEmitter();
 
-  private _layers!: Array<Layer & { selected: boolean}>;
+  private _layers!: Array<LayerWithSelection>;
   @Input()
-  public get layers() {
+  public get layers(): Array<LayerWithSelection> {
     return this._layers;
   }
   public set layers(layers: Layer[]) {
-    console.log(layers);
     this._layers = layers.map((layer) => ({...layer, selected: false}));
   }
 
@@ -51,11 +51,15 @@ export class LayerColorPickerComponent {
     '#795548'
   ];
 
-  selectLayer(layer: Layer) {
+  selectLayer(layer: LayerWithSelection) {
+    this.layers.map((layer) =>  layer.selected = false);
+    layer.selected = true;
     this.selectedLayer = layer;
   }
 
   colourSelected(color: string) {
-    // this.colourPicked.next({layer: this.selectedLayer, color: color})
+    const selectedLayer = this.layers.find((layer) => layer.selected) as LayerWithSelection;
+    const { selected, ...layer } = selectedLayer;
+    this.colourPicked.next({layer, color})
   }
 }

@@ -80,14 +80,6 @@ export class BuilderComponent implements AfterViewInit{
 
   async loadModel() {
     await loadModel(this.sceneHelper.scene, 'model', '', `${environment.ASSET_URL}glb/`, 'model-3.glb');
-    // (this.sceneHelper.scene.activeCamera as ArcRotateCamera).setTarget((this.sceneHelper.scene.getMeshByName('bounding-box') as Mesh));
-    // ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture = new Texture(`${environment.ASSET_URL}assets/Cotton_Heavy_Canvas_NRM.jpg`, this.sceneHelper.scene);
-    // (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).level = 2;
-    // (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).uScale = 5;
-    // (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).vScale = 5;
-    // ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).metallic = 0.2;
-    // ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).roughness = .7;
-    // ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).indexOfRefraction = 1.9;
     await this.renderDynamicTexture();
   }
 
@@ -113,7 +105,7 @@ export class BuilderComponent implements AfterViewInit{
   }
 
 
-  applyColor(color: {layer: LayerNames, color: string}) {
+  applyColor(color: any) {
     this.selectLayer(color.layer);
     this.setColor(color.color);
   }
@@ -150,5 +142,17 @@ export class BuilderComponent implements AfterViewInit{
           this.dynamicTexture.update(false);
         })
       ).subscribe();
+  }
+}
+
+const materialConfig  = {
+  metallic: 0.2,
+  roughness: .7,
+  indexOfRefraction: 1.9,
+  bumpTexture: {
+    url: `${environment.ASSET_URL}assets/Cotton_Heavy_Canvas_NRM.jpg`,
+    level: 2,
+    uScale: 5,
+    vScale: 5,
   }
 }
