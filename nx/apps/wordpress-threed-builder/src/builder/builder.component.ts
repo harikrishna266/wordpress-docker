@@ -55,7 +55,7 @@ export class BuilderComponent implements AfterViewInit{
 
   selectLayer(layer: LayerNames): void {}
 
-  setCurrentAction(action: MenuActions) {
+  setCurrentAction(action: any) {
     if(this.currentAction === action) {
       this.currentAction = 'none';
       return;

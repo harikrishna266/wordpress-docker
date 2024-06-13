@@ -1,26 +1,17 @@
 <div class='w-screen h-screen  flex flex-col bg-white relative'>
   <div class='absolute w-full  flex flex-row justify-center p-3'>
-    <ul class=' flex flex-row  gap-1'>
-      <li>
-        <a class='flex items-center space-x-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100'
-           (click)='setCurrentAction("designs")'>
-          <i class='fas fa-home text-blue-500'></i>
-          <span class='text-gray-700'>Designs</span>
-        </a>
-      </li>
-      <li>
-        <a *ngIf="design?.layers" class='flex items-center space-x-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100'
-           (click)='setCurrentAction("layers")'>
-          <i class='fas fa-home text-blue-500'></i>
-          <span class='text-gray-700'>Layers</span>
-        </a>
-      </li>
-      <li>
-        <a *ngIf="design?.layers"  class='flex items-center space-x-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100'
-           (click)='setCurrentAction("patterns")'>
-          <i class='fas fa-home text-blue-500'></i>
-          <span class='text-gray-700'>Patterns</span>
-        </a>
+    <ul class="text-sm font-medium w-80 text-center text-gray-500 rounded-lg shadow flex flex-row m-auto	py-1 justify-center">
+      <li class="focus-within:z-10" *ngFor="let action of ['designs','layers', 'patterns' ]; first as first; last as last">
+        <button
+          (click)='setCurrentAction(action)'
+          [ngClass]="{
+      'not-selected-layer': currentAction !== action,
+      'selected-layer': currentAction === action,
+      'rounded-s-lg': first,
+      'rounded-e-lg': last
+    }">
+          {{ action }}
+        </button>
       </li>
     </ul>
   </div>
@@ -37,6 +28,6 @@
     ></canvas>
   </div>
   <app-design-selector *ngIf='currentAction === "designs"'   (designSelected)="applyDesign($event)" ></app-design-selector>
-  <app-layer-color-picker *ngIf='currentAction === "layers"' [layers]="design.layers" (colourPicked)="applyColor($event)" ></app-layer-color-picker>
+  <app-layer-color-picker *ngIf='currentAction === "layers" && design' [layers]="design.layers" (colourPicked)="applyColor($event)" ></app-layer-color-picker>
 <!--  <app-layer-patterns *ngIf='currentAction === "patterns"' [sceneHelper]="this.sceneHelper"></app-layer-patterns>-->
 </div>
