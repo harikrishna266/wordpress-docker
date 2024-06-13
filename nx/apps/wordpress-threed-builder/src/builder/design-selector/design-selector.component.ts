@@ -18,15 +18,15 @@ import { WordpressService } from '../../services/wordpress.service';
 import { tap } from 'rxjs';
 
 @Component({
-  selector: 'app-designs-side-bar',
+  selector: 'app-design-selector',
   standalone: true,
   imports: [CommonModule, HttpClientModule],
-  styleUrl: './designs-side-bar.component.scss',
-  templateUrl: './designs-side-bar.component.html',
+  styleUrl: './design-selector.component.scss',
+  templateUrl: './design-selector.component.html',
   encapsulation: ViewEncapsulation.None,
   providers: []
 })
-export class DesignsSideBarComponent implements OnInit{
+export class DesignSelectorComponent implements OnInit{
   @Input() sceneHelper!: SceneHelper;
   @Output() designSelected: EventEmitter<Designs> = new EventEmitter();
   private readonly wordpressService = inject(WordpressService)

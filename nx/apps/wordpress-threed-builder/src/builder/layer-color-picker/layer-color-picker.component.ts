@@ -2,18 +2,30 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SceneHelper } from '@brocha-libs/builder-3d';
 import { LayerNames } from '../types/design.type';
+import { Layer } from '../types/layer.type';
 
 @Component({
-  selector: 'app-layer-options',
+  selector: 'app-layer-color-picker',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './layer-options.component.html',
-  styleUrl: './layer-options.component.css',
+  templateUrl: './layer-color-picker.component.html',
+  styleUrl: './layer-color-picker.component.css',
 })
-export class LayerOptionsComponent {
-  selectedLayer: LayerNames = 'layer_1';
+export class LayerColorPickerComponent {
+  selectedLayer!: Layer;
   @Input() sceneHelper!: SceneHelper;
   @Output() colourPicked: EventEmitter<{layer: LayerNames, color: string}> = new EventEmitter();
+
+  private _layers!: Array<Layer & { selected: boolean}>;
+  @Input()
+  public get layers() {
+    return this._layers;
+  }
+  public set layers(layers: Layer[]) {
+    console.log(layers);
+    this._layers = layers.map((layer) => ({...layer, selected: false}));
+  }
+
   currentTab: 'color' | 'pattern' = 'pattern';
   goodColors: string[] = [
     '#FFFFFF',
@@ -39,11 +51,11 @@ export class LayerOptionsComponent {
     '#795548'
   ];
 
-  selectLayer(layer: LayerNames) {
+  selectLayer(layer: Layer) {
     this.selectedLayer = layer;
   }
 
   colourSelected(color: string) {
-    this.colourPicked.next({layer: this.selectedLayer, color: color})
+    // this.colourPicked.next({layer: this.selectedLayer, color: color})
   }
 }

@@ -1,10 +1,9 @@
+import { Layer } from './layer.type';
+
 export type Designs = {
-  ID: string;
+  id: string;
   name: string;
-  design_layer_1: string;
-  design_layer_2: string;
-  design_layer_3?: string;
-  design_layer_4?: string;
+  layers: Layer[],
   model_id: string;
   user: string;
 };

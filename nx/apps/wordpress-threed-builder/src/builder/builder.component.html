@@ -9,14 +9,14 @@
         </a>
       </li>
       <li>
-        <a class='flex items-center space-x-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100'
+        <a *ngIf="design?.layers" class='flex items-center space-x-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100'
            (click)='setCurrentAction("layers")'>
           <i class='fas fa-home text-blue-500'></i>
           <span class='text-gray-700'>Layers</span>
         </a>
       </li>
       <li>
-        <a class='flex items-center space-x-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100'
+        <a *ngIf="design?.layers"  class='flex items-center space-x-2 p-2 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100'
            (click)='setCurrentAction("patterns")'>
           <i class='fas fa-home text-blue-500'></i>
           <span class='text-gray-700'>Patterns</span>
@@ -31,12 +31,12 @@
       style='width: 2048px; height: 2048px; display: none'
     ></div>
     <canvas
-      #threedCanvas
+      #threeDCanvas
       id='renderer-canvas'
       style='height: 100%; width: 100%; padding: 0px'
     ></canvas>
   </div>
-  <app-designs-side-bar *ngIf='currentAction === "designs"'   (designSelected)="applyDesign($event)" ></app-designs-side-bar>
-  <app-layer-options *ngIf='currentAction === "layers"' [sceneHelper]="this.sceneHelper" (colourPicked)="applyColor($event)" ></app-layer-options>
-  <app-layer-patterns *ngIf='currentAction === "patterns"' [sceneHelper]="this.sceneHelper"></app-layer-patterns>
+  <app-design-selector *ngIf='currentAction === "designs"'   (designSelected)="applyDesign($event)" ></app-design-selector>
+  <app-layer-color-picker *ngIf='currentAction === "layers"' [layers]="design.layers" (colourPicked)="applyColor($event)" ></app-layer-color-picker>
+<!--  <app-layer-patterns *ngIf='currentAction === "patterns"' [sceneHelper]="this.sceneHelper"></app-layer-patterns>-->
 </div>

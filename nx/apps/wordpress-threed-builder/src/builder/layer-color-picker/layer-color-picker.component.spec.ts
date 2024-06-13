@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LayerOptionsComponent } from './layer-options.component';
+import { LayerColorPickerComponent } from './layer-color-picker.component';
 
 describe('LayerOptionsComponent', () => {
-  let component: LayerOptionsComponent;
-  let fixture: ComponentFixture<LayerOptionsComponent>;
+  let component: LayerColorPickerComponent;
+  let fixture: ComponentFixture<LayerColorPickerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LayerOptionsComponent],
+      imports: [LayerColorPickerComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LayerOptionsComponent);
+    fixture = TestBed.createComponent(LayerColorPickerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
