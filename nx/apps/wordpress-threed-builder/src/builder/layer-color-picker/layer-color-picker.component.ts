@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SceneHelper } from '@brocha-libs/builder-3d';
-import { LayerNames } from '../types/design.type';
 import { Layer } from '../types/layer.type';
 type LayerWithSelection = Layer & { selected: boolean};
 @Component({

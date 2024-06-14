@@ -53,7 +53,9 @@ export class BuilderComponent implements AfterViewInit{
   @ViewChild('konvaContainer', { static: true }) konvaContainer!: ElementRef;
 
 
-  selectLayer(layer: LayerNames): void {}
+  selectLayer(layer: LayerNames): void {
+
+  }
 
   setCurrentAction(action: any) {
     if(this.currentAction === action) {
@@ -73,7 +75,7 @@ export class BuilderComponent implements AfterViewInit{
 
   async threeDBuilder() {
     await this.sceneHelper.createScene(this.threedCanvas.nativeElement);
-    this.sceneHelper.addDefaultEnvironment();
+    this.sceneHelper.addExternalEnvironment(`${environment.ASSET_URL}assets/environmentSpecular.env`);
     this.sceneHelper.loadCamera();
     await this.loadModel();
   }
