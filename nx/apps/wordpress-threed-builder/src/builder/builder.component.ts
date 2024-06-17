@@ -18,12 +18,13 @@ import { environment } from '../environments/environment';
 import { DesignSelectorComponent } from './design-selector/design-selector.component';
 import { LayerColorPickerComponent } from './layer-color-picker/layer-color-picker.component';
 import { LayerPatternsComponent } from './layer-patterns/layer-patterns.component';
-import { Designs, LayerNames } from './types/design.type';
+import { Designs } from './types/design.type';
 import { forkJoin, from, map, switchMap, tap, toArray } from 'rxjs';
 import { LayerService } from '../services/layer.service';
 import { Layer } from './types/layer.type';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
 type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
+
 @Component({
   selector: 'app-builder',
   standalone: true,
@@ -49,13 +50,8 @@ export class BuilderComponent implements AfterViewInit{
 
   private readonly LayerService = inject(LayerService);
 
-  @ViewChild('threeDCanvas', { static: true }) threedCanvas!: ElementRef;
+  @ViewChild('threeDCanvas', { static: true }) threeDCanvas!: ElementRef;
   @ViewChild('konvaContainer', { static: true }) konvaContainer!: ElementRef;
-
-
-  selectLayer(layer: LayerNames): void {
-
-  }
 
   setCurrentAction(action: any) {
     if(this.currentAction === action) {
@@ -74,7 +70,7 @@ export class BuilderComponent implements AfterViewInit{
   }
 
   async threeDBuilder() {
-    await this.sceneHelper.createScene(this.threedCanvas.nativeElement);
+    await this.sceneHelper.createScene(this.threeDCanvas.nativeElement);
     this.sceneHelper.addExternalEnvironment(`${environment.ASSET_URL}assets/environmentSpecular.env`);
     this.sceneHelper.loadCamera();
     await this.loadModel();
@@ -98,30 +94,33 @@ export class BuilderComponent implements AfterViewInit{
     });
   }
 
-  async setColor(color: string) {
-    // await this.selectedLayer.setAttrs({
-    //   fill: color
-    // });
-    // this.stage.layer.draw();
-    // this.dynamicTexture.update(false);
+  async setColor(selectedLayer: Path, color: string) {
+    await selectedLayer.setAttrs({
+      fill: color
+    });
+    this.stage.layer.draw();
+    this.dynamicTexture.update(false);
   }
 
 
-  applyColor(color: any) {
-    this.selectLayer(color.layer);
-    this.setColor(color.color);
+  applyColor({layer, color}: {layer: Layer, color: string}) {
+    const selectedLayer = this.layers.find((layerPath: Path) => layer.id === layerPath.id);
+    if(selectedLayer) {
+      this.setColor(selectedLayer, color);
+    }
   }
 
-  async createLayer(path: string, fill: string) {
-    const layer =   this.stage.createShape('path') as Path;
-    layer.setAttrs({
+  async createLayer(layer: {id: string, path: string}, fill: string) {
+    const layerObj =   this.stage.createShape('path') as Path;
+    layerObj.setAttrs({
+      id: layer.id,
       fill,
-      data: path,
+      data: layer.path,
       scaleX: 1,
       scaleY: 1,
     });
-    await this.stage.addShape(this.stage.layer, layer);
-    return layer;
+    await this.stage.addShape(this.stage.layer, layerObj);
+    return layerObj;
   }
 
   applyDesign(design: Designs) {
@@ -131,30 +130,27 @@ export class BuilderComponent implements AfterViewInit{
     this.design = design;
     from(design.layers)
       .pipe(
-        map((layer: Layer) => this.LayerService.downloadTemplate(layer.url)),
+        map((layer: Layer) =>
+          this.LayerService.downloadTemplate(layer.url).pipe(
+            map((path) => ({id: layer.id, path}))
+          )
+        ),
         toArray(),
         switchMap((layerApi) =>forkJoin(layerApi)),
         tap((layers) => {
+          const previousColours = this.layers.map((layer) => layer.fill);
           this.layers = [];
           layers.forEach(async (layer, index) => {
-            const layerInstance = await this.createLayer(layer, design.layers[index].color);
+            let colour = design.layers[index].color;
+            if(previousColours[index]) {
+              colour = previousColours[index];
+            }
+            const layerInstance = await this.createLayer(layer, colour);
             this.layers.push(layerInstance);
           });
           this.stage.layer.draw();
           this.dynamicTexture.update(false);
         })
       ).subscribe();
-  }
-}
-
-const materialConfig  = {
-  metallic: 0.2,
-  roughness: .7,
-  indexOfRefraction: 1.9,
-  bumpTexture: {
-    url: `${environment.ASSET_URL}assets/Cotton_Heavy_Canvas_NRM.jpg`,
-    level: 2,
-    uScale: 5,
-    vScale: 5,
   }
 }

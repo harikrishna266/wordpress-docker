@@ -56,6 +56,10 @@ export class LayerColorPickerComponent {
     this.selectedLayer = layer;
   }
 
+  get isLayerSelected() {
+    return this.layers.some((layer) => layer.selected);
+  }
+
   colourSelected(color: string) {
     const selectedLayer = this.layers.find((layer) => layer.selected) as LayerWithSelection;
     const { selected, ...layer } = selectedLayer;
