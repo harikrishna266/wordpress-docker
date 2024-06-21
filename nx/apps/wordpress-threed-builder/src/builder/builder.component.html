@@ -1,19 +1,16 @@
-<div class='w-screen h-screen  flex flex-col bg-white relative'>
-  <div class='absolute w-full  flex flex-row justify-center p-3'>
-    <ul class="text-sm font-medium  text-center text-gray-500 rounded-lg shadow flex flex-row m-auto	  justify-center">
-      <li class="focus-within:z-10" *ngFor="let action of ['designs','layers', 'patterns' ]; first as first; last as last">
-        <button
-          (click)='setCurrentAction(action)'
+<div class='relative w-screen h-screen  flex flex-col bg-white'>
+  <div class='fixed w-full  flex flex-row justify-center p-3'>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="border border-gray-300 rounded-lg p-2 lg:p-2 bg-white shadow-md cursor-pointer"
           [ngClass]="{
-      'not-selected-layer': currentAction !== action,
-      'selected-layer': currentAction === action,
-      'rounded-s-lg': first,
-      'rounded-e-lg': last
-    }">
-          {{ action }}
-        </button>
-      </li>
-    </ul>
+            'bg-white': currentAction !== action,
+            'bg-yellow-900 text-white': currentAction === action,
+          }"
+           (click)='setCurrentAction(action)'
+           *ngFor="let action of ['designs','layers', 'patterns' ]; first as first; last as last">
+        <p class="text-sm lg:text-xl font-semibold text-center">{{action}}</p>
+       </div>
+    </div>
   </div>
   <div class='flex-1 bg-green-200'>
     <div
@@ -27,7 +24,7 @@
       style='height: 100%; width: 100%; padding: 0px'
     ></canvas>
   </div>
-  <app-design-selector *ngIf='currentAction === "designs"'   (designSelected)="applyDesign($event)" ></app-design-selector>
-  <app-layer-color-picker *ngIf='currentAction === "layers" && design' [layers]="design.layers" (colourPicked)="applyColor($event)" ></app-layer-color-picker>
-  <app-layer-patterns *ngIf='currentAction === "patterns" && design' [layers]="design.layers" [stage]="stage" (colourPicked)="applyColor($event, 'pattern' )" ></app-layer-patterns>
+  <app-design-selector *ngIf='currentAction === "designs"' [sceneHelper]="sceneHelper" [stage]="stage"  [dynamicTexture]="this.dynamicTexture" ></app-design-selector>
+  <app-layer-color-picker *ngIf='currentAction === "layers" && !!layerHelper.designLayers'  [stage]="stage" [dynamicTexture]="this.dynamicTexture"  ></app-layer-color-picker>
+  <app-layer-patterns *ngIf='currentAction === "patterns"' ></app-layer-patterns>
 </div>

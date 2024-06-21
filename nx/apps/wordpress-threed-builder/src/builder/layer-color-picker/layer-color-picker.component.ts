@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SceneHelper } from '@brocha-libs/builder-3d';
-import { Layer } from '../types/layer.type';
+import { LayerHelper } from '../layer.helper';
+import { LayerTypes } from '../types/three-d-builder-layer.type';
 import { colors } from '../colors';
-type LayerWithSelection = Layer & { selected: boolean};
+import { DynamicTexture } from '@brocha-libs/builder-3d';
+import { Stage2D } from '@brocha-libs/builder-2d';
 @Component({
   selector: 'app-layer-color-picker',
   standalone: true,
@@ -13,34 +14,18 @@ type LayerWithSelection = Layer & { selected: boolean};
 })
 
 export class LayerColorPickerComponent {
-  selectedLayer!: Layer;
-  @Input() sceneHelper!: SceneHelper;
-  @Output() colourPicked: EventEmitter<{layer: Layer, color: string}> = new EventEmitter();
-
-  private _layers!: Array<LayerWithSelection>;
-  @Input()
-  public get layers(): Array<LayerWithSelection> {
-    return this._layers;
-  }
-  public set layers(layers: Layer[]) {
-    this._layers = layers.map((layer) => ({...layer, selected: false}));
-  }
-
-  goodColors: string[] = colors;
-
-  selectLayer(layer: LayerWithSelection) {
-    this.layers.map((layer) =>  layer.selected = false);
-    layer.selected = true;
+  @Input() dynamicTexture!: DynamicTexture;
+  @Input() stage!: Stage2D;
+  public readonly layerHelper = inject(LayerHelper);
+  public selectedLayer!: LayerTypes;
+  public colours = colors;
+  selectLayer(layer: LayerTypes) {
     this.selectedLayer = layer;
   }
 
-  get isLayerSelected() {
-    return this.layers.some((layer) => layer.selected);
-  }
-
-  colourSelected(color: string) {
-    const selectedLayer = this.layers.find((layer) => layer.selected) as LayerWithSelection;
-    const { selected, ...layer } = selectedLayer;
-    this.colourPicked.next({layer, color})
+  setColor(color: string) {
+    this.selectedLayer.path.setAttrs({fill: color});
+    this.stage.layer.draw();
+    this.dynamicTexture.update(false);
   }
 }

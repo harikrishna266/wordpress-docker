@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class LayerService {
+export class LayerAPIService {
   private http: HttpClient = inject(HttpClient);
 
   downloadTemplate(template: string) {

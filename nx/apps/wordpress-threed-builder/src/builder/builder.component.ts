@@ -19,14 +19,10 @@ import { DesignSelectorComponent } from './design-selector/design-selector.compo
 import { LayerColorPickerComponent } from './layer-color-picker/layer-color-picker.component';
 import { LayerPatternsComponent } from './layer-patterns/layer-patterns.component';
 import { Designs } from './types/design.type';
-import { forkJoin, from, map, switchMap, tap, toArray } from 'rxjs';
-import { LayerService } from '../services/layer.service';
-import { Layer } from './types/layer.type';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
+import { LayerHelper } from './layer.helper';
 type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
-type DesignLayer = { path: Path, type: 'layer'};
-type PatternLayer = { path: Path, pattern: Path, type: 'pattern'};
-type LayerTypes = PatternLayer | DesignLayer ;
+
 @Component({
   selector: 'app-builder',
   standalone: true,
@@ -40,16 +36,19 @@ type LayerTypes = PatternLayer | DesignLayer ;
   templateUrl: './builder.component.html',
   styleUrl: './builder.component.scss',
   encapsulation: ViewEncapsulation.None,
+  providers: [
+    LayerHelper
+  ]
 })
 
 export class BuilderComponent implements AfterViewInit{
-  private readonly sceneHelper: SceneHelper = new SceneHelper();
-  private dynamicTexture!: DynamicTexture;
+  public sceneHelper: SceneHelper = new SceneHelper();
   public stage!: Stage2D;
+  public dynamicTexture!: DynamicTexture;
   public currentAction!: MenuActions ;
   public design!: Designs;
-  public designLayers: LayerTypes[] = [];
-  private readonly LayerService = inject(LayerService);
+  public readonly layerHelper = inject(LayerHelper);
+
 
   @ViewChild('threeDCanvas', { static: true }) threeDCanvas!: ElementRef;
   @ViewChild('konvaContainer', { static: true }) konvaContainer!: ElementRef;
@@ -104,86 +103,46 @@ export class BuilderComponent implements AfterViewInit{
   }
 
 
-  applyColor({layer, color}: {layer: Layer, color: string}, type: LayerTypes['type'] = 'layer') {
-    const selectedLayer = this.designLayers.find(l => l.path.id === layer.id && type === l.type);
-    if(!selectedLayer) {
-      return;
-    }
-    console.log(type);
-    switch (type) {
-      case 'layer':
-        this.setColor(selectedLayer.path, color);
-        break;
-      case 'pattern':
-        console.log(selectedLayer);
-        this.drawPattern((selectedLayer as PatternLayer).pattern, color, (selectedLayer as PatternLayer).path)
-        this.stage.layer.draw();
-        this.dynamicTexture.update(false);
-        break;
-    }
-  }
-
-  async createLayer(layer: {id: string, path: string}, fill: string) {
-    const layerObj =   this.stage.createShape('path') as Path;
-    layerObj.setAttrs({
-      id: layer.id,
-      fill,
-      data: layer.path,
-      scaleX: 1,
-      scaleY: 1,
-    });
-    await this.stage.addShape(this.stage.layer, layerObj);
-    return layerObj;
-  }
-
-  async drawPattern(pattern: Path, fill: string, layer: Path ) {
-    await pattern.setAttrs({
-      fill,
-    });
-    const image = await pattern.shape.toImage({
-      x: 0,
-      y: 0,
-      mimeType: 'image/png',
-      width: 805,
-      height: 805,
-      quality: 1,
-      pixelRatio: 1
-    }) as any;
-    await layer.setAttrs({
-      fillPatternImage: image,
-    });
-  }
+  // applyColor({layer, color}: {layer: Layer, color: string}, type: LayerTypes['type'] = 'layer') {
+  //   const selectedLayer = this.designLayers.find(l => l.path.id === layer.id && type === l.type);
+  //   if(!selectedLayer) {
+  //     return;
+  //   }
+  //   console.log(type);
+  //   switch (type) {
+  //     case 'layer':
+  //       this.setColor(selectedLayer.path, color);
+  //       break;
+  //     case 'pattern':
+  //       console.log(selectedLayer);
+  //       this.drawPattern((selectedLayer as PatternLayer).pattern, color, (selectedLayer as PatternLayer).path)
+  //       this.stage.layer.draw();
+  //       this.dynamicTexture.update(false);
+  //       break;
+  //   }
+  // }
 
 
 
-  applyDesign(design: Designs) {
-    if(this.design?.id === design.id) {
-      return;
-    }
-    this.design = design;
-    from(design.layers)
-      .pipe(
-        map((layer: Layer) =>
-          this.LayerService.downloadTemplate(layer.url).pipe(
-            map((path) => ({id: layer.id, path}))
-          )
-        ),
-        toArray(),
-        switchMap((layerApi) =>forkJoin(layerApi)),
-        tap((layers) => {
-          const previousColors = [...this.designLayers.map(({ path }) => path.fill)]
-          this.designLayers = [];
-          layers.forEach(async (layer, index) => {
-            let colour = design.layers[index].color;
-            if(previousColors[index]) {
-              colour = previousColors[index];
-            }
-            const layerInstance = await this.createLayer(layer, colour);
-            this.designLayers.push({ path: layerInstance, type: 'layer' });
-          });
-          this.stage.layer.draw();
-          this.dynamicTexture.update(false);
-        })
-      ).subscribe();
-  }
+  // async drawPattern(pattern: Path, fill: string, layer: Path ) {
+  //   await pattern.setAttrs({
+  //     fill,
+  //   });
+  //   const image = await pattern.shape.toImage({
+  //     x: 0,
+  //     y: 0,
+  //     mimeType: 'image/png',
+  //     width: 805,
+  //     height: 805,
+  //     quality: 1,
+  //     pixelRatio: 1
+  //   }) as any;
+  //   await layer.setAttrs({
+  //     fillPatternImage: image,
+  //   });
+  // }
+
+
+
+
 }
