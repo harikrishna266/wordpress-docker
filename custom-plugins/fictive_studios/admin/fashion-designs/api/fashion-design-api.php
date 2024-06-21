@@ -9,9 +9,18 @@ class FashionDesignAPIAdmin
     {
         global $wpdb;
         $query = "SELECT * FROM " . FICTIVE_TABLE . "fashion_designs";
-        $results = $wpdb->get_results($query);
-        echo json_encode($results);
+        $designs = $wpdb->get_results($query, OBJECT);
+
+        foreach ($designs as $design) {
+            $layers_table = FICTIVE_TABLE . 'design_layers';
+            $layers_query = $wpdb->prepare("SELECT * FROM $layers_table WHERE `design_id` = %d", $design->ID);
+            $layers = $wpdb->get_results($layers_query, OBJECT);
+            $design->layers = $layers;
+        }
+        
+        echo json_encode($designs);
         wp_die();
+        
     }
 
     public function get_design_by_id()
@@ -27,6 +36,13 @@ class FashionDesignAPIAdmin
 
         $query = "SELECT * from $table_name WHERE `ID` = $id";
         $design = $wpdb->get_row($query, OBJECT);
+
+        if ($design) {
+            $layers_table = FICTIVE_TABLE . 'design_layers';
+            $layers_query = $wpdb->prepare("SELECT * FROM $layers_table WHERE `design_id` = %d", $id);
+            $layers = $wpdb->get_results($layers_query, OBJECT);
+            $design->layers = $layers;
+        }
 
         echo json_encode($design);
         wp_die();
