@@ -28,6 +28,7 @@ class AdminBuilder {
         $this->threeDModelCrud();
         $this->model_print_area_CRUD();
         $this->patterns_CRUD();
+        $this->fashion_design_layers_CRUD();
         $this->initWooProductFunctionalities();
     }
 
@@ -117,6 +118,17 @@ class AdminBuilder {
 
         $model_print_areas_api = new FictiveCodes\ModelPrintAreasAPIAdmin();
         $this->loader->add_action( 'admin_post_save_model_print_area_data', $model_print_areas_api, 'save_model_print_area_data' );
+    }
+
+    private function fashion_design_layers_CRUD(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/layers/listing/layers-listing.php';
+        $layers_list = new FictiveCodes\LayersListingAdmin();
+        $this->loader->add_action( 'admin_menu', $layers_list, 'add_submenu' );
+
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/layers/api/layers-api.php';
+        $layersAPI = new FictiveCodes\LayersAPIAdmin();
+        $this->loader->add_action( 'admin_post_save_design_layers_data', $layersAPI, 'save_design_layers_data' );
+        $this->loader->add_action( 'admin_post_edit_design_layers_data', $layersAPI, 'edit_design_layers_data' );
     }
 
     private function dashboard()

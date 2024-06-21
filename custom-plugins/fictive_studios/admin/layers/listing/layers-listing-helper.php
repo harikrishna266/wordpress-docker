@@ -4,15 +4,15 @@ namespace FictiveCodes;
 
 require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 
-class FashionDesignListingHelper extends \WP_List_Table
+class LayersListingHelper extends \WP_List_Table
 {
 
     public function __construct()
     {
         parent::__construct(
             array(
-                'singular' => 'fashion_design',
-                'plural' => 'fashion_designs',
+                'singular' => 'layer',
+                'plural' => 'layers',
                 'ajax' => false
             )
         );
@@ -23,8 +23,9 @@ class FashionDesignListingHelper extends \WP_List_Table
         return array(
             'cb' => '<input type="checkbox"/>',
             'name' => __('Name', 'name'),
-            'no_of_layers' => __('No of Layer', 'design_layer_1'),
-            'view_layers' => __('View Layers', 'view_layers'),
+            'file_url' => __('File', 'file_url'),
+            'color' => __('Color', 'color'),
+            'allow_pattern' => __('Allow Pattern', 'allow_pattern'),
         );
     }
 
@@ -46,46 +47,15 @@ class FashionDesignListingHelper extends \WP_List_Table
         return $output;
     }
 
-    public function column_no_of_layers($item)
-    {
-        global $wpdb;
-
-        if (isset($item['ID'])) {
-            $table_name = FICTIVE_TABLE . 'design_layers';
-            $design_id = intval($item['ID']);
-            $query = $wpdb->prepare(
-                "SELECT COUNT(*) FROM $table_name WHERE design_id = %d",
-                $design_id
-            );
-            $count = $wpdb->get_var($query);
-            return $count;
-        } else {
-            return 0;
-        }
-    }
-
-    public function column_view_layers($item)
-    {
-        $view_page = esc_url(add_query_arg(array('design' => $item['ID']), admin_url('admin.php?page=' . DESIGN_LAYERS_SLUG)));
-        $actions = '<a href="' . $view_page . '"class="dashicons dashicons-visibility"></a>';
-        return $actions;
-    }
-
     private function getEditQueryArguments($item): string
     {
         $edit_params = array(
-            'page' => FASHION_DESIGNS_BUILDER_SLUG,
+            'page' => DESIGN_LAYERS_SLUG,
             'action' => 'edit',
-            'design' => $item['ID']
+            'layer' => $item['ID'],
+            'design' => $item['design_id']
         );
         return add_query_arg($edit_params, admin_url('admin.php'));
-    }
-
-    public function get_sortable_columns()
-    {
-        return array(
-            'name' => array('name', false),
-        );
     }
 
     protected function column_default($item, $column_name)
@@ -93,22 +63,39 @@ class FashionDesignListingHelper extends \WP_List_Table
         return isset($item[$column_name]) ? $item[$column_name] : '';
     }
 
+    protected function column_allow_pattern($item)
+    {
+        if ($item['allow_pattern']) {
+            return __('Yes', 'text_domain');
+        } else {
+            return __('No', 'text_domain');
+        }
+    }
 
     public function prepare_items()
     {
         $columns = $this->get_columns();
-        $sortable = $this->get_sortable_columns();
         $hidden = array();
         $primary = 'name';
-        $this->_column_headers = array($columns, $hidden, $sortable, $primary);
-        $this->items = $this->get_fashion_designs_data();
+        $this->_column_headers = array($columns, $hidden, $primary);
+        $this->items = $this->get_layers_data();
     }
 
-    private function get_fashion_designs_data()
+    public function column_cb($item)
+    {
+        return sprintf(
+            '<input type="checkbox" name="%1$s_ID[]" value="%2$s" />',
+            esc_attr($this->_args['singular']),
+            esc_attr($item['name'])
+        );
+    }
+
+    private function get_layers_data()
     {
         global $wpdb;
-        $table_name = FICTIVE_TABLE . 'fashion_designs';
-        $query = "SELECT * FROM $table_name";
+        $table_name = FICTIVE_TABLE . 'design_layers';
+        $design_id = $_GET['design'];
+        $query = "SELECT * from $table_name WHERE `design_id` = $design_id";
         $results = $wpdb->get_results($query, ARRAY_A);
         return $results;
     }
