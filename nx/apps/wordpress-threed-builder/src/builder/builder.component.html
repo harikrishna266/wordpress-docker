@@ -29,5 +29,5 @@
   </div>
   <app-design-selector *ngIf='currentAction === "designs"'   (designSelected)="applyDesign($event)" ></app-design-selector>
   <app-layer-color-picker *ngIf='currentAction === "layers" && design' [layers]="design.layers" (colourPicked)="applyColor($event)" ></app-layer-color-picker>
-  <app-layer-patterns *ngIf='currentAction === "patterns" && design' [layers]="design.layers" (colourPicked)="applyColor($event)" (patternPicked)="applyPattern($event)"></app-layer-patterns>
+  <app-layer-patterns *ngIf='currentAction === "patterns" && design' [layers]="design.layers" [stage]="stage" (colourPicked)="applyColor($event, 'pattern' )" ></app-layer-patterns>
 </div>

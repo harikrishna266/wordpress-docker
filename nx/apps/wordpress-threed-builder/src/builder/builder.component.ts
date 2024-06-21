@@ -24,7 +24,9 @@ import { LayerService } from '../services/layer.service';
 import { Layer } from './types/layer.type';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
 type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
-type ModelLayer = { path: Path, type: 'layer'} | {path: Path, pattern: Path, type: 'pattern'} ;
+type DesignLayer = { path: Path, type: 'layer'};
+type PatternLayer = { path: Path, pattern: Path, type: 'pattern'};
+type LayerTypes = PatternLayer | DesignLayer ;
 @Component({
   selector: 'app-builder',
   standalone: true,
@@ -42,11 +44,11 @@ type ModelLayer = { path: Path, type: 'layer'} | {path: Path, pattern: Path, typ
 
 export class BuilderComponent implements AfterViewInit{
   private readonly sceneHelper: SceneHelper = new SceneHelper();
-  private stage!: Stage2D;
   private dynamicTexture!: DynamicTexture;
+  public stage!: Stage2D;
   public currentAction!: MenuActions ;
   public design!: Designs;
-  public modelLayers: ModelLayer[] = [];
+  public designLayers: LayerTypes[] = [];
   private readonly LayerService = inject(LayerService);
 
   @ViewChild('threeDCanvas', { static: true }) threeDCanvas!: ElementRef;
@@ -102,10 +104,22 @@ export class BuilderComponent implements AfterViewInit{
   }
 
 
-  applyColor({layer, color}: {layer: Layer, color: string}) {
-    const selectedLayer = this.modelLayers.find(({path}) => layer.id === path.id);
-    if(selectedLayer) {
-      this.setColor(selectedLayer.path, color);
+  applyColor({layer, color}: {layer: Layer, color: string}, type: LayerTypes['type'] = 'layer') {
+    const selectedLayer = this.designLayers.find(l => l.path.id === layer.id && type === l.type);
+    if(!selectedLayer) {
+      return;
+    }
+    console.log(type);
+    switch (type) {
+      case 'layer':
+        this.setColor(selectedLayer.path, color);
+        break;
+      case 'pattern':
+        console.log(selectedLayer);
+        this.drawPattern((selectedLayer as PatternLayer).pattern, color, (selectedLayer as PatternLayer).path)
+        this.stage.layer.draw();
+        this.dynamicTexture.update(false);
+        break;
     }
   }
 
@@ -122,44 +136,25 @@ export class BuilderComponent implements AfterViewInit{
     return layerObj;
   }
 
-  async applyPattern(pattern: {layer: Layer, pattern: string}) {
-    const selectedLayer = this.modelLayers.find(({path}) => pattern.layer.id === path.id);
-    const path = selectedLayer?.path;
-    if(path && selectedLayer) {
-      const patternShape = this.stage.createShape('path');
-      await patternShape.setAttrs({
-        fill: 'red',
-        scaleX: 1,
-        scaleY: 1,
-        data: pattern.pattern
-      });
-      const image = await patternShape.shape.toImage({
-        x: 0,
-        y: 0,
-        mimeType: 'image/png',
-        width: 805,
-        height: 805,
-        quality: 1,
-        pixelRatio: 1
-      }) as any;
-      const basePath = this.stage.createShape('path') as Path;
-      await basePath.setAttrs({
-        x: 0,
-        y: 0,
-        data: selectedLayer.path.data,
-        fill: '',
-        fillPatternImage: image,
-        fillPatternScaleX: .51,
-        fillPatternScaleY: .51,
-        fillPatternRepeat: 'repeat',
-        scaleX: 1,
-        scaleY: 1
-      });
-      await this.stage.addShape(this.stage.layer, basePath);
-      this.stage.layer.draw();
-      this.dynamicTexture.update(false);
-    }
+  async drawPattern(pattern: Path, fill: string, layer: Path ) {
+    await pattern.setAttrs({
+      fill,
+    });
+    const image = await pattern.shape.toImage({
+      x: 0,
+      y: 0,
+      mimeType: 'image/png',
+      width: 805,
+      height: 805,
+      quality: 1,
+      pixelRatio: 1
+    }) as any;
+    await layer.setAttrs({
+      fillPatternImage: image,
+    });
   }
+
+
 
   applyDesign(design: Designs) {
     if(this.design?.id === design.id) {
@@ -176,15 +171,15 @@ export class BuilderComponent implements AfterViewInit{
         toArray(),
         switchMap((layerApi) =>forkJoin(layerApi)),
         tap((layers) => {
-          const previousColors = [...this.modelLayers.map(({ path }) => path.fill)]
-          this.modelLayers = [];
+          const previousColors = [...this.designLayers.map(({ path }) => path.fill)]
+          this.designLayers = [];
           layers.forEach(async (layer, index) => {
             let colour = design.layers[index].color;
             if(previousColors[index]) {
               colour = previousColors[index];
             }
             const layerInstance = await this.createLayer(layer, colour);
-            this.modelLayers.push({ path: layerInstance, type: 'layer' });
+            this.designLayers.push({ path: layerInstance, type: 'layer' });
           });
           this.stage.layer.draw();
           this.dynamicTexture.update(false);

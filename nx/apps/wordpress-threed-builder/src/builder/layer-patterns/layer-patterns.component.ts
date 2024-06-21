@@ -8,6 +8,8 @@ import { Designs } from '../types/design.type';
 import { WordpressService } from '../../services/wordpress.service';
 import { Pattern } from '../types/pattern.type';
 import { LayerService } from '../../services/layer.service';
+import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
+import { Stage2D } from '@brocha-libs/builder-2d';
 type LayerWithSelection = Layer & { selected: boolean};
 
 
@@ -21,6 +23,7 @@ type LayerWithSelection = Layer & { selected: boolean};
 export class LayerPatternsComponent implements OnInit {
   selectedLayer!: Layer;
   @Input() sceneHelper!: SceneHelper;
+  @Input() stage!: Stage2D;
   @Output() patternPicked: EventEmitter<{layer: Layer, pattern: string}> = new EventEmitter();
   @Output() colourPicked: EventEmitter<{layer: Layer, color: string}> = new EventEmitter();
 
@@ -44,6 +47,7 @@ export class LayerPatternsComponent implements OnInit {
     this.layers.map((layer) =>  layer.selected = false);
     layer.selected = true;
     this.selectedLayer = layer;
+    this.createPattern()
   }
 
   ngOnInit() {
@@ -74,5 +78,37 @@ export class LayerPatternsComponent implements OnInit {
         )
         .subscribe()
     }
+  }
+
+  async createPattern() {
+    const selectedLayer = this.layers.find((layer) => layer.selected) as LayerWithSelection;
+     // const selectedLayer = this.designLayers.find(({path}) => pattern.layer.id === path.id);
+    // const path = selectedLayer?.path;
+    // if(path && selectedLayer) {
+    //   const patternPath = this.stage.createShape('path') as Path;
+    //   await patternPath.setAttrs({
+    //     id: 'patternPath',
+    //     scaleX: 1,
+    //     scaleY: 1,
+    //     data: pattern.pattern
+    //   });
+    //   const basePath = this.stage.createShape('path') as Path;
+    //   await basePath.setAttrs({
+    //     id: 'basePath',
+    //     x: 0,
+    //     y: 0,
+    //     data: selectedLayer.path.data,
+    //     fill: '',
+    //     fillPatternScaleX: .51,
+    //     fillPatternScaleY: .51,
+    //     fillPatternRepeat: 'repeat',
+    //     scaleX: 1,
+    //     scaleY: 1
+    //   });
+    //   await this.stage.addShape(this.stage.layer, basePath);
+    //   this.designLayers.push({path: basePath, pattern: patternPath, type: 'pattern',});
+    //   this.stage.layer.draw();
+    //   this.dynamicTexture.update(false);
+    // }
   }
 }
