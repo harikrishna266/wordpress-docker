@@ -24,7 +24,7 @@ import { LayerService } from '../services/layer.service';
 import { Layer } from './types/layer.type';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
 type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
-
+type ModelLayer = { path: Path, type: 'layer'} | {path: Path, pattern: Path, type: 'pattern'} ;
 @Component({
   selector: 'app-builder',
   standalone: true,
@@ -46,8 +46,7 @@ export class BuilderComponent implements AfterViewInit{
   private dynamicTexture!: DynamicTexture;
   public currentAction!: MenuActions ;
   public design!: Designs;
-  public layers: Path[] = [];
-
+  public modelLayers: ModelLayer[] = [];
   private readonly LayerService = inject(LayerService);
 
   @ViewChild('threeDCanvas', { static: true }) threeDCanvas!: ElementRef;
@@ -104,9 +103,9 @@ export class BuilderComponent implements AfterViewInit{
 
 
   applyColor({layer, color}: {layer: Layer, color: string}) {
-    const selectedLayer = this.layers.find((layerPath: Path) => layer.id === layerPath.id);
+    const selectedLayer = this.modelLayers.find(({path}) => layer.id === path.id);
     if(selectedLayer) {
-      this.setColor(selectedLayer, color);
+      this.setColor(selectedLayer.path, color);
     }
   }
 
@@ -121,6 +120,45 @@ export class BuilderComponent implements AfterViewInit{
     });
     await this.stage.addShape(this.stage.layer, layerObj);
     return layerObj;
+  }
+
+  async applyPattern(pattern: {layer: Layer, pattern: string}) {
+    const selectedLayer = this.modelLayers.find(({path}) => pattern.layer.id === path.id);
+    const path = selectedLayer?.path;
+    if(path && selectedLayer) {
+      const patternShape = this.stage.createShape('path');
+      await patternShape.setAttrs({
+        fill: 'red',
+        scaleX: 1,
+        scaleY: 1,
+        data: pattern.pattern
+      });
+      const image = await patternShape.shape.toImage({
+        x: 0,
+        y: 0,
+        mimeType: 'image/png',
+        width: 805,
+        height: 805,
+        quality: 1,
+        pixelRatio: 1
+      }) as any;
+      const basePath = this.stage.createShape('path') as Path;
+      await basePath.setAttrs({
+        x: 0,
+        y: 0,
+        data: selectedLayer.path.data,
+        fill: '',
+        fillPatternImage: image,
+        fillPatternScaleX: .51,
+        fillPatternScaleY: .51,
+        fillPatternRepeat: 'repeat',
+        scaleX: 1,
+        scaleY: 1
+      });
+      await this.stage.addShape(this.stage.layer, basePath);
+      this.stage.layer.draw();
+      this.dynamicTexture.update(false);
+    }
   }
 
   applyDesign(design: Designs) {
@@ -138,15 +176,15 @@ export class BuilderComponent implements AfterViewInit{
         toArray(),
         switchMap((layerApi) =>forkJoin(layerApi)),
         tap((layers) => {
-          const previousColours = this.layers.map((layer) => layer.fill);
-          this.layers = [];
+          const previousColors = [...this.modelLayers.map(({ path }) => path.fill)]
+          this.modelLayers = [];
           layers.forEach(async (layer, index) => {
             let colour = design.layers[index].color;
-            if(previousColours[index]) {
-              colour = previousColours[index];
+            if(previousColors[index]) {
+              colour = previousColors[index];
             }
             const layerInstance = await this.createLayer(layer, colour);
-            this.layers.push(layerInstance);
+            this.modelLayers.push({ path: layerInstance, type: 'layer' });
           });
           this.stage.layer.draw();
           this.dynamicTexture.update(false);
