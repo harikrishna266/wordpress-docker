@@ -1,19 +1,33 @@
-<div  class='lg:left-0 lg:top-0  lg:w-1/4 lg:h-full bottom-0 h-1/3 w-full absolute  bg-gray-800 text-white p-4 slide-in-left flex flex-col'>
-  <div class="inline-flex rounded-md shadow-sm " role="group">
+<div  class='lg:left-0 lg:top-0  lg:w-1/4 lg:h-full bottom-0 h-1/2 w-full absolute  bg-gray-800 text-white p-4 slide-in-left flex flex-col'>
+  <div class="inline-flex my-1 rounded-md shadow-sm " role="group">
     <button type="button"
             *ngFor="let layer of layerHelper.designLayers; first as first; last as last;"
-            [ngClass]="{
+            (click)="selectLayer(layer)"
+             [ngClass]="{
                 'rounded-s-lg': first,
-                'rounded-e-lg': last,
+                'rounded-e-lg': last
                }"
-            class="px-2 py-2 bg text-xs font-medium text-gray-900  border border-gray-200 rounded-s-lg hover:text-blue-700   focus:ring-2">
+            [style.border-color]="layer.path.fill"
+            class="px-2 py-2 bg text-xs border-2 font-medium text-gray-900  border-gray-200 rounded-s-lg hover:text-blue-700   focus:ring-2">
       {{layer.layer.name}}
     </button>
   </div>
-<!--  <div class="flex-1  my-2 flex flex-row flex-wrap overflow-auto" *ngIf="selectedLayer">-->
-<!--    <div class="border-2 border-gray-600 w-10 h-10 flex justify-center items-center" *ngFor="let color of colours" (click)="setColor(color)" >-->
-<!--      <div [style.background]="color" class="w-6 h-6 rounded-2xl"></div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="grid grid-cols-4 gap-4 overflow-auto cursor-pointer" *ngIf="!layerHelper.getPatternForLayer(selectedLayer)">
+    <div *ngFor='let pattern of patterns' (click)="createPattern(pattern)"   >
+      <img
+        alt='gallery'
+        class='block h-full w-full rounded-lg object-cover object-center'
+        src='https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp' />
+    </div>
+  </div>
+  <div  *ngIf="layerHelper.getPatternForLayer(selectedLayer)">
+      <app-layer-pattern-setting ></app-layer-pattern-setting>
+  </div>
+
+  <!--  <div class="flex-1  my-2 flex flex-row flex-wrap overflow-auto" *ngIf="selectedLayer">-->
+  <!--    <div class="border-2 border-gray-600 w-10 h-10 flex justify-center items-center" *ngFor="let color of colours" (click)="setColor(color)" >-->
+  <!--      <div [style.background]="color" class="w-6 h-6 rounded-2xl cursor-pointer"></div>-->
+  <!--    </div>-->
+  <!--  </div>-->
 </div>
 
