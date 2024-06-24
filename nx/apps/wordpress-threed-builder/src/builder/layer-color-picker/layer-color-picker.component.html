@@ -6,8 +6,8 @@
                [ngClass]="{
                 'rounded-s-lg': first,
                 'rounded-e-lg': last,
-                'bg-amber-600': layer?.layer?.id === selectedLayer?.layer?.id,
-                'bg-white': layer?.layer?.id !== selectedLayer?.layer?.id,
+                'bg-amber-600':  selectedLayer && layer?.layer?.id === selectedLayer.layer.id,
+                'bg-white':   selectedLayer &&  layer?.layer?.id !== selectedLayer.layer.id,
                }"
                [style.border-color]="layer.path.fill"
                class="px-2 py-2 bg text-xs border-2 font-medium text-gray-900  border-gray-200 rounded-s-lg hover:text-blue-700   focus:ring-2">

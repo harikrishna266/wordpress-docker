@@ -196,7 +196,12 @@ export const sampleData = {
     {
       "id": "2",
       "name": "cross-desgin",
-      url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/tiger/parrterns/text/PARRTERN-2.txt',
+      url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/tiger/parrterns/text/PARRTERN-3.txt',
+    },
+    {
+      "id": "2",
+      "name": "cross-desgin",
+      url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/tiger/parrterns/text/PARRTERN-4.txt',
     }
   ]
 }

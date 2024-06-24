@@ -1,9 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PatternLayer } from '../../types/three-d-builder-layer.type';
 import { colors } from '../../colors';
 import { Stage2D } from '@brocha-libs/builder-2d';
 import { DynamicTexture } from '@brocha-libs/builder-3d';
+import { tap } from 'rxjs';
+import { Pattern } from '../../types/pattern.type';
+import { WordpressService } from '../../../services/wordpress.service';
 
 @Component({
   selector: 'app-layer-pattern-setting',
@@ -18,12 +21,33 @@ export class LayerPatternSettingComponent {
   @Input() stage!: Stage2D;
   @Input() dynamicTexture!: DynamicTexture;
   protected readonly colours = colors;
+  private readonly wordpressService = inject(WordpressService);
+
+  patterns: Pattern[] = [];
 
   async setColor(color: string) {
     switch (this.tabSelected) {
       case 'color':
         await this.updatePatternColor(color);
+        break;
+      case 'pattern':
+        await this.updateColor(color);
+        break;
     }
+  }
+
+  ngOnInit() {
+    this.wordpressService.getAllPatterns()
+      .pipe(
+        tap((patterns: Pattern[]) => this.patterns = patterns)
+      )
+      .subscribe()
+  }
+
+  async updateColor(color: string) {
+    await this.patternDetails.path.setAttrs({...this.patternDetails.path.serialize(), fill: color});
+    await this.stage.layer.draw();
+    this.dynamicTexture.update(false);
   }
 
   async updatePatternColor(color: string) {

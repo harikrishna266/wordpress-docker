@@ -77,9 +77,9 @@ export class LayerPatternsComponent implements OnInit {
             fillPatternImage: image,
           });
           await this.stage.addShape(this.stage.layer, patternBasePath);
+          this.layerHelper.addPattern(patternBasePath, pattern, this.designLayer )
           this.stage.layer.draw();
           this.dynamicTexture.update(false);
-          this.layerHelper.addPattern(patternBasePath, pattern, this.designLayer )
         })
       ).subscribe()
   }

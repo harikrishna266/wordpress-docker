@@ -15,6 +15,10 @@ export class LayerHelper {
     };
     const index = this.designLayers.findIndex((layer) => layer.layer.id === selectedLayer.layer.id);
     this.designLayers = [...this.designLayers.slice(0, index), patternLayer, ...this.designLayers.slice(index)];
+    this.designLayers.map((layer, index: number) => {
+      layer.path.zIndex = index;
+    })
+
   }
 
   getPatternForLayer(patternId: string) {
