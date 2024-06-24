@@ -1,7 +1,7 @@
 <div  class='lg:left-0 lg:top-0  lg:w-1/4 lg:h-full bottom-0 h-1/3 w-full absolute  bg-gray-800 text-white p-4 slide-in-left flex flex-col'>
     <div class="inline-flex rounded-md shadow-sm " role="group">
        <button type="button"
-               *ngFor="let layer of layerHelper.designLayers; first as first; last as last;"
+               *ngFor="let layer of layerHelper.designLayers| filterByDesignLayer; first as first; last as last;"
                (click)="selectLayer(layer)"
                [ngClass]="{
                 'rounded-s-lg': first,

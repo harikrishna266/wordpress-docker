@@ -46,6 +46,7 @@ export class BuilderComponent implements AfterViewInit{
   public stage!: Stage2D;
   public dynamicTexture!: DynamicTexture;
   public currentAction!: MenuActions ;
+  public menuActions: MenuActions[] = ['designs','layers', 'patterns' ];
   public design!: Designs;
   public readonly layerHelper = inject(LayerHelper);
 
@@ -53,7 +54,7 @@ export class BuilderComponent implements AfterViewInit{
   @ViewChild('threeDCanvas', { static: true }) threeDCanvas!: ElementRef;
   @ViewChild('konvaContainer', { static: true }) konvaContainer!: ElementRef;
 
-  setCurrentAction(action: any) {
+  setCurrentAction(action: MenuActions) {
     if(this.currentAction === action) {
       this.currentAction = 'none';
       return;
@@ -65,7 +66,7 @@ export class BuilderComponent implements AfterViewInit{
   async ngAfterViewInit() {
     this.stage = new Stage2D();
     this.stage.initializeStage(this.konvaContainer.nativeElement, 2048, 2048);
-    this.stage.isEditor = true;
+    this.stage.isEditor = false;
     await this.threeDBuilder();
   }
 
@@ -93,56 +94,5 @@ export class BuilderComponent implements AfterViewInit{
       }
     });
   }
-
-  async setColor(selectedLayer: Path, color: string) {
-    await selectedLayer.setAttrs({
-      fill: color
-    });
-    this.stage.layer.draw();
-    this.dynamicTexture.update(false);
-  }
-
-
-  // applyColor({layer, color}: {layer: Layer, color: string}, type: LayerTypes['type'] = 'layer') {
-  //   const selectedLayer = this.designLayers.find(l => l.path.id === layer.id && type === l.type);
-  //   if(!selectedLayer) {
-  //     return;
-  //   }
-  //   console.log(type);
-  //   switch (type) {
-  //     case 'layer':
-  //       this.setColor(selectedLayer.path, color);
-  //       break;
-  //     case 'pattern':
-  //       console.log(selectedLayer);
-  //       this.drawPattern((selectedLayer as PatternLayer).pattern, color, (selectedLayer as PatternLayer).path)
-  //       this.stage.layer.draw();
-  //       this.dynamicTexture.update(false);
-  //       break;
-  //   }
-  // }
-
-
-
-  // async drawPattern(pattern: Path, fill: string, layer: Path ) {
-  //   await pattern.setAttrs({
-  //     fill,
-  //   });
-  //   const image = await pattern.shape.toImage({
-  //     x: 0,
-  //     y: 0,
-  //     mimeType: 'image/png',
-  //     width: 805,
-  //     height: 805,
-  //     quality: 1,
-  //     pixelRatio: 1
-  //   }) as any;
-  //   await layer.setAttrs({
-  //     fillPatternImage: image,
-  //   });
-  // }
-
-
-
 
 }

@@ -2,7 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WordpressService } from '../../services/wordpress.service';
 import { LayerHelper } from '../layer.helper';
-import { LayerTypes } from '../types/three-d-builder-layer.type';
+import { DesignLayer, LayerTypes, PatternLayer } from '../types/three-d-builder-layer.type';
 import { tap } from 'rxjs';
 import { Pattern } from '../types/pattern.type';
 import { LayerPatternSettingComponent } from './layer-pattern-setting/layer-pattern-setting.component';
@@ -10,11 +10,16 @@ import { Stage2D } from '@brocha-libs/builder-2d';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
 import { DynamicTexture } from '@brocha-libs/builder-3d';
 import { LayerAPIService } from '../../services/layer.service';
+import { DesignLayerFilterPipe } from '../pipes/design-layer-filter.pipe';
+import { PipesModule } from '../pipes/pipes.module';
 
 @Component({
   selector: 'app-layer-patterns',
   standalone: true,
-  imports: [CommonModule, LayerPatternSettingComponent],
+  imports: [CommonModule, LayerPatternSettingComponent, PipesModule],
+  providers: [
+    DesignLayerFilterPipe
+  ],
   templateUrl: './layer-patterns.component.html',
   styleUrl: './layer-patterns.component.css',
 })
@@ -22,13 +27,16 @@ export class LayerPatternsComponent implements OnInit {
   public readonly layerHelper = inject(LayerHelper);
   private readonly wordpressService = inject(WordpressService);
   private readonly layerService = inject(LayerAPIService);
-
   patterns: Pattern[] = [];
-  selectedLayer!: LayerTypes;
+  designLayer!: DesignLayer;
+  selectedPattern: false | PatternLayer = false;
   @Input() stage!: Stage2D;
   @Input() dynamicTexture!: DynamicTexture;
   selectLayer(layer: LayerTypes) {
-    this.selectedLayer = layer;
+    if(layer.type === 'layer') {
+      this.designLayer = layer;
+    }
+    this.selectedPattern = this.layerHelper.getPatternForLayer(layer.layer.id);
   }
 
   ngOnInit() {
@@ -48,7 +56,7 @@ export class LayerPatternsComponent implements OnInit {
             id: pattern.id,
             scaleX: 1,
             scaleY: 1,
-            data: patternSection
+            data: patternSection,
           });
           const image = await pattern.shape.toImage({
             x: 0,
@@ -61,9 +69,9 @@ export class LayerPatternsComponent implements OnInit {
           }) as any;
           const patternBasePath =   this.stage.createShape('path') as Path;
           patternBasePath.setAttrs({
-            id: this.selectedLayer.layer.id,
+            id: this.designLayer.layer.id,
             fill: '',
-            data: this.selectedLayer.path.data,
+            data: this.designLayer.path.data,
             scaleX: 1,
             scaleY: 1,
             fillPatternImage: image,
@@ -71,6 +79,7 @@ export class LayerPatternsComponent implements OnInit {
           await this.stage.addShape(this.stage.layer, patternBasePath);
           this.stage.layer.draw();
           this.dynamicTexture.update(false);
+          this.layerHelper.addPattern(patternBasePath, pattern, this.designLayer )
         })
       ).subscribe()
   }

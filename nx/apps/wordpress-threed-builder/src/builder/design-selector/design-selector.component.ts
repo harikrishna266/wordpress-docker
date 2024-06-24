@@ -18,6 +18,7 @@ import { Layer } from '../types/layer.type';
 import { LayerAPIService } from '../../services/layer.service';
 import { LayerHelper } from '../layer.helper';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @Component({
@@ -27,7 +28,6 @@ import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
   styleUrl: './design-selector.component.scss',
   templateUrl: './design-selector.component.html',
   encapsulation: ViewEncapsulation.None,
-  providers: []
 })
 export class DesignSelectorComponent implements OnInit{
   @Input() sceneHelper!: SceneHelper;

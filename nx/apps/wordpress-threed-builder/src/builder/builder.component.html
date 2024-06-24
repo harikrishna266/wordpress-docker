@@ -7,7 +7,7 @@
             'bg-yellow-900 text-white': currentAction === action,
           }"
            (click)='setCurrentAction(action)'
-           *ngFor="let action of ['designs','layers', 'patterns' ]; first as first; last as last">
+           *ngFor="let action of menuActions; first as first; last as last">
         <p class="text-sm lg:text-xl font-semibold text-center">{{action}}</p>
        </div>
     </div>

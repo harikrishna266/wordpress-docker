@@ -1,7 +1,7 @@
-<div  class='lg:left-0 lg:top-0  lg:w-1/4 lg:h-full bottom-0 h-1/2 w-full absolute  bg-gray-800 text-white p-4 slide-in-left flex flex-col'>
-  <div class="inline-flex my-1 rounded-md shadow-sm " role="group">
+<div  class='lg:left-0 lg:top-0  lg:w-1/4 lg:h-full bottom-0 h-1/2 w-full absolute  bg-gray-800 text-white p-4 slide-in-left flex flex-col overflow-hidden'>
+  <div class="inline-flex my-1 rounded-md shadow-sm " role="group"  *ngIf="!selectedPattern" >
     <button type="button"
-            *ngFor="let layer of layerHelper.designLayers; first as first; last as last;"
+            *ngFor="let layer of layerHelper.designLayers| filterByDesignLayer; first as first; last as last;"
             (click)="selectLayer(layer)"
              [ngClass]="{
                 'rounded-s-lg': first,
@@ -12,7 +12,7 @@
       {{layer.layer.name}}
     </button>
   </div>
-  <div class="grid grid-cols-4 gap-4 overflow-auto cursor-pointer" *ngIf="!layerHelper.getPatternForLayer(selectedLayer)">
+  <div class="grid grid-cols-4 gap-4 overflow-auto cursor-pointer" *ngIf="!selectedPattern" >
     <div *ngFor='let pattern of patterns' (click)="createPattern(pattern)"   >
       <img
         alt='gallery'
@@ -20,14 +20,9 @@
         src='https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp' />
     </div>
   </div>
-  <div  *ngIf="layerHelper.getPatternForLayer(selectedLayer)">
-      <app-layer-pattern-setting ></app-layer-pattern-setting>
-  </div>
-
-  <!--  <div class="flex-1  my-2 flex flex-row flex-wrap overflow-auto" *ngIf="selectedLayer">-->
-  <!--    <div class="border-2 border-gray-600 w-10 h-10 flex justify-center items-center" *ngFor="let color of colours" (click)="setColor(color)" >-->
-  <!--      <div [style.background]="color" class="w-6 h-6 rounded-2xl cursor-pointer"></div>-->
-  <!--    </div>-->
-  <!--  </div>-->
+    <app-layer-pattern-setting
+      *ngIf="selectedPattern"
+      [stage]="stage" [dynamicTexture]="this.dynamicTexture"
+      [patternDetails]="selectedPattern" ></app-layer-pattern-setting>
 </div>
 
