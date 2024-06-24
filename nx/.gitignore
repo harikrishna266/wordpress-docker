@@ -5,6 +5,8 @@ dist
 tmp
 /out-tsc
 
+/nginx/certs/*
+
 # dependencies
 node_modules
 apps/fictivecode/src/public/wordpress-scripts

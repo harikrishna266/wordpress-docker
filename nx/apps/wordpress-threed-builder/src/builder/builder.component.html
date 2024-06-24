@@ -1,67 +1,30 @@
-<div class='h-screen w-screen text-left text-white font-montserrat bg-gray-900 flex'>
-  <div class='bg-gray w-28 h-full flex flex-col items-center justify-start box-border space-y-10'>
-    <div class='bg-gray w-28 h-full flex flex-col box-border space-y-10' id="main-menu"  >
-      <ul class='w-full flex-col space-y-10 mt-20'  >
-        <li
-          class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'
-        >
-          <img src="https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/icons/svg/templates.svg" width="40" >
-          <span class='mt-2'>Templates</span>
-        </li>
-        <li
-          class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'>
-          <img src="https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/icons/svg/elements.svg" width="40" >
-          <span class='mt-2'>Elements</span>
-        </li>
-        <li
-          class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'>
-          <img src="https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/icons/svg/text.svg" width="40">
-          <span class='mt-2'>Text</span>
-        </li>
-        <li
-          class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'>
-          <img src="https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/icons/svg/image.svg" width="40">
-          <span class='mt-2'>Image</span>
-        </li>
-        <li
-          class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'>
-          <img src="https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/icons/svg/my-design.svg" width="40">
-          <span class='mt-2'>My Designs</span>
-        </li>
-        <li
-          class='h-24 cursor-pointer hover:bg-gray-600 flex flex-col items-center justify-center text-gray-400 fill-gray-400'>
-          <img src="https://fictive-codes.s3.ap-southeast-2.amazonaws.com/public/icons/svg/my-design.svg" width="40">
-          <span class='mt-2'>Patterns</span>
-        </li>
-      </ul>
-    </div>
-    <div class='flex items-center justify-center rounded-md p-4 text-gray-400'  >
-
+<div class='relative w-screen h-screen  flex flex-col bg-white'>
+  <div class='fixed w-full  flex flex-row justify-center p-3'>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="border border-gray-300 rounded-lg p-2 lg:p-2 bg-white shadow-md cursor-pointer"
+          [ngClass]="{
+            'bg-white': currentAction !== action,
+            'bg-yellow-900 text-white': currentAction === action,
+          }"
+           (click)='setCurrentAction(action)'
+           *ngFor="let action of menuActions; first as first; last as last">
+        <p class="text-sm lg:text-xl font-semibold text-center">{{action}}</p>
+       </div>
     </div>
   </div>
-  <div class='w-2/12 h-full'>
-    <ul>
-      <li *ngFor="let design of designs" (click)="loadDesign(design)" >
-        {{design.name}}
-      </li>
-    </ul>
+  <div class='flex-1 bg-green-200'>
+    <div
+      #konvaContainer
+      id='konva-container'
+      style='width: 2048px; height: 2048px; display: none'
+    ></div>
+    <canvas
+      #threeDCanvas
+      id='renderer-canvas'
+      style='height: 100%; width: 100%; padding: 0px'
+    ></canvas>
   </div>
-  <div class='flex-1 bg-white'>
-    <div class='flex-1 flex flex-col h-full'>
-      <div class='flex-1 relative'>
-        <div
-          id='konva-container'
-          #konvacontainer
-          style='width: 2048px; height: 2048px; display: none'
-        ></div>
-        <canvas
-          #rendererCanvas
-          id='renderer-canvas'
-          style='height: 100%; width: 100%; padding: 0px'
-        ></canvas>
-      </div>
-    </div>
-  </div>
+  <app-design-selector *ngIf='currentAction === "designs"' [sceneHelper]="sceneHelper" [stage]="stage"  [dynamicTexture]="this.dynamicTexture" ></app-design-selector>
+  <app-layer-color-picker *ngIf='currentAction === "layers" && !!layerHelper.designLayers'  [stage]="stage" [dynamicTexture]="this.dynamicTexture"  ></app-layer-color-picker>
+  <app-layer-patterns *ngIf='currentAction === "patterns"'  [stage]="stage" [dynamicTexture]="this.dynamicTexture"></app-layer-patterns>
 </div>
-
-

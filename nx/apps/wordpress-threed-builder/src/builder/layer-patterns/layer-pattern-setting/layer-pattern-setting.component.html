@@ -1,0 +1,39 @@
+<div class="flex flex-col  overflow-hidden h-full">
+  <h2 class='lg:text-2xl sm:text-sm mb-4 text-center'>{{ patternDetails.layer.name }}</h2>
+  <ul class="flex flex-row ">
+    <li class="px-3 y-1 border-b-2 bg-black border-black cursor-pointer" (click)="tabSelected = 'color'"
+    [ngClass]="{
+      'border-black-50': tabSelected === 'color',
+      'border-black': tabSelected !== 'color'
+    }"
+    >Color</li>
+    <li class="px-3 y-1 border-b-2 bg-black border-black cursor-pointer" (click)="tabSelected = 'pattern-color'"
+    [ngClass]="{
+      'border-black-50': tabSelected === 'pattern-color',
+      'border-black': tabSelected !== 'pattern-color'
+    }"
+    >Pattern color</li>
+    <li class="px-3 y-1 border-b-2 bg-black border-black cursor-pointer" (click)="tabSelected = 'pattern'"
+        [ngClass]="{
+      'border-black-50': tabSelected === 'pattern',
+      'border-black': tabSelected !== 'pattern'
+    }"
+    >Patterns</li>
+  </ul>
+  <div class="flex-1  my-2 flex flex-row flex-wrap overflow-auto"  *ngIf="tabSelected === 'color' || tabSelected === 'pattern-color' " >
+    <div class="border-2 border-gray-600 w-10 h-10 flex justify-center items-center" *ngFor="let color of colours" (click)="setColor(color)" >
+      <div [style.background]="color" class="w-6 h-6 rounded-2xl cursor-pointer"></div>
+    </div>
+  </div>
+
+  <div class="flex-1  my-2 flex flex-row flex-wrap overflow-auto" *ngIf="tabSelected === 'pattern'" >
+    <div *ngFor='let pattern of patterns'  class=" border-gray-600  flex justify-center items-center"   >
+      <img
+        alt='gallery'
+        class='block h-full w-full rounded-lg object-cover object-center'
+        src='https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp' />
+    </div>
+  </div>
+</div>
+
+

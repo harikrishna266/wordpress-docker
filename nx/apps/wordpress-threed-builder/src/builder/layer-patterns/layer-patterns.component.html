@@ -1,0 +1,28 @@
+<div  class='lg:left-0 lg:top-0  lg:w-1/4 lg:h-full bottom-0 h-1/2 w-full absolute  bg-gray-800 text-white p-4 slide-in-left flex flex-col overflow-hidden'>
+  <div class="inline-flex my-1 rounded-md shadow-sm " role="group"  *ngIf="!selectedPattern" >
+    <button type="button"
+            *ngFor="let layer of layerHelper.designLayers| filterByDesignLayer; first as first; last as last;"
+            (click)="selectLayer(layer)"
+             [ngClass]="{
+                'rounded-s-lg': first,
+                'rounded-e-lg': last
+               }"
+            [style.border-color]="layer.path.fill"
+            class="px-2 py-2 bg text-xs border-2 font-medium text-gray-900  border-gray-200 rounded-s-lg hover:text-blue-700   focus:ring-2">
+      {{layer.layer.name}}
+    </button>
+  </div>
+  <div class="grid grid-cols-4 gap-4 overflow-auto cursor-pointer" *ngIf="!selectedPattern" >
+    <div *ngFor='let pattern of patterns' (click)="createPattern(pattern)"   >
+      <img
+        alt='gallery'
+        class='block h-full w-full rounded-lg object-cover object-center'
+        src='https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp' />
+    </div>
+  </div>
+    <app-layer-pattern-setting
+      *ngIf="selectedPattern"
+      [stage]="stage" [dynamicTexture]="this.dynamicTexture"
+      [patternDetails]="selectedPattern" ></app-layer-pattern-setting>
+</div>
+

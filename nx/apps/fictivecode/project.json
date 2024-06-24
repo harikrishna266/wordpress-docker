@@ -9,14 +9,16 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "fictivecode:build"
+        "buildTarget": "fictivecode:build",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {
           "buildTarget": "fictivecode:build:development"
         },
         "production": {
-          "buildTarget": "fictivecode:build:production"
+          "buildTarget": "fictivecode:build:production",
+          "generatePackageJson": true
         }
       }
     },
