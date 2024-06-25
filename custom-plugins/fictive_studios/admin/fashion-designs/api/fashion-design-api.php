@@ -9,9 +9,18 @@ class FashionDesignAPIAdmin
     {
         global $wpdb;
         $query = "SELECT * FROM " . FICTIVE_TABLE . "fashion_designs";
-        $results = $wpdb->get_results($query);
-        echo json_encode($results);
+        $designs = $wpdb->get_results($query, OBJECT);
+
+        foreach ($designs as $design) {
+            $layers_table = FICTIVE_TABLE . 'design_layers';
+            $layers_query = $wpdb->prepare("SELECT * FROM $layers_table WHERE `design_id` = %d", $design->ID);
+            $layers = $wpdb->get_results($layers_query, OBJECT);
+            $design->layers = $layers;
+        }
+        
+        echo json_encode($designs);
         wp_die();
+        
     }
 
     public function get_design_by_id()
@@ -27,6 +36,13 @@ class FashionDesignAPIAdmin
 
         $query = "SELECT * from $table_name WHERE `ID` = $id";
         $design = $wpdb->get_row($query, OBJECT);
+
+        if ($design) {
+            $layers_table = FICTIVE_TABLE . 'design_layers';
+            $layers_query = $wpdb->prepare("SELECT * FROM $layers_table WHERE `design_id` = %d", $id);
+            $layers = $wpdb->get_results($layers_query, OBJECT);
+            $design->layers = $layers;
+        }
 
         echo json_encode($design);
         wp_die();
@@ -44,12 +60,6 @@ class FashionDesignAPIAdmin
             'model_id' => $model_id,
             'user' => get_current_user_id()
         );
-
-        for ($i = 1; $i <= 5; $i++) {
-            $insert_data['design_layer_' . $i . '_name'] = isset($_POST['fashion_design_layer_' . $i . '_name']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_name']) : '';
-            $insert_data['design_layer_' . $i . '_link'] = isset($_POST['fashion_design_layer_' . $i . '_link']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_link']) : '';
-            $insert_data['design_layer_' . $i . '_color'] = isset($_POST['fashion_design_layer_' . $i . '_color']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_color']) : '';
-        }
 
         $wpdb->insert($model_table, $insert_data);
 
@@ -85,12 +95,6 @@ class FashionDesignAPIAdmin
             'model_id' => $model_id,
         );
 
-        for ($i = 1; $i <= 5; $i++) {
-            $insert_data['design_layer_' . $i . '_name'] = isset($_POST['fashion_design_layer_' . $i . '_name']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_name']) : '';
-            $insert_data['design_layer_' . $i . '_link'] = isset($_POST['fashion_design_layer_' . $i . '_link']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_link']) : '';
-            $insert_data['design_layer_' . $i . '_color'] = isset($_POST['fashion_design_layer_' . $i . '_color']) ? sanitize_text_field($_POST['fashion_design_layer_' . $i . '_color']) : '';
-        }
-
         $wpdb->update(
             $table_name,
             $insert_data,
@@ -98,11 +102,6 @@ class FashionDesignAPIAdmin
             array(
                 '%s',
                 '%d',
-                '%s',
-                '%s',
-                '%s',
-                '%s',
-                '%s'
             ),
             array('%d')
         );

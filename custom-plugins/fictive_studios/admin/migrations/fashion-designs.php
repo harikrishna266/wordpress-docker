@@ -11,25 +11,6 @@ function create_fashion_designs_tables()
         name text NOT NULL,
         model_id mediumint(9) NOT NULL,
         user int NOT NULL,
-        design_layer_1_name text NOT NULL,
-        design_layer_1_link text NOT NULL,
-        design_layer_1_color text NOT NULL,
-
-        design_layer_2_name text NOT NULL,
-        design_layer_2_link text NOT NULL,
-        design_layer_2_color text NOT NULL,
-
-        design_layer_3_name text NOT NULL,
-        design_layer_3_link text NOT NULL,
-        design_layer_3_color text NOT NULL,
-
-        design_layer_4_name text NOT NULL,
-        design_layer_4_link text NOT NULL,
-        design_layer_4_color text NOT NULL,
-
-        design_layer_5_name text NOT NULL,
-        design_layer_5_link text NOT NULL,
-        design_layer_5_color text NOT NULL,
         PRIMARY KEY  (ID),
         FOREIGN KEY (model_id) REFERENCES $models_table(ID)
     ) $charset_collate;";
