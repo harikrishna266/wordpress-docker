@@ -23,7 +23,7 @@ class FashionDesignListingHelper extends \WP_List_Table
         return array(
             'cb' => '<input type="checkbox"/>',
             'name' => __('Name', 'name'),
-            'no_of_layers' => __('No of Layer', 'design_layer_1'),
+            'no_of_layers' => __('No of Layer', 'no_of_layers'),
             'view_layers' => __('View Layers', 'view_layers'),
         );
     }
