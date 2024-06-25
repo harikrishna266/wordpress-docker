@@ -18,7 +18,6 @@ import { Layer } from '../types/layer.type';
 import { LayerAPIService } from '../../services/layer.service';
 import { LayerHelper } from '../layer.helper';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
-import { PipesModule } from '../pipes/pipes.module';
 
 
 @Component({

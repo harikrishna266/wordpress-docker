@@ -7,6 +7,7 @@ import { DynamicTexture } from '@brocha-libs/builder-3d';
 import { tap } from 'rxjs';
 import { Pattern } from '../../types/pattern.type';
 import { WordpressService } from '../../../services/wordpress.service';
+import { LayerHelper } from '../../layer.helper';
 
 @Component({
   selector: 'app-layer-pattern-setting',
@@ -22,15 +23,17 @@ export class LayerPatternSettingComponent {
   @Input() dynamicTexture!: DynamicTexture;
   protected readonly colours = colors;
   private readonly wordpressService = inject(WordpressService);
+  private readonly layerHelper = inject(LayerHelper);
 
   patterns: Pattern[] = [];
 
   async setColor(color: string) {
+    console.log(this.tabSelected);
     switch (this.tabSelected) {
-      case 'color':
+      case 'pattern-color':
         await this.updatePatternColor(color);
         break;
-      case 'pattern':
+      case 'color':
         await this.updateColor(color);
         break;
     }
@@ -45,12 +48,16 @@ export class LayerPatternSettingComponent {
   }
 
   async updateColor(color: string) {
-    await this.patternDetails.path.setAttrs({...this.patternDetails.path.serialize(), fill: color});
+    const layer = this.layerHelper.designLayers.find((layer) => layer.type === 'layer' && layer.path.id === this.patternDetails.path.id)
+    if(layer) {
+      layer.path.setAttrs({ ...layer.path.serialize(), fill: color });
+    }
     await this.stage.layer.draw();
     this.dynamicTexture.update(false);
   }
 
   async updatePatternColor(color: string) {
+    console.log('asd');
     this.patternDetails.pattern.setAttrs({fill: color})
     const image = await this.patternDetails.pattern.shape.toImage({
       x: 0,

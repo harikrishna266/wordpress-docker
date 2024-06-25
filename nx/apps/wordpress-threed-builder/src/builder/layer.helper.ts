@@ -14,16 +14,14 @@ export class LayerHelper {
       layer: selectedLayer.layer,  path, type: 'pattern', pattern,
     };
     const index = this.designLayers.findIndex((layer) => layer.layer.id === selectedLayer.layer.id);
-    this.designLayers = [...this.designLayers.slice(0, index), patternLayer, ...this.designLayers.slice(index)];
-    this.designLayers.map((layer, index: number) => {
-      layer.path.zIndex = index;
-    })
-
+    this.designLayers = [...this.designLayers.slice(0, index + 1), patternLayer, ...this.designLayers.slice(index + 1)];
+    this.designLayers.map((layer: LayerTypes, index: number) => layer.path.zIndex = index);
   }
 
   getPatternForLayer(patternId: string) {
     const pattern =  this.designLayers
       .find((layer): layer is PatternLayer  => layer.type === 'pattern' && layer.path.id === patternId);
+    console.log(pattern);
     return pattern ? pattern : false;
   }
 }
