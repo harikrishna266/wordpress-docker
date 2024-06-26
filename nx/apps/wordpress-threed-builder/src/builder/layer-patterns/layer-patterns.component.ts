@@ -67,8 +67,8 @@ export class LayerPatternsComponent implements OnInit {
             quality: 1,
             pixelRatio: 1
           }) as any;
-          const patternBasePath =   this.stage.createShape('path') as Path;
-          patternBasePath.setAttrs({
+          const path =   this.stage.createShape('path') as Path;
+          path.setAttrs({
             id: this.designLayer.layer.id,
             fill: '',
             data: this.designLayer.path.data,
@@ -76,8 +76,9 @@ export class LayerPatternsComponent implements OnInit {
             scaleY: 1,
             fillPatternImage: image,
           });
-          await this.stage.addShape(this.stage.layer, patternBasePath);
-          this.layerHelper.addPattern(patternBasePath, pattern, this.designLayer )
+          await this.stage.addShape(this.stage.layer, path);
+          const patternLayer: PatternLayer = {layer: this.designLayer.layer, path, basePath: this.designLayer.path, patternImage: pattern, type: 'pattern', };
+          this.layerHelper.addPattern(patternLayer);
           this.stage.layer.draw();
           this.dynamicTexture.update(false);
         })

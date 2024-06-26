@@ -10,7 +10,7 @@ import {
   loadModel,
   SceneHelper,
   DynamicTexture,
-  PBRMaterial,
+  PBRMaterial
 } from '@brocha-libs/builder-3d';
 import { HttpClientModule } from '@angular/common/http';
 import { Stage2D } from '@brocha-libs/builder-2d';

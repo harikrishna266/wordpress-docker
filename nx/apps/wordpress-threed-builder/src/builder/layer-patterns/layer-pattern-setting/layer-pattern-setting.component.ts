@@ -28,10 +28,10 @@ export class LayerPatternSettingComponent {
   async setColor(color: string) {
     switch (this.tabSelected) {
       case 'color':
-        await this.updatePatternColor(color);
-        break;
-      case 'pattern':
         await this.updateColor(color);
+        break;
+      case 'pattern-color':
+        await this.updatePatternColor(color);
         break;
     }
   }
@@ -45,14 +45,14 @@ export class LayerPatternSettingComponent {
   }
 
   async updateColor(color: string) {
-    await this.patternDetails.path.setAttrs({...this.patternDetails.path.serialize(), fill: color});
+    await this.patternDetails.basePath.setAttrs({...this.patternDetails.path.serialize(), fill: color});
     await this.stage.layer.draw();
     this.dynamicTexture.update(false);
   }
 
   async updatePatternColor(color: string) {
-    this.patternDetails.pattern.setAttrs({fill: color})
-    const image = await this.patternDetails.pattern.shape.toImage({
+    this.patternDetails.patternImage.setAttrs({...this.patternDetails.patternImage.serialize(), fill: color})
+    const image = await this.patternDetails.patternImage.shape.toImage({
       x: 0,
       y: 0,
       mimeType: 'image/png',

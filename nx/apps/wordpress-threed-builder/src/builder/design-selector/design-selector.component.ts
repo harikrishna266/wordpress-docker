@@ -12,14 +12,13 @@ import {
 import { DynamicTexture, SceneHelper } from '@brocha-libs/builder-3d';
 import { Designs } from '../types/design.type';
 import { WordpressService } from '../../services/wordpress.service';
-import { forkJoin, from, map, switchMap, tap, toArray } from 'rxjs';
+import { forkJoin, from, map, switchMap, tap, toArray, finalize } from 'rxjs';
 import { Stage2D } from '@brocha-libs/builder-2d';
 import { Layer } from '../types/layer.type';
 import { LayerAPIService } from '../../services/layer.service';
 import { LayerHelper } from '../layer.helper';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
-import { PipesModule } from '../pipes/pipes.module';
-import { DesignLayer, LayerTypes } from '../types/three-d-builder-layer.type';
+import { DesignLayer } from '../types/three-d-builder-layer.type';
 
 
 @Component({
@@ -48,8 +47,6 @@ export class DesignSelectorComponent implements OnInit{
       .subscribe()
   }
 
-
-
   applyDesign(design: Designs) {
     this.design = design;
     from(design.layers)
@@ -73,10 +70,11 @@ export class DesignSelectorComponent implements OnInit{
         }),
         tap((path: DesignLayer[]) => {
           this.layerHelper.addDesignLayer(path);
+        }),
+        finalize(() => {
           this.stage.layer.draw();
           this.dynamicTexture.update(false);
         })
-
       ).subscribe();
   }
 
