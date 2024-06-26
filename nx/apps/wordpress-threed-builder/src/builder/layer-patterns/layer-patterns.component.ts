@@ -36,7 +36,6 @@ export class LayerPatternsComponent implements OnInit {
     if(layer.type === 'layer') {
       this.designLayer = layer;
     }
-    this.selectedPattern = this.layerHelper.getPatternForLayer(layer.layer.id);
   }
 
   ngOnInit() {
@@ -81,6 +80,7 @@ export class LayerPatternsComponent implements OnInit {
           this.layerHelper.addPattern(patternLayer);
           this.stage.layer.draw();
           this.dynamicTexture.update(false);
+          this.selectedPattern = this.layerHelper.getPatternForLayer(this.designLayer.layer.id);
         })
       ).subscribe()
   }
