@@ -13,7 +13,7 @@
     </button>
   </div>
   <div class="grid grid-cols-4 gap-4 overflow-auto cursor-pointer" *ngIf="!selectedPattern" >
-    <div *ngFor='let pattern of patterns' (click)="createPattern(pattern)"   >
+    <div *ngFor='let pattern of patterns' (click)="setNewPattern(pattern)"   >
       <img
         alt='gallery'
         class='block h-full w-full rounded-lg object-cover object-center'
@@ -22,7 +22,9 @@
   </div>
     <app-layer-pattern-setting
       *ngIf="selectedPattern"
-      [stage]="stage" [dynamicTexture]="this.dynamicTexture"
+      [stage]="stage"
+      [designLayer]="designLayer"
+      [dynamicTexture]="this.dynamicTexture"
       [patternDetails]="selectedPattern" ></app-layer-pattern-setting>
 </div>
 

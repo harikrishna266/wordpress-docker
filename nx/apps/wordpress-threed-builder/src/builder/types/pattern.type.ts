@@ -3,5 +3,9 @@ export type Pattern  = {
   name: string;
   url: string;
   image: string;
+  width: number,
+  height: number,
+  scale: number,
+  opacity: number
 }
 

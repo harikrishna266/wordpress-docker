@@ -1,12 +1,14 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PatternLayer } from '../../types/three-d-builder-layer.type';
+import { DesignLayer, PatternLayer } from '../../types/three-d-builder-layer.type';
 import { colors } from '../../colors';
 import { Stage2D } from '@brocha-libs/builder-2d';
 import { DynamicTexture } from '@brocha-libs/builder-3d';
 import { tap } from 'rxjs';
 import { Pattern } from '../../types/pattern.type';
 import { WordpressService } from '../../../services/wordpress.service';
+import { LayerAPIService } from '../../../services/layer.service';
+import { LayerHelper } from '../../layer.helper';
 
 @Component({
   selector: 'app-layer-pattern-setting',
@@ -20,8 +22,12 @@ export class LayerPatternSettingComponent {
   @Input() patternDetails!: PatternLayer;
   @Input() stage!: Stage2D;
   @Input() dynamicTexture!: DynamicTexture;
+  @Input() designLayer!: DesignLayer;
   protected readonly colours = colors;
   private readonly wordpressService = inject(WordpressService);
+  private readonly layerService = inject(LayerAPIService);
+  public readonly layerHelper = inject(LayerHelper);
+
 
   patterns: Pattern[] = [];
 
@@ -65,4 +71,17 @@ export class LayerPatternSettingComponent {
     await this.stage.layer.draw();
     this.dynamicTexture.update(false);
    }
+
+  async setNewPattern(pattern: Pattern) {
+    this.layerService.downloadTemplate(pattern.url)
+      .pipe(
+        tap(async (patternData) => {
+          const patternLayer = this.layerHelper.getPatternForLayer(this.designLayer.layer.id);
+          if(patternLayer) {
+            await this.layerHelper.updatePattern(pattern, patternLayer, patternData, this.stage)
+          }
+          this.dynamicTexture.update(false);
+        })
+      ).subscribe()
+  }
 }

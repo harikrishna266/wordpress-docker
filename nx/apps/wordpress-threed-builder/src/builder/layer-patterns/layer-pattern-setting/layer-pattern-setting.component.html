@@ -27,7 +27,7 @@
   </div>
 
   <div class="flex-1  my-2 flex flex-row flex-wrap overflow-auto" *ngIf="tabSelected === 'pattern'" >
-    <div *ngFor='let pattern of patterns'  class=" border-gray-600  flex justify-center items-center"   >
+    <div *ngFor='let pattern of patterns' (click)="setNewPattern(pattern)" class=" border-gray-600  flex justify-center items-center"   >
       <img
         alt='gallery'
         class='block h-full w-full rounded-lg object-cover object-center'
