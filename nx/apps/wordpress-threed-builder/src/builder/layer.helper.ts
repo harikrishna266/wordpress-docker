@@ -14,12 +14,25 @@ export class LayerHelper {
       layer: selectedLayer.layer,  path, type: 'pattern', pattern,
     };
     const index = this.designLayers.findIndex((layer) => layer.layer.id === selectedLayer.layer.id);
-    this.designLayers = [...this.designLayers.slice(0, index), patternLayer, ...this.designLayers.slice(index)];
-    this.designLayers.map((layer, index: number) => {
-      layer.path.zIndex = index;
-    })
-
+    this.designLayers = [...this.designLayers.slice(0, index + 1), patternLayer, ...this.designLayers.slice(index + 1)];
+    this.designLayers.map((layer: LayerTypes, index: number) => layer.path.zIndex = index);
   }
+
+  addDesignLayer(designLayer: DesignLayer[]) {
+    this.designLayers = [...this.designLayers, ...designLayer];
+    this.designLayers.map((layer: LayerTypes, index: number) => layer.path.zIndex = index);
+  }
+
+  removeAllLayer() {
+    this.designLayers.map((layer: LayerTypes) => {
+      layer.path.shape.destroy();
+      if(layer.type === 'pattern') {
+        layer.pattern.shape.destroy();
+      }
+    })
+    this.designLayers = [];
+  }
+
 
   getPatternForLayer(patternId: string) {
     const pattern =  this.designLayers
