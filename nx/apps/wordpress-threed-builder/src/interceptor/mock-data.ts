@@ -2,190 +2,47 @@ export const sampleData = {
   '/wp-admin/admin-ajax.php?action=get_all_designs' : [
     {
       "id": "1",
-      "name": "cross-desgin",
+      "name": "Design 1",
       "model_id": "1",
       "user": "1",
+      imageUrl:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/DESIGN-1.png',
+
       layers: [
         {
           id: 1,
           name: 'layer_1',
-          url: 'https:\/\/raw.githubusercontent.com\/krishnajithr5\/graphics-design-\/tiger\/designs\/cross-desgin\/layer-1.txt',
+          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/layer-1.txt',
           color: 'red',
-          allowPattern: true
+          allowPattern: true,
+
         },
         {
           id: 2,
           name: 'layer_2',
-          url: 'https:\/\/raw.githubusercontent.com\/krishnajithr5\/graphics-design-\/tiger\/designs\/cross-desgin\/layer-2.txt',
+          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/layer-2.txt',
           color: 'green',
+        },
+        {
+          id:3,
+          name:'layer3',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/layer-3.txt',
+          color:' yellow'
+        },
+        {
+          id:4,
+          name:'layer4',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/layer-4.txt',
+          color:' yellow'
+        },
+        {
+          id:5,
+          name:'Stitches',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/stitches.txt',
+          color:' yellow'
         }
       ],
     },
-    {
-      "id": "2",
-      "name": "cross-desgin",
-      "model_id": "1",
-      "user": "1",
-      layers: [
-        {
-          id: 1,
-          name: 'layer_1',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-1.txt',
-          color: 'red',
-          allowPattern: true,
-        },
-        {
-          id: 2,
-          name: 'layer_2',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-2.txt',
-          color: 'green',
-          allowPattern: true,
-        },
-        {
-          id: 3,
-          name: 'layer_3',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-3.txt',
-          color: 'blue',
-          allowPattern: true,
-        },
-        {
-          id: 4,
-          name: 'layer_4',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-4.txt',
-          color: 'yellow',
-        },
-        {
-          id: 5,
-          name: 'layer_5',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-5.txt',
-          color: 'orange',
-        }
-      ],
-    },
-    {
-      "id": "1",
-      "name": "cross-desgin",
-      "model_id": "1",
-      "user": "1",
-      layers: [
-        {
-          id: 1,
-          name: 'layer_1',
-          url: 'https:\/\/raw.githubusercontent.com\/krishnajithr5\/graphics-design-\/tiger\/designs\/cross-desgin\/layer-1.txt',
-          color: 'red',
-          allowPattern: true
-        },
-        {
-          id: 2,
-          name: 'layer_2',
-          url: 'https:\/\/raw.githubusercontent.com\/krishnajithr5\/graphics-design-\/tiger\/designs\/cross-desgin\/layer-2.txt',
-          color: 'green',
-        }
-      ],
-    },
-    {
-      "id": "2",
-      "name": "cross-desgin",
-      "model_id": "1",
-      "user": "1",
-      layers: [
-        {
-          id: 1,
-          name: 'layer_1',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-1.txt',
-          color: 'red',
-          allowPattern: true,
-        },
-        {
-          id: 2,
-          name: 'layer_2',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-2.txt',
-          color: 'green',
-          allowPattern: true,
-        },
-        {
-          id: 3,
-          name: 'layer_3',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-3.txt',
-          color: 'blue',
-          allowPattern: true,
-        },
-        {
-          id: 4,
-          name: 'layer_4',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-4.txt',
-          color: 'yellow',
-        },
-        {
-          id: 5,
-          name: 'layer_5',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-5.txt',
-          color: 'orange',
-        }
-      ],
-    },
-    {
-      "id": "1",
-      "name": "cross-desgin",
-      "model_id": "1",
-      "user": "1",
-      layers: [
-        {
-          id: 1,
-          name: 'layer_1',
-          url: 'https:\/\/raw.githubusercontent.com\/krishnajithr5\/graphics-design-\/tiger\/designs\/cross-desgin\/layer-1.txt',
-          color: 'red',
-          allowPattern: true
-        },
-        {
-          id: 2,
-          name: 'layer_2',
-          url: 'https:\/\/raw.githubusercontent.com\/krishnajithr5\/graphics-design-\/tiger\/designs\/cross-desgin\/layer-2.txt',
-          color: 'green',
-        }
-      ],
-    },
-    {
-      "id": "2",
-      "name": "cross-desgin",
-      "model_id": "1",
-      "user": "1",
-      layers: [
-        {
-          id: 1,
-          name: 'layer_1',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-1.txt',
-          color: 'red',
-          allowPattern: true,
-        },
-        {
-          id: 2,
-          name: 'layer_2',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-2.txt',
-          color: 'green',
-          allowPattern: true,
-        },
-        {
-          id: 3,
-          name: 'layer_3',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-3.txt',
-          color: 'blue',
-          allowPattern: true,
-        },
-        {
-          id: 4,
-          name: 'layer_4',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-4.txt',
-          color: 'yellow',
-        },
-        {
-          id: 5,
-          name: 'layer_5',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/design-4/TEXT-LAYER/LAYER-5.txt',
-          color: 'orange',
-        }
-      ],
-    }
+
   ],
   '/wp-admin/admin-ajax.php?action=get_all_patterns': [
     {

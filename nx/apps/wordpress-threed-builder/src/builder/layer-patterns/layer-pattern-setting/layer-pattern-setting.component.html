@@ -19,15 +19,34 @@
       'border-black': tabSelected !== 'pattern'
     }"
     >Patterns</li>
+    <li class="px-3 y-1 border-b-2 bg-black border-black cursor-pointer" (click)="tabSelected = 'settings'"
+        [ngClass]="{
+      'border-black-50': tabSelected === 'settings',
+      'border-black': tabSelected !== 'settings'
+    }"
+    >Settings</li>
   </ul>
   <div class="flex-1  my-2 flex flex-row flex-wrap overflow-auto"  *ngIf="tabSelected === 'color' || tabSelected === 'pattern-color' " >
     <div class="border-2 border-gray-600 w-10 h-10 flex justify-center items-center" *ngFor="let color of colours" (click)="setColor(color)" >
       <div [style.background]="color" class="w-6 h-6 rounded-2xl cursor-pointer"></div>
     </div>
   </div>
+  <div class="flex-1  my-2 flex flex-row start-0 flex-wrap overflow-auto"  *ngIf="tabSelected === 'settings' " >
+   <div>
+     <label   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Opacity</label>
+     {{patternDetails.patternImage.opacity}}
+     <input   [(ngModel)]="patternDetails.patternImage.opacity" (ngModelChange)="updateLayer()"  type="range" min="0" step=".1" max="1" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+   </div>
+    <div>
+      <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scale</label>
+      {{patternDetails.patternImage.pixelRation}}
+      <input   [(ngModel)]="patternDetails.patternImage.pixelRation" (ngModelChange)="updateLayer()"  type="range" min="0" step=".1" max="1" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+     </div>
+
+  </div>
 
   <div class="flex-1  my-2 flex flex-row flex-wrap overflow-auto" *ngIf="tabSelected === 'pattern'" >
-    <div *ngFor='let pattern of patterns'  class=" border-gray-600  flex justify-center items-center"   >
+    <div *ngFor='let pattern of patterns' (click)="setNewPattern(pattern)" class=" border-gray-600  flex justify-center items-center"   >
       <img
         alt='gallery'
         class='block h-full w-full rounded-lg object-cover object-center'

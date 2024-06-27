@@ -36,7 +36,7 @@ export class LayerPatternsComponent implements OnInit {
     if(layer.type === 'layer') {
       this.designLayer = layer;
     }
-    this.selectedPattern = this.layerHelper.getPatternForLayer(layer.layer.id);
+    this.selectedPattern = this.layerHelper.getPatternForLayer(this.designLayer.layer.id);
   }
 
   ngOnInit() {
@@ -47,40 +47,22 @@ export class LayerPatternsComponent implements OnInit {
       .subscribe()
   }
 
-  async createPattern(pattern: Pattern) {
+  async setNewPattern(pattern: Pattern) {
     this.layerService.downloadTemplate(pattern.url)
       .pipe(
-        tap(async (patternSection) => {
-          const pattern = this.stage.createShape('path') as Path;
-          pattern.setAttrs({
-            id: pattern.id,
-            scaleX: 1,
-            scaleY: 1,
-            data: patternSection,
-          });
-          const image = await pattern.shape.toImage({
-            x: 0,
-            y: 0,
-            mimeType: 'image/png',
-            width: 805,
-            height: 805,
-            quality: 1,
-            pixelRatio: 1
-          }) as any;
-          const patternBasePath =   this.stage.createShape('path') as Path;
-          patternBasePath.setAttrs({
-            id: this.designLayer.layer.id,
-            fill: '',
-            data: this.designLayer.path.data,
-            scaleX: 1,
-            scaleY: 1,
-            fillPatternImage: image,
-          });
-          await this.stage.addShape(this.stage.layer, patternBasePath);
-          this.layerHelper.addPattern(patternBasePath, pattern, this.designLayer )
-          this.stage.layer.draw();
-          this.dynamicTexture.update(false);
+        tap(async (patternData) => {
+          const patternLayer = this.layerHelper.getPatternForLayer(this.designLayer.layer.id);
+           if(!patternLayer) {
+            await this.layerHelper.createPattern(patternData, pattern, this.designLayer, this.stage);
+          } else {
+            await this.layerHelper.updatePattern(pattern, patternLayer, patternData, this.stage)
+          }
+           this.dynamicTexture.update(false);
+          this.selectedPattern = this.layerHelper.getPatternForLayer(this.designLayer.layer.id);
         })
       ).subscribe()
   }
+
+
+
 }

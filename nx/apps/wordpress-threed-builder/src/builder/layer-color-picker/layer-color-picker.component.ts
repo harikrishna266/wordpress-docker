@@ -24,9 +24,9 @@ export class LayerColorPickerComponent {
     this.selectedLayer = layer;
   }
 
-  setColor(color: string) {
-    this.selectedLayer.path.setAttrs({fill: color});
-    this.stage.layer.draw();
+  async setColor(color: string) {
+    await this.selectedLayer.path.setAttrs({...this.selectedLayer.path.serialize(), fill: color});
+    await this.stage.layer.draw();
     this.dynamicTexture.update(false);
   }
 }
