@@ -40,7 +40,6 @@ export const sampleData = {
           url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/stitches.txt',
           color:' yellow'
         }
-
       ],
     },
 

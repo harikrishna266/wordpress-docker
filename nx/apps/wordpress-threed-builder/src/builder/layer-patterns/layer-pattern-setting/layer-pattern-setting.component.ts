@@ -44,6 +44,7 @@ export class LayerPatternSettingComponent {
   }
 
   async updateLayer() {
+    await this.patternDetails.patternImage.setAttrs({...this.patternDetails.patternImage.serialize()})
      const image = await this.patternDetails.patternImage.shape.toImage({
       x: 0,
       y: 0,
