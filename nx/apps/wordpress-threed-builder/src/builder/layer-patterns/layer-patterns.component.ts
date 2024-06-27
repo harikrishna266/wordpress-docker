@@ -57,7 +57,7 @@ export class LayerPatternsComponent implements OnInit {
           } else {
             await this.layerHelper.updatePattern(pattern, patternLayer, patternData, this.stage)
           }
-          this.dynamicTexture.update(false);
+           this.dynamicTexture.update(false);
           this.selectedPattern = this.layerHelper.getPatternForLayer(this.designLayer.layer.id);
         })
       ).subscribe()

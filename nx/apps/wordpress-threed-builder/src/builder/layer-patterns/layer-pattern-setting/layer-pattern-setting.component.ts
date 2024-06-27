@@ -9,16 +9,17 @@ import { Pattern } from '../../types/pattern.type';
 import { WordpressService } from '../../../services/wordpress.service';
 import { LayerAPIService } from '../../../services/layer.service';
 import { LayerHelper } from '../../layer.helper';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-layer-pattern-setting',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './layer-pattern-setting.component.html',
   styleUrl: './layer-pattern-setting.component.css',
 })
 export class LayerPatternSettingComponent {
-  tabSelected: 'color'| 'pattern' | 'pattern-color' = 'color';
+  tabSelected: 'color'| 'pattern' | 'pattern-color' | 'settings' = 'color';
   @Input() patternDetails!: PatternLayer;
   @Input() stage!: Stage2D;
   @Input() dynamicTexture!: DynamicTexture;
@@ -42,6 +43,21 @@ export class LayerPatternSettingComponent {
     }
   }
 
+  async updateLayer() {
+     const image = await this.patternDetails.patternImage.shape.toImage({
+      x: 0,
+      y: 0,
+      mimeType: 'image/png',
+      width: 805,
+      height: 805,
+      quality: 1,
+      pixelRatio: 1
+    }) as any;
+    await this.patternDetails.path.shape.fillPatternImage(image);
+    await this.stage.layer.draw();
+    this.dynamicTexture.update(false);
+  }
+
   ngOnInit() {
     this.wordpressService.getAllPatterns()
       .pipe(
@@ -51,7 +67,7 @@ export class LayerPatternSettingComponent {
   }
 
   async updateColor(color: string) {
-    await this.patternDetails.basePath.setAttrs({...this.patternDetails.path.serialize(), fill: color});
+    await this.patternDetails.basePath.setAttrs({ fill: color});
     await this.stage.layer.draw();
     this.dynamicTexture.update(false);
   }
