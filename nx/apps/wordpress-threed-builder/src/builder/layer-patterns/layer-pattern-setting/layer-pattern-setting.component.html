@@ -37,11 +37,11 @@
      {{patternDetails.patternImage.opacity}}
      <input   [(ngModel)]="patternDetails.patternImage.opacity" (ngModelChange)="updateLayer()"  type="range" min="0" step=".1" max="1" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
    </div>
-<!--    <div>-->
-<!--      <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scale</label>-->
-<!--      {{patternDetails.patternImage.pixelRation}}-->
-<!--      <input   [(ngModel)]="patternDetails.patternImage.pixelRation" (ngModelChange)="updateLayer()"  type="range" min="0" step=".1" max="1" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">-->
-<!--     </div>-->
+    <div>
+      <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scale</label>
+      {{patternDetails.patternImage.pixelRation}}
+      <input   [(ngModel)]="patternDetails.patternImage.pixelRation" (ngModelChange)="updateLayer()"  type="range" min="0" step=".1" max="1" value="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+     </div>
 
   </div>
 

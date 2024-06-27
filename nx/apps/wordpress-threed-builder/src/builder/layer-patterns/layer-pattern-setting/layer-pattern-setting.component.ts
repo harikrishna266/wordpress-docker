@@ -52,7 +52,7 @@ export class LayerPatternSettingComponent {
       width: 805,
       height: 805,
       quality: 1,
-      pixelRatio: 1
+      pixelRatio: this.patternDetails.patternImage.pixelRation
     }) as any;
     await this.patternDetails.path.shape.fillPatternImage(image);
     await this.stage.layer.draw();
@@ -82,7 +82,7 @@ export class LayerPatternSettingComponent {
       width: 805,
       height: 805,
       quality: 1,
-      pixelRatio: 1
+      pixelRatio: this.patternDetails.patternImage.pixelRation
     }) as any;
     await this.patternDetails.path.shape.fillPatternImage(image);
     await this.stage.layer.draw();
