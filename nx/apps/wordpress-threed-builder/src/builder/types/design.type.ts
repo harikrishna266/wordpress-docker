@@ -6,6 +6,7 @@ export type Designs = {
   layers: Layer[],
   model_id: string;
   user: string;
+  imageUrl: string;
 };
 
 

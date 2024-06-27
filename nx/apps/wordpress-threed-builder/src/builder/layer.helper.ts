@@ -21,6 +21,7 @@ export class LayerHelper {
 
   setZIndex() {
     this.designLayers.map((layer, index) => {
+      layer.path.zIndex = index;
       layer.path.shape.zIndex(index);
     });
   }
