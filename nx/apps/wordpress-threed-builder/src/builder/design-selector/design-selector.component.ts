@@ -7,12 +7,13 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  HttpClientModule,
+  HttpClient,
+  HttpClientModule
 } from '@angular/common/http';
 import { DynamicTexture, SceneHelper } from '@brocha-libs/builder-3d';
 import { Designs } from '../types/design.type';
 import { WordpressService } from '../../services/wordpress.service';
-import { forkJoin, from, map, switchMap, tap, toArray, finalize } from 'rxjs';
+import { forkJoin, from, map, switchMap, tap, toArray, finalize, Observable } from 'rxjs';
 import { Stage2D } from '@brocha-libs/builder-2d';
 import { Layer } from '../types/layer.type';
 import { LayerAPIService } from '../../services/layer.service';
@@ -38,6 +39,7 @@ export class DesignSelectorComponent implements OnInit{
   private readonly layerHelper = inject(LayerHelper);
   public designs:Designs[] = [];
   public design!: Designs;
+  designAPI!: any;
 
   ngOnInit() {
     this.wordpressService.getDesigns()
@@ -49,7 +51,11 @@ export class DesignSelectorComponent implements OnInit{
 
   applyDesign(design: Designs) {
     this.design = design;
-    from(design.layers)
+    if (this.designAPI) {
+      this.designAPI.unsubscribe();
+      this.layerHelper.removeAllLayer();
+    }
+    this.designAPI = from(design.layers)
       .pipe(
         map((layer: Layer) =>
           this.layerService.downloadTemplate(layer.url).pipe(
