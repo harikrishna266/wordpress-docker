@@ -29,13 +29,46 @@ class ManageIsCustomizableField
     function display_is_customizable_field()
     {
         global $post;
+        $BUILDER_URL = BUILDER_URL;
         $is_customizable = get_post_meta($post->ID, IS_CUSTOMIZABLE, true);
         if ($is_customizable === 'yes') {
-            echo '<div class="custom-field">';
-            echo '<h2>' . __('Customizable:', 'woocommerce') . '</h2>';
-            echo '<p>' . __('This product is customizable.', 'woocommerce') . '</p>';
-            echo '</div>';
+            echo <<<EOD
+                <div class="custom-field">
+                    <h2>Customizable:</h2>
+                    <button class="button" onclick="loadBuilder()">Customize Product</button>
+                </div>
+                <style>
+                    #modal-3d {
+                        background: black;
+                        position: absolute;
+                        width: 100vw;
+                        height: 100vh;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                    }
+
+                </style>
+                <script>
+                    function loadBuilder() {
+                        const builderHolder = document.createElement( 'div' );
+                        builderHolder.setAttribute('id', "modal-3d");
+                        builderHolder.style.zIndex = 100001;
+                        document.body.appendChild( builderHolder);
+                        document.body.scrollTop = document.documentElement.scrollTop = 0;
+                        document.body.style.overflow = 'hidden';
+                        const appBuilder = document.createElement('app-root');
+                        appBuilder.setAttribute('model', 'model url goes here');
+                        builderHolder.appendChild(appBuilder);
+                    }
+                </script>
+                <script src="{$BUILDER_URL}polyfills.js" defer type="module"></script>
+                <script src="{$BUILDER_URL}main.js" defer type="module"></script>
+                EOD;
         }
     }
-
 }
+
+
