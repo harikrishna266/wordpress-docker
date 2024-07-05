@@ -29,7 +29,6 @@ class AdminBuilder {
         $this->model_print_area_CRUD();
         $this->patterns_CRUD();
         $this->fashion_design_layers_CRUD();
-        $this->initWooProductFunctionalities();
         $this->initUserDesigns();        
     }
 
@@ -173,12 +172,6 @@ class AdminBuilder {
         $this->loader->add_action( 'admin_enqueue_scripts', $builder2d, 'add_tailwind' );
          $this->loader->add_filter( 'script_loader_tag', $builder2d, 'process_2d_builder_script', 9, 3 );
         $this->loader->add_filter( 'style_loader_tag', $builder2d, 'process_2d_builder_styles', 9, 3 );
-    }
-
-    private function initWooProductFunctionalities(){
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/woo-products-functionalities/woo-product-api.php';
-        $woo_products_api = new WooProductAPI();
-        $this->loader->add_action( 'wp_ajax_create_private_woo_product', $woo_products_api, 'createWooPrivateProduct' );
     }
 
     private function initUserDesigns(){
