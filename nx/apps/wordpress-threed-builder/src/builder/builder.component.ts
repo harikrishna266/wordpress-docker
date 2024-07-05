@@ -21,6 +21,7 @@ import { LayerPatternsComponent } from './layer-patterns/layer-patterns.componen
 import { Designs } from './types/design.type';
 import { Path } from '@brocha-libs/builder-2d/lib/shapes/path';
 import { LayerHelper } from './layer.helper';
+import { FileActionsComponent } from './file-actions/file-actions.component';
 type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
 
 @Component({
@@ -31,7 +32,8 @@ type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
     HttpClientModule,
     DesignSelectorComponent,
     LayerColorPickerComponent,
-    LayerPatternsComponent
+    LayerPatternsComponent,
+    FileActionsComponent
   ],
   templateUrl: './builder.component.html',
   styleUrl: './builder.component.scss',
