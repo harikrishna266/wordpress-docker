@@ -29,7 +29,7 @@ class AdminBuilder {
         $this->model_print_area_CRUD();
         $this->patterns_CRUD();
         $this->fashion_design_layers_CRUD();
-        $this->initWooProductFunctionalities();
+        $this->initUserDesigns();        
     }
 
     private function initDependencies(){
@@ -174,10 +174,10 @@ class AdminBuilder {
         $this->loader->add_filter( 'style_loader_tag', $builder2d, 'process_2d_builder_styles', 9, 3 );
     }
 
-    private function initWooProductFunctionalities(){
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/woo-products-functionalities/woo-product-api.php';
-        $woo_products_api = new WooProductAPI();
-        $this->loader->add_action( 'wp_ajax_create_private_woo_product', $woo_products_api, 'createWooPrivateProduct' );
+    private function initUserDesigns(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/user-designs/api/user-designs-api.php';
+        $user_design_api = new UserDesignsAPIAdmin(); 
+        $this->loader->add_action( 'wp_ajax_save_user_design', $user_design_api, 'create_user_product' );
     }
 
     private function define_public_hooks() {
