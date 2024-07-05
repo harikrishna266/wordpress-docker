@@ -27,4 +27,5 @@
   <app-design-selector *ngIf='currentAction === "designs"' [sceneHelper]="sceneHelper" [stage]="stage"  [dynamicTexture]="this.dynamicTexture" ></app-design-selector>
   <app-layer-color-picker *ngIf='currentAction === "layers" && !!layerHelper.designLayers'  [stage]="stage" [dynamicTexture]="this.dynamicTexture"  ></app-layer-color-picker>
   <app-layer-patterns *ngIf='currentAction === "patterns"'  [stage]="stage" [dynamicTexture]="this.dynamicTexture"></app-layer-patterns>
+  <app-file-actions></app-file-actions>
 </div>

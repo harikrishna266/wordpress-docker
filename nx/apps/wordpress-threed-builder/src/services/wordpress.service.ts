@@ -16,4 +16,10 @@ export class WordpressService {
   getAllPatterns() {
     return this.http.get<Pattern[]>('/wp-admin/admin-ajax.php?action=get_all_patterns')
   }
+
+  saveDesings(designData:any){
+    console.log(designData);
+    
+    return this.http.post<any[]>('/wp-admin/admin-ajax.php?action=create_private_woo_product', designData)
+  }
 }
