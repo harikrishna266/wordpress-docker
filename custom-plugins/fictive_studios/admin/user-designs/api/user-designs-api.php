@@ -5,9 +5,11 @@ class UserDesignsAPIAdmin
 
     public function create_user_product()
     {
-        $serialized_data = isset($_POST['serialized_data']) ? sanitize_text_field($_POST['serialized_data']) : '';
+        $design_data = json_decode(file_get_contents('php://input'), true);
+        $design_name = sanitize_text_field($design_data['name']);
+        $serialized_data = sanitize_text_field($design_data['serialized_data']);
         $product = new WC_Product_Simple();
-        $product->set_name('Product1');
+        $product->set_name($design_name);
         $product->set_status('publish');
         $product->set_price(19.99);
         $product->update_meta_data(IS_CUSTOMIZABLE, 'yes');
@@ -15,7 +17,7 @@ class UserDesignsAPIAdmin
         $product->save();
         wp_die();
     }
-
+ 
     public function update_user_product()
     {
         $product_id = isset($_GET['id']) ? sanitize_text_field($_POST['id']) : '';
