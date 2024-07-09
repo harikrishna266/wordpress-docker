@@ -14,7 +14,7 @@ class PrivateProductsHandler
     {
         if (!empty($query_vars['customvar'])) {
             $query['meta_query'][] = array(
-                'key' => '_is_private_product',
+                'key' => IS_PRIVATE,
                 'value' => esc_attr($query_vars['customvar']),
                 'compare' => '='
             );
@@ -26,7 +26,7 @@ class PrivateProductsHandler
     {
         woocommerce_wp_checkbox(
             array(
-                'id' => '_is_private_product',
+                'id' => IS_PRIVATE,
                 'label' => __('Is Private?', 'woocommerce'),
                 'description' => __('Check this box if the product is private.', 'woocommerce'),
             )
@@ -35,14 +35,14 @@ class PrivateProductsHandler
 
     public function save_is_private_product_field($post_id)
     {
-        $is_private_product = isset($_POST['_is_private_product']) ? 'yes' : 'no';
-        update_post_meta($post_id, '_is_private_product', $is_private_product);
+        $is_private_product = isset($_POST[IS_PRIVATE]) ? 'yes' : 'no';
+        update_post_meta($post_id, IS_PRIVATE, $is_private_product);
     }
 
     public function display_is_private_product_field()
     {
         global $post;
-        $is_private_product = get_post_meta($post->ID, '_is_private_product', true);
+        $is_private_product = get_post_meta($post->ID, IS_PRIVATE, true);
         if ($is_private_product === 'yes') {
             echo '<div class="custom-field">';
             echo '<h2>' . __('Private Product:', 'woocommerce') . '</h2>';

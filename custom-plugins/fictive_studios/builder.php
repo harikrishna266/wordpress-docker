@@ -38,6 +38,7 @@ define('PLUGIN_URL', plugins_url('public', __FILE__)."/");
 define('FICTIVE_TABLE', 'fictive_');
 define('DESIGN_SERIALIZED_DATA', '_serialized_data');
 define('IS_CUSTOMIZABLE', '_is_customizable');
+define('IS_PRIVATE', '_is_private_product');
 
  function activate_builder() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/class-builder-activator.php';

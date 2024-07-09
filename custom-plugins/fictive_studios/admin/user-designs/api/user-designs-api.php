@@ -14,10 +14,15 @@ class UserDesignsAPIAdmin
         $product->set_price(19.99);
         $product->update_meta_data(IS_CUSTOMIZABLE, 'yes');
         $product->update_meta_data(DESIGN_SERIALIZED_DATA, $serialized_data);
+        if (current_user_can('manage_options')) {
+            $product->update_meta_data(IS_PRIVATE, 'no');
+        } else {
+            $product->update_meta_data(IS_PRIVATE, 'yes');
+        }
         $product->save();
         wp_die();
     }
- 
+
     public function update_user_product()
     {
         $product_id = isset($_GET['id']) ? sanitize_text_field($_POST['id']) : '';
