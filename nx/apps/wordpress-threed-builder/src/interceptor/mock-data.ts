@@ -1,6 +1,5 @@
 export const sampleData = {
   '/wp-admin/admin-ajax.php?action=get_all_designs' : [
-    // design-1//
     {
       "id": "1",
       "name": "Design 1",
@@ -44,7 +43,6 @@ export const sampleData = {
 
       ],
     },
-    // design-2//
     {
       "id": "2",
       "name": "Design 2",
@@ -94,7 +92,6 @@ export const sampleData = {
 
       ],
     },
-    // design-3//
     {
       "id": "3",
       "name": "Design 3",
@@ -144,7 +141,6 @@ export const sampleData = {
 
       ],
     },
-    // design-4//
     {
       "id": "4",
       "name": "Design 4",
@@ -194,7 +190,6 @@ export const sampleData = {
 
       ],
     },
-    // design-5//
     {
       "id": "5",
       "name": "Design 5",
@@ -240,7 +235,6 @@ export const sampleData = {
 
       ],
     },
-    // design-6//
     {
       "id": "6",
       "name": "Design 6",
@@ -276,7 +270,6 @@ export const sampleData = {
         }
       ],
     },
-    // design-7//
     {
       "id": "7",
       "name": "Design 7",
@@ -313,8 +306,6 @@ export const sampleData = {
         }
       ],
     },
-
-    // design-8//
     {
       "id": "8",
       "name": "Design 8",
@@ -364,8 +355,6 @@ export const sampleData = {
         }
       ],
     },
-
-// design-9//
     {
       "id": "9",
       "name": "Design 9",
@@ -402,7 +391,6 @@ export const sampleData = {
 
       ],
     },
-// design-8//
     {
       "id": "10",
       "name": "Design 10",
@@ -446,11 +434,6 @@ export const sampleData = {
         }
       ],
     },
-
-
-
-
-
   ],
   '/wp-admin/admin-ajax.php?action=get_all_patterns': [
     {
@@ -468,5 +451,116 @@ export const sampleData = {
       "name": "cross-desgin",
       url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/tiger/parrterns/text/PARRTERN-4.txt',
     }
+  ],
+  '/wp-admin/admin-ajax.php?action=get_models': [
+    {
+      name: 'cycle',
+      id: '1',
+      url: 'http://localhost:3200/cycle.glb'
+    },
+    {
+      name: 'sweatshirt',
+      id: '2',
+      url: 'http://localhost:3200/sweatshirt.glb'
+    },
+    {
+      name: 'jersey',
+      id: '3',
+      url: 'http://localhost:3200/model-3.glb'
+    }
+  ],
+  '/wp-admin/admin-ajax.php?action=get_all_designs&modelId=1': [
+    {
+      "id": "1",
+      "name": "Design 1",
+      "model_id": "1",
+      "user": "1",
+      imageUrl:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/DESIGN-1.png',
+
+      layers: [
+        {
+          id: 1,
+          name: 'layer_1',
+          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/layer-1.txt',
+          color: '#353535',
+          allowPattern: true,
+
+        },
+        {
+          id: 2,
+          name: 'layer_2',
+          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/layer-2.txt',
+          color: '#ff0000',
+        },
+        {
+          id:3,
+          name:'layer3',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/layer-3.txt',
+          color:'#ffffff'
+        },
+        {
+          id:4,
+          name:'layer4',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/layer-4.txt',
+          color:'#353535'
+        },
+        {
+          id:5,
+          name:'Stitches',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/stitches.txt',
+          color:' yellow'
+        }
+
+      ],
+    },
+    {
+      "id": "2",
+      "name": "Design 2",
+      "model_id": "1",
+      "user": "1",
+      imageUrl:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-2/design-2-image.png',
+
+      layers: [
+        {
+          id: 1,
+          name: 'layer_1',
+          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-2/TEXT-LAYERS/LAYER-1.txt',
+          color: '#353535',
+          allowPattern: true,
+
+        },
+        {
+          id: 2,
+          name: 'layer_2',
+          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-2/TEXT-LAYERS/LAYER-2.txt',
+          color: 'red',
+        },
+        {
+          id:3,
+          name:'layer3',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-2/TEXT-LAYERS/LAYER-3.txt',
+          color:' #ffffff'
+        },
+        {
+          id:4,
+          name:'layer4',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-2/TEXT-LAYERS/LAYER-4.txt',
+          color:' #353535'
+        },
+        {
+          id:5,
+          name:'layer4',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-2/TEXT-LAYERS/LAYER-5.txt',
+          color:'#353535'
+        },
+        {
+          id:6,
+          name:'Stitches',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/T-Shirt-EXPEDITION/T-Shirt-EXPEDITION/DESIGNS/DESIGN-1/layers/text-layer/stitches.txt',
+          color:' yellow'
+        }
+
+      ],
+    },
   ]
 }

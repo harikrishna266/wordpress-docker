@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef, inject,
+  ElementRef, inject, Input,
   ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -19,6 +19,7 @@ import { LayerPatternsComponent } from '../layer-patterns/layer-patterns.compone
 import { Designs } from '../types/design.type';
 import { LayerHelper } from '../layer.helper';
 import { environment } from '../../environments/environment';
+import { Model } from '../types/model.type';
 type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
 
 @Component({
@@ -29,8 +30,6 @@ type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
   styleUrl: './three-d-builder.component.css',
 })
 export class ThreeDBuilderComponent implements AfterViewInit {
-
-
   public sceneHelper: SceneHelper = new SceneHelper();
   public stage!: Stage2D;
   public dynamicTexture!: DynamicTexture;
@@ -39,6 +38,18 @@ export class ThreeDBuilderComponent implements AfterViewInit {
   public design!: Designs;
   public readonly layerHelper = inject(LayerHelper);
 
+  _model!:Model;
+  @Input()
+  set model(model: Model) {
+    this._model = model;
+    setTimeout(() => {
+      this.loadModel();
+    }, 500)
+
+  }
+  get model() {
+    return this._model;
+  }
 
   @ViewChild('threeDCanvas', { static: true }) threeDCanvas!: ElementRef;
   @ViewChild('konvaContainer', { static: true }) konvaContainer!: ElementRef;
@@ -63,16 +74,16 @@ export class ThreeDBuilderComponent implements AfterViewInit {
     await this.sceneHelper.createScene(this.threeDCanvas.nativeElement);
     this.sceneHelper.addExternalEnvironment(`${environment.ASSET_URL}assets/environmentSpecular.env`);
     this.sceneHelper.loadCamera();
-    await this.loadModel();
   }
 
   async loadModel() {
-    await loadModel(this.sceneHelper.scene, 'model', '', `${environment.ASSET_URL}glb/`, 'model-3.glb');
+    const model = new URL(this.model.url).pathname.split('/')[0];
+    await loadModel(this.sceneHelper.scene, 'model', '', `${environment.ASSET_URL}glb/`, model);
     (this.sceneHelper.scene.getMeshByName('bounding-box') as Mesh).isPickable = true;
     ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture = new Texture(`${environment.ASSET_URL}assets/Cotton_Heavy_Canvas_NRM.jpg`, this.sceneHelper.scene);
     (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).level = 1.4;
-    (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).uScale = 12;
-    (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).vScale = 12;
+    (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).uScale = 9;
+    (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).vScale = 9;
     ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).metallic = 0.1;
     ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).roughness = .2;
     ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).indexOfRefraction = 1.9;
