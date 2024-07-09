@@ -25,7 +25,7 @@
     ></canvas>
   </div>
   <button (click)="addRect()"  >Add Rect</button>
-  <app-design-selector *ngIf='currentAction === "designs"' [sceneHelper]="sceneHelper" [stage]="stage"  [dynamicTexture]="this.dynamicTexture" ></app-design-selector>
+  <app-design-selector *ngIf='currentAction === "designs"' [sceneHelper]="sceneHelper" [stage]="stage"  [dynamicTexture]="this.dynamicTexture" [modelId]="model.id" ></app-design-selector>
   <app-layer-color-picker *ngIf='currentAction === "layers" && !!layerHelper.designLayers'  [stage]="stage" [dynamicTexture]="this.dynamicTexture"  ></app-layer-color-picker>
   <app-layer-patterns *ngIf='currentAction === "patterns"'  [stage]="stage" [dynamicTexture]="this.dynamicTexture"></app-layer-patterns>
 </div>

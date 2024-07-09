@@ -20,6 +20,7 @@ import { Designs } from '../types/design.type';
 import { LayerHelper } from '../layer.helper';
 import { environment } from '../../environments/environment';
 import { Model } from '../types/model.type';
+import { DesignRenderHelper } from '../design-render.helper';
 type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
 
 @Component({
@@ -35,8 +36,10 @@ export class ThreeDBuilderComponent implements AfterViewInit {
   public dynamicTexture!: DynamicTexture;
   public currentAction!: MenuActions ;
   public menuActions: MenuActions[] = ['designs','layers', 'patterns' ];
-  public design!: Designs;
   public readonly layerHelper = inject(LayerHelper);
+  public readonly designRenderHelper = inject(DesignRenderHelper);
+
+  @Input() design!: Designs;
 
   _model!:Model;
   @Input()
@@ -44,6 +47,7 @@ export class ThreeDBuilderComponent implements AfterViewInit {
     this._model = model;
     setTimeout(() => {
       this.loadModel();
+      this.designRenderHelper.applyDesign(this.design);
     }, 500)
 
   }
@@ -65,6 +69,7 @@ export class ThreeDBuilderComponent implements AfterViewInit {
 
   async ngAfterViewInit() {
     this.stage = new Stage2D();
+    this.designRenderHelper.stage = this.stage;
     this.stage.initializeStage(this.konvaContainer.nativeElement, 2048, 2048);
     this.stage.isEditor = false;
     await this.threeDBuilder();
@@ -72,21 +77,15 @@ export class ThreeDBuilderComponent implements AfterViewInit {
 
   async threeDBuilder() {
     await this.sceneHelper.createScene(this.threeDCanvas.nativeElement);
+    this.designRenderHelper.sceneHelper = this.sceneHelper;
     this.sceneHelper.addExternalEnvironment(`${environment.ASSET_URL}assets/environmentSpecular.env`);
     this.sceneHelper.loadCamera();
   }
 
   async loadModel() {
-    const model = new URL(this.model.url).pathname.split('/')[0];
+    const model = new URL(this.model.url).pathname.split('/')[1];
     await loadModel(this.sceneHelper.scene, 'model', '', `${environment.ASSET_URL}glb/`, model);
     (this.sceneHelper.scene.getMeshByName('bounding-box') as Mesh).isPickable = true;
-    ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture = new Texture(`${environment.ASSET_URL}assets/Cotton_Heavy_Canvas_NRM.jpg`, this.sceneHelper.scene);
-    (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).level = 1.4;
-    (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).uScale = 9;
-    (((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).bumpTexture as Texture).vScale = 9;
-    ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).metallic = 0.1;
-    ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).roughness = .2;
-    ((this.sceneHelper.scene.getMeshByName('Cloth') as Mesh).material as PBRMaterial).indexOfRefraction = 1.9;
     await this.renderDynamicTexture();
   }
 
@@ -97,13 +96,13 @@ export class ThreeDBuilderComponent implements AfterViewInit {
       this.stage.layer.getCanvas()._canvas,
       this.sceneHelper.scene
     );
+    this.designRenderHelper.dynamicTexture = this.dynamicTexture;
     this.sceneHelper.scene.meshes.forEach((mesh) => {
       if (mesh.material) {
         const material = mesh.material as PBRMaterial;
         material.albedoTexture = this.dynamicTexture;
       }
     });
-    this.addRect();
   }
 
   async addRect() {
