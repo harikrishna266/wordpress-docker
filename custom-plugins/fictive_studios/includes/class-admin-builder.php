@@ -94,6 +94,7 @@ class AdminBuilder {
         $this->loader->add_action( 'admin_post_edit_design_data', $fashion_design_api, 'edit_design' );
         $this->loader->add_action( 'wp_ajax_get_design_by_id', $fashion_design_api, 'get_design_by_id' );
         $this->loader->add_action( 'wp_ajax_get_all_designs', $fashion_design_api, 'get_all_designs' );
+        $this->loader->add_action( 'wp_ajax_get_designs_by_model_id', $fashion_design_api, 'get_designs_by_model_id' );
     }
 
     private function models_CRUD(){

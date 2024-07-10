@@ -17,10 +17,9 @@ class FashionDesignAPIAdmin
             $layers = $wpdb->get_results($layers_query, OBJECT);
             $design->layers = $layers;
         }
-        
+
         echo json_encode($designs);
         wp_die();
-        
     }
 
     public function get_design_by_id()
@@ -112,5 +111,31 @@ class FashionDesignAPIAdmin
         $url = add_query_arg($redirect_params, admin_url('admin.php'));
         wp_redirect($url);
         exit;
+    }
+
+    public function get_designs_by_model_id()
+    {
+        global $wpdb;
+        $table_name = FICTIVE_TABLE . 'fashion_designs';
+        $model_id = isset($_GET['model_id']) ? intval($_GET['model_id']) : 0;
+
+        if ($model_id <= 0) {
+            wp_redirect(admin_url('admin.php?page=fashion_designs_builder&error=invalid_id'));
+            exit;
+        }
+
+        $query = "SELECT * from $table_name WHERE `model_id` = $model_id";
+        $design = $wpdb->get_results($query, OBJECT);
+
+        if ($design) {
+            foreach ($design as $design_row) {
+                $layers_table = FICTIVE_TABLE . 'design_layers';
+                $layers_query = $wpdb->prepare("SELECT * FROM $layers_table WHERE `design_id` = %d", $design_row->ID);
+                $layers = $wpdb->get_results($layers_query, OBJECT);
+                $design_row->layers = $layers;
+            }
+        }
+        echo json_encode($design);
+        wp_die();
     }
 }
