@@ -36,10 +36,12 @@ class AdminBuilder {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/manage-is-customizable-field.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/private-products-handler.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/woo-products-filter.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-end-user-design-page.php';
 
         new ManageIsCustomizableField();
         new PrivateProductsHandler();
         new WooProductFilter();
+        new EndUserDesignPage();
     }
 
     private function createLoader() {
