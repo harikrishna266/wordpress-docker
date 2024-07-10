@@ -13,7 +13,7 @@ class WooProductFilter
         if (isset($_GET['page']) && $_GET['page'] === 'User_custom_Products') {
             return;
         }
-        if (is_admin() && isset($_GET['post_type']) && $_GET['post_type'] === 'product') {
+        if (isset($_GET['post_type']) && $_GET['post_type'] === 'product') {
             if (isset($query->query['post_type']) && $query->query['post_type'] === 'product') {
                 $meta_query = $query->get('meta_query');
                 if (!is_array($meta_query)) {
