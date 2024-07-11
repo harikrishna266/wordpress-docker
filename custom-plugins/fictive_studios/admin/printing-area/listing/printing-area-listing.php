@@ -38,7 +38,6 @@ class PrintingAreaListingAdmin
         include plugin_dir_path(__FILE__) . 'printing-area-listing-helper.php';
         $print_area_table = new PrintAreasListingHelper();
         require_once (plugin_dir_path(__FILE__) . 'partials/printing-area-header.php');
-        echo '<a id="getPrintArea" class="button-secondary">Get All Print Areas</a>';
     }
 
     public function display_print_area_edit_pages()

@@ -14,7 +14,7 @@ class ModelPrintAreaListingAdmin
             'callback' => array($this, 'get_page'),
         );
         add_submenu_page(
-            'builder_main_menu',
+            null,
             $submenu['page_title'],
             $submenu['menu_title'],
             $submenu['capability'],
