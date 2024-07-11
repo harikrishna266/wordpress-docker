@@ -1059,27 +1059,21 @@ export const sampleData = {
         {
           id: 1,
           name: 'layer_1',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/polo-t-shirt/design/design-1/layer-1.txt',
+          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/polo-t-shirt/design/design-1/new/text/Layer-1.txt',
           color: '#be0202',
           allowPattern: true,
         },
         {
           id: 2,
           name: 'layer_2',
-          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/polo-t-shirt/design/design-1/Layers/text-layer/layer-2.txt',
+          url: 'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/polo-t-shirt/design/design-1/new/text/Layer-2.txt',
           color: '#ff0000',
         },
         {
           id:3,
           name:'layer3',
-          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/polo-t-shirt/design/design-1/Layers/text-layer/layer-3.txt',
+          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/polo-t-shirt/design/design-1/new/text/Layer-3.txt',
           color:'#ffffff'
-        },
-        {
-          id:4,
-          name:'layer4',
-          url:'https://raw.githubusercontent.com/ARRAYGEEK/graphics-design-/polo-t-shirt/design/design-1/Layers/text-layer/layer-4.txt',
-          color:'#353535'
         }
       ],
     },
