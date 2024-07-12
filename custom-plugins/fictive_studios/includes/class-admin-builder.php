@@ -29,7 +29,8 @@ class AdminBuilder {
         $this->model_print_area_CRUD();
         $this->patterns_CRUD();
         $this->fashion_design_layers_CRUD();
-        $this->initUserDesigns();        
+        $this->initUserDesigns();       
+        $this->tags_CRUD(); 
     }
 
     private function initDependencies(){
@@ -163,6 +164,19 @@ class AdminBuilder {
         $this->loader->add_action( 'admin_post_edit_pattern_data', $patternAPI, 'edit_pattern_data' );
         $this->loader->add_action( 'wp_ajax_get_patterns', $patternAPI, 'get_all_patterns' );
         $this->loader->add_action( 'wp_ajax_get_pattern_by_id', $patternAPI, 'get_pattern_by_id' );
+    }
+
+    private function tags_CRUD(){
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/tags/listing/tags-listing.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/tags/api/tags-api.php';
+
+        $tagsListing = new FictiveCodes\TagsListingAdmin();
+        $this->loader->add_action( 'admin_menu', $tagsListing, 'add_submenu' );
+
+        $tagsAPI = new FictiveCodes\TagsAPIAdmin();
+        $this->loader->add_action( 'admin_post_save_tag_data', $tagsAPI, 'save_tag_data' );
+        $this->loader->add_action( 'admin_post_edit_tag_data', $tagsAPI, 'edit_tag_data' );
+
     }
 
     private function builder2d()

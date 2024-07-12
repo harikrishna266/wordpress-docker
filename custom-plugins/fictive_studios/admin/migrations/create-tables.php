@@ -14,6 +14,7 @@ class BuilderMigrations
         create_print_area_model_cordinates_tables();
         create_patterns_tables();
         create_layers_tables();
+        create_tags_tables();
 
         $this->load_seeding_files();
         $this->run_data_seeding();
@@ -38,6 +39,7 @@ class BuilderMigrations
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/print-area-model-coordinates.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/patterns.php';
         require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/layers.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'migrations/tags.php';
     }
 
     public function load_seeding_files()
