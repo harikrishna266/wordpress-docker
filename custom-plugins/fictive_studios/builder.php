@@ -33,6 +33,7 @@ define('MODELS_BUILDER_SLUG', 'models_builder');
 define('MODEL_PRINT_AREA_SLUG', 'model_print_areas');
 define('PATTERNS_BUILDER_SLUG', 'patterns_builder');
 define('DESIGN_LAYERS_SLUG', 'design_layers');
+define('TAGS_SLUG', 'tags_builder');
 define('PLUGIN_ROOT', plugin_dir_path( __FILE__));
 define('PLUGIN_URL', plugins_url('public', __FILE__)."/");
 define('FICTIVE_TABLE', 'fictive_');
