@@ -471,7 +471,7 @@ export const sampleData = {
     {
       name: 'polo',
       id: 'polo',
-      url: 'http://localhost:3200/polo.glb'
+      url: 'http://localhost:3200/polo-new.glb'
     }
   ],
   '/wp-admin/admin-ajax.php?action=get_all_designs&modelId=cycle': [

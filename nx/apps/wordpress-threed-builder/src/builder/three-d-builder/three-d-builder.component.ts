@@ -22,6 +22,7 @@ import { environment } from '../../environments/environment';
 import { Model } from '../types/model.type';
 import { DesignRenderHelper } from '../design-render.helper';
 type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
+import { Inspector } from '@babylonjs/inspector';
 
 @Component({
   selector: 'app-three-d-builder',
@@ -80,6 +81,7 @@ export class ThreeDBuilderComponent implements AfterViewInit {
     this.designRenderHelper.sceneHelper = this.sceneHelper;
     this.sceneHelper.addExternalEnvironment(`${environment.ASSET_URL}assets/environmentSpecular.env`);
     this.sceneHelper.loadCamera();
+
   }
 
   async loadModel() {
@@ -103,6 +105,11 @@ export class ThreeDBuilderComponent implements AfterViewInit {
         material.albedoTexture = this.dynamicTexture;
       }
     });
+    // ['Cloth.003_primitive1'].map((e) => {
+    //   (this.sceneHelper.scene.getMeshByName(e) as Mesh).visibility = 1;
+    //   (this.sceneHelper.scene.getMeshByName(e) as Mesh).material = material;
+    //   ((this.sceneHelper.scene.getMeshByName(e) as Mesh).material as PBRMaterial).albedoTexture = this.dynamicTexture;
+    // })
   }
 
   async addRect() {
