@@ -1,11 +1,6 @@
-<div  class='lg:left-0 lg:top-0  lg:w-1/4 lg:h-full bottom-0 h-1/4 w-full absolute  bg-gray-800 text-white p-4 slide-in-left flex flex-col'>
-  <h2 class='lg:text-2xl sm:text-sm mb-4 text-center'>Choose Designs</h2>
-  <div class="grid  grid-cols-4 gap-4 overflow-auto cursor-pointer">
-    <div *ngFor='let design of designs' (click)="applyDesign(design)" >
-      <img
-        alt='gallery'
-        class='block h-full w-full rounded-lg object-cover object-center'
-        [src]='design.imageUrl' />
-    </div>
+<div class="flex justify-start overflow-x-auto gap-2 lg:grid lg: grid-cols-4 px-5" >
+  <div class="h-24 w-24 cursor-pointer flex-shrink-0 border-2 rounded-s-md my-4" *ngFor="let design of designs" (click)="applyDesign(design)" >
+    <img class="w-full h-full object-contain" [src]="design.imageUrl" alt="Example image">
   </div>
 </div>
+

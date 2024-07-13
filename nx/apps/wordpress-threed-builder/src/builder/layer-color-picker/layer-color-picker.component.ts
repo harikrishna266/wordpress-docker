@@ -6,6 +6,7 @@ import { colors } from '../colors';
 import { DynamicTexture } from '@brocha-libs/builder-3d';
 import { Stage2D } from '@brocha-libs/builder-2d';
 import { PipesModule } from '../pipes/pipes.module';
+import { DesignRenderHelper } from '../design-render.helper';
 @Component({
   selector: 'app-layer-color-picker',
   standalone: true,
@@ -18,6 +19,8 @@ export class LayerColorPickerComponent {
   @Input() dynamicTexture!: DynamicTexture;
   @Input() stage!: Stage2D;
   public readonly layerHelper = inject(LayerHelper);
+  public readonly designRenderHelper = inject(DesignRenderHelper);
+
   public selectedLayer!: LayerTypes;
   public colours = colors;
   selectLayer(layer: LayerTypes) {
@@ -25,8 +28,6 @@ export class LayerColorPickerComponent {
   }
 
   async setColor(color: string) {
-    await this.selectedLayer.path.setAttrs({...this.selectedLayer.path.serialize(), fill: color});
-    await this.stage.layer.draw();
-    this.dynamicTexture.update(false);
+    await this.designRenderHelper.updateDesign(this.selectedLayer, {...this.selectedLayer.path.serialize(), fill: color})
   }
 }

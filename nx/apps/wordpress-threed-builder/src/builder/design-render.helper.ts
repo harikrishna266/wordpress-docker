@@ -1,7 +1,7 @@
 import { Designs } from './types/design.type';
 import { finalize, forkJoin, from, map, switchMap, tap, toArray } from 'rxjs';
 import { Layer } from './types/layer.type';
-import { DesignLayer } from './types/three-d-builder-layer.type';
+import { DesignLayer, LayerTypes } from './types/three-d-builder-layer.type';
 import { LayerHelper } from './layer.helper';
 import { inject } from '@angular/core';
 import { LayerAPIService } from '../services/layer.service';
@@ -70,4 +70,12 @@ export class DesignRenderHelper {
     await this.stage.addShape(this.stage.layer, path);
     return { layer: layerWithPath.layer, path: path, type: 'layer'};
   }
+
+
+  async updateDesign(layer: LayerTypes, attr: any) {
+    await layer.path.setAttrs(attr);
+    await this.stage.layer.draw();
+    this.dynamicTexture.update(false);
+  }
+
 }

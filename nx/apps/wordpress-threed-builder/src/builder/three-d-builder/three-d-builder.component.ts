@@ -10,7 +10,7 @@ import {
   loadModel,
   SceneHelper,
   DynamicTexture,
-  PBRMaterial, Mesh, Texture
+  PBRMaterial, Mesh
 } from '@brocha-libs/builder-3d';
 import { Stage2D } from '@brocha-libs/builder-2d';
 import { DesignSelectorComponent } from '../design-selector/design-selector.component';
@@ -21,8 +21,10 @@ import { LayerHelper } from '../layer.helper';
 import { environment } from '../../environments/environment';
 import { Model } from '../types/model.type';
 import { DesignRenderHelper } from '../design-render.helper';
-type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
-import { Inspector } from '@babylonjs/inspector';
+import { GUI3DManager , PlanePanel, HolographicButton, Button3D, AdvancedDynamicTexture, Button } from '@babylonjs/gui';
+ type MenuActions =  'designs' | 'layers' | 'patterns' | 'none';
+
+
 
 @Component({
   selector: 'app-three-d-builder',
@@ -81,6 +83,10 @@ export class ThreeDBuilderComponent implements AfterViewInit {
     this.designRenderHelper.sceneHelper = this.sceneHelper;
     this.sceneHelper.addExternalEnvironment(`${environment.ASSET_URL}assets/environmentSpecular.env`);
     this.sceneHelper.loadCamera();
+    this.createMenu();
+  }
+
+  createMenu() {
 
   }
 

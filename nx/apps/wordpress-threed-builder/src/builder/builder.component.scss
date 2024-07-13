@@ -1,11 +1,15 @@
 @use '@angular/material' as mat;
+@import '@angular/material/prebuilt-themes/magenta-violet.css';
+@include mat.core();
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
-@include mat.core();
 
-html, body {
-  height: 100%;
+
+:host {
+  background: red;
 }
+
