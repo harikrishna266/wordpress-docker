@@ -1,10 +1,10 @@
-<div class="flex flex-col bg-gray-200 pt-2" [ngClass]="{'h-40': selectedLayer, 'h-16': !selectedLayer}" >
-  <div class="grid grid-cols-8 gap-2 overflow-auto flex-1" *ngIf="selectedLayer">
+<div class="flex flex-col  pt-2 lg:flex-col-reverse lg:h-auto   place-content-start	 	" [ngClass]="{'h-40': selectedLayer, 'h-16': !selectedLayer}" >
+  <div class="grid grid-cols-8 gap-2 overflow-auto flex-1 " *ngIf="selectedLayer">
     <div class="border-gray-600 w-10 h-10 flex justify-center items-center" *ngFor="let color of colours" (click)="setColor(color)" >
       <div [style.background]="color" class="w-6 h-6 rounded-2xl cursor-pointer"></div>
     </div>
   </div>
-  <ul class="p-2 grid grid-cols-5 gap-x-0 items-stretch  m-auto bg-gray-200">
+  <ul class="p-2 grid grid-cols-5 gap-x-0 items-stretch  m-auto cursor-pointer">
     <li class="py-2 px-2 text-xs text-center leading-4"
         (click)="selectLayer(layer)"
         [ngClass]="{
